@@ -1,14 +1,16 @@
 package co.edu.uniquindio.poo.proyectofinalmusica.model;
 
+import java.time.LocalDate;
+
 public abstract class Persona {
     protected String id;
     protected String nombre;
     protected String email;
     protected String telefono;
     protected String direccion;
-    protected String fechaNacimiento;
+    protected LocalDate fechaNacimiento;
 
-    public Persona(String  id, String nombre, String email, String telefono, String direccion,  String fechaNacimiento) {
+    public Persona(String  id, String nombre, String email, String telefono, String direccion,  LocalDate fechaNacimiento) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
@@ -58,11 +60,11 @@ public abstract class Persona {
         this.direccion = direccion;
     }
 
-    public String getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 }

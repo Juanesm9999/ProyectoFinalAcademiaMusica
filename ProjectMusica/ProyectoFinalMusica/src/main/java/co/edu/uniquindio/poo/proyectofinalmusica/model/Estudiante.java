@@ -5,18 +5,19 @@ import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.EvaluacionProgres
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.Inscripcion;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.NivelAprobado;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class Estudiante extends Persona implements IReportable {
     private String matricula;
-    private String fechaIngreso;
+    private LocalDate fechaIngreso;
     private boolean activo;
     private List<Inscripcion> theInscripciones; // 1 a muchos
     private List<NivelAprobado> theNivelesAprobados; // 1 a muchos
     private List<Asistencia> theHistorialAsistencia; // 1 a muchos
     private List<EvaluacionProgreso> theEvaluaciones; // 1 a muchos
 
-    public Estudiante(String matricula, String fechaIngreso , boolean activo, String  id, String nombre, String apellido, String email, String telefono, String direccion,  String fechaNacimiento) {
+    public Estudiante(String matricula, LocalDate fechaIngreso , boolean activo, String  id, String nombre, String email, String telefono, String direccion,  LocalDate fechaNacimiento) {
         super(id, nombre,email,telefono,direccion, fechaNacimiento);
         this.matricula = matricula;
         this.fechaIngreso = fechaIngreso;
@@ -32,11 +33,11 @@ public class Estudiante extends Persona implements IReportable {
         this.matricula = matricula;
     }
 
-    public String getFechaIngreso() {
+    public LocalDate getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(String fechaIngreso) {
+    public void setFechaIngreso(LocalDate fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 

@@ -36,7 +36,7 @@ public class SistemaAcademia {
 
     //---------------------------------------- CRUD ESTUDIANTE -----------------------------------------------
 
-    public boolean registrarEstudiante(Estudiante estudiante) {
+    public static boolean registrarEstudiante(Estudiante estudiante) {
 
         boolean centinela = false;
         if (!verificarEstudiante(estudiante.getId())) {

@@ -1,4 +1,4 @@
 package co.edu.uniquindio.poo.proyectofinalmusica.viewController;
 
-public class MainVIewController {
+public class PrimaryViewController {
 }
