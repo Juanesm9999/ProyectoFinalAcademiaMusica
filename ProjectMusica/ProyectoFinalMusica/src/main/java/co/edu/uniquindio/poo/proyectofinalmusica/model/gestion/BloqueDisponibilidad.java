@@ -66,4 +66,6 @@ public class BloqueDisponibilidad {
     public void setTheProfesor(Profesor theProfesor) {
         this.theProfesor = theProfesor;
     }
+
+
 }

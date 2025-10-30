@@ -182,7 +182,7 @@ public class SistemaAcademia {
                 curso.setEstado(actualizado.getEstado());
                 curso.setFechaInicio(actualizado.getFechaInicio());
                 curso.setFechaFin(actualizado.getFechaFin());
-                curso.setDuracionSemanas();
+                curso.setDuracionSemanas(actualizado.getDuracionSemanas());
 
                 centinela = true;
                 break;
@@ -234,7 +234,7 @@ public class SistemaAcademia {
     }
 
     //     id,horario,diaSemana,horaInicio,HoraFin,instrumento,nivel,activa,capacidadMaxima, capacidadActual, cuposDisponibles
-    public boolean modificarClaseGrupal(String id, Clase actualizado) {
+    public boolean modificarClaseGrupal(String id, ClaseGrupal actualizado) {
         boolean centinela = false;
         for (Clase claseGrupal : listClases) {
             if (claseGrupal.getId().equals(id)) {
@@ -269,14 +269,89 @@ public class SistemaAcademia {
     //-------------------------------------------- CLASE INDIVIDUAL -------------------------------------------------------
 
 
-    public void crearClaseIndividual(ClaseIndividual clase) {}
-    public void modificarClaseIndividual(ClaseIndividual clase) {}
+    public boolean crearClaseIndividual(ClaseIndividual claseIndividual) {
+        boolean centinela = false;
+        if (!verificarClaseIndividual(claseIndividual.getId())) {
+            listClases.add(claseIndividual);
+            centinela = true;
+        }
+        return centinela;
+    }
+
+    //     id,horario,diaSemana,horaInicio,HoraFin,instrumento,nivel,activa,capacidadMaxima, capacidadActual, cuposDisponibles
+    public boolean modificarClaseIndividual(String id, ClaseIndividual actualizado) {
+        boolean centinela = false;
+        for (Clase claseIndividual : listClases) {
+            if (claseIndividual.getId().equals(id)) {
+                claseIndividual.setId(actualizado.getId());
+                claseIndividual.setHorario(actualizado.getHorario());
+                claseIndividual.setDiaSemana(actualizado.getDiaSemana());
+                claseIndividual.setHoraInicio(actualizado.getHoraInicio());
+                claseIndividual.setHoraFin(actualizado.getHoraFin());
+                claseIndividual.setInstrumento(actualizado.getInstrumento());
+                claseIndividual.setNivel(actualizado.getNivel());
+                claseIndividual.setActiva(actualizado.isActiva());
+                centinela = true;
+                break;
+            }
+        }
+        return centinela;
+    }
+
+
+
+
+    public boolean verificarClaseIndividual(String id) {
+        boolean centinela = false;
+        for (Clase claseIndividual : listClases) {
+            if (claseIndividual.getId().equals(id)) {
+                centinela = true;
+            }
+        }
+        return centinela;
+    }
 
     //-------------------------------------------- ASISTENCIA -------------------------------------------------------
 
 
-    public void registrarAsistencia(Asistencia asistencia) {}
-    public void registrarEvaluacion(EvaluacionProgreso evaluacion) {}
+    public boolean registrarAsistencia(Asistencia asistencia) {
+        boolean centinela = false;
+        if (!verificarAsistencia(asistencia.getId())) {
+            listAsistencias.add(asistencia);
+            centinela = true;
+        }
+        return centinela;
+    }
+
+    public boolean verificarAsistencia(String id) {
+        boolean centinela = false;
+        for (Asistencia asistencia : listAsistencias) {
+            if (asistencia.getId().equals(id)) {
+                centinela = true;
+            }
+        }
+        return centinela;
+    }
+
+
+    public boolean registrarEvaluacion(EvaluacionProgreso evaluacionProgreso) {
+        boolean centinela = false;
+        if (!verificarEvaluacionProgreso(evaluacionProgreso.getId())) {
+            listEvaluaciones.add(evaluacionProgreso);
+            centinela = true;
+        }
+        return centinela;
+    }
+
+    public boolean verificarEvaluacionProgreso(String id) {
+        boolean centinela = false;
+        for (EvaluacionProgreso evaluacionProgreso : listEvaluaciones) {
+            if (evaluacionProgreso.getId().equals(id)) {
+                centinela = true;
+            }
+        }
+        return centinela;
+    }
 
     //-------------------------------------------- VERIFICACIONES -------------------------------------------------------
 
@@ -303,4 +378,95 @@ public class SistemaAcademia {
     public List<String> generarReporteCargaDocente() {return null;}
     public List<String> generarReporteEstudiante(Estudiante estudiante) {return null;}
 
+
+    //--------------------------------------- GETTERS Y SETTERS -----------------------------------------------
+    public String getNombre() {
+        return nombre;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNit() {
+        return nit;
+    }
+
+    public void setNit(String nit) {
+        this.nit = nit;
+    }
+
+    public List<Estudiante> getListEstudiantes() {
+        return listEstudiantes;
+    }
+
+    public void setListEstudiantes(List<Estudiante> listEstudiantes) {
+        this.listEstudiantes = listEstudiantes;
+    }
+
+    public List<Profesor> getListProfesores() {
+        return listProfesores;
+    }
+
+    public void setListProfesores(List<Profesor> listProfesores) {
+        this.listProfesores = listProfesores;
+    }
+
+    public List<Administrador> getListAdministradores() {
+        return listAdministradores;
+    }
+
+    public void setListAdministradores(List<Administrador> listAdministradores) {
+        this.listAdministradores = listAdministradores;
+    }
+
+    public List<Curso> getListCursos() {
+        return listCursos;
+    }
+
+    public void setListCursos(List<Curso> listCursos) {
+        this.listCursos = listCursos;
+    }
+
+    public List<Aula> getListAulas() {
+        return listAulas;
+    }
+
+    public void setListAulas(List<Aula> listAulas) {
+        this.listAulas = listAulas;
+    }
+
+    public List<Clase> getListClases() {
+        return listClases;
+    }
+
+    public void setListClases(List<Clase> listClases) {
+        this.listClases = listClases;
+    }
+
+    public List<Inscripcion> getListInscripciones() {
+        return listInscripciones;
+    }
+
+    public void setListInscripciones(List<Inscripcion> listInscripciones) {
+        this.listInscripciones = listInscripciones;
+    }
+
+    public List<Asistencia> getListAsistencias() {
+        return listAsistencias;
+    }
+
+    public void setListAsistencias(List<Asistencia> listAsistencias) {
+        this.listAsistencias = listAsistencias;
+    }
+
+    public List<EvaluacionProgreso> getListEvaluaciones() {
+        return listEvaluaciones;
+    }
+
+    public void setListEvaluaciones(List<EvaluacionProgreso> listEvaluaciones) {
+        this.listEvaluaciones = listEvaluaciones;
+    }
+}
+
+

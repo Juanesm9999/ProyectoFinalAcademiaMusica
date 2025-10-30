@@ -64,14 +64,6 @@ public class Asistencia {
         this.presente = presente;
     }
 
-    public String getJustificacion() {
-        return justificacion;
-    }
-
-    public void setJustificacion(String justificacion) {
-        this.justificacion = justificacion;
-    }
-
     public String getObservaciones() {
         return observaciones;
     }
@@ -79,4 +71,6 @@ public class Asistencia {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
+
+
 }

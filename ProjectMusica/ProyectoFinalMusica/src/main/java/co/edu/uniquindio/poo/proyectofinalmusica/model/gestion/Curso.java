@@ -159,6 +159,10 @@ public class Curso implements IReportable {
         this.theEstudiantes = theEstudiantes;
     }
 
+    public void setDuracionSemanas(int duracionSemanas) {
+        this.duracionSemanas = duracionSemanas;
+    }
+
     @Override
     public String generarReporte() {
         return "";

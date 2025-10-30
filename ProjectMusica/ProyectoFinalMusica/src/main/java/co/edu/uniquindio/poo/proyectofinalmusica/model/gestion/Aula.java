@@ -66,5 +66,7 @@ public class Aula {
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
+
+
 }
 

@@ -107,4 +107,6 @@ public abstract class Clase implements IEvaluable {
     public void setActiva(boolean activa) {
         this.activa = activa;
     }
+
+
 }

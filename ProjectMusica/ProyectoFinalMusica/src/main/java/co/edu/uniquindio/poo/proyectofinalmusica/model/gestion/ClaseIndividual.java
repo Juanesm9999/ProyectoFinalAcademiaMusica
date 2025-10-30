@@ -17,6 +17,38 @@ public class ClaseIndividual extends Clase {
         this.observaciones = observaciones;
     }
 
+    public Estudiante getTheEstudiante() {
+        return theEstudiante;
+    }
+
+    public void setTheEstudiante(Estudiante theEstudiante) {
+        this.theEstudiante = theEstudiante;
+    }
+
+    public String getTemaEspecifico() {
+        return temaEspecifico;
+    }
+
+    public void setTemaEspecifico(String temaEspecifico) {
+        this.temaEspecifico = temaEspecifico;
+    }
+
+    public String getObjetivos() {
+        return objetivos;
+    }
+
+    public void setObjetivos(String objetivos) {
+        this.objetivos = objetivos;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
     @Override
     public void registrarAsistencia(Estudiante estudiante, boolean presente) {
 

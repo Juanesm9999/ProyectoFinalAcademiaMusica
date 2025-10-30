@@ -77,4 +77,6 @@ public class Profesor extends Persona {
     public void setTheClasesAsignadas(List<Clase> theClasesAsignadas) {
         this.theClasesAsignadas = theClasesAsignadas;
     }
+
+
 }

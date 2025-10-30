@@ -52,6 +52,8 @@ public class ClaseGrupal extends Clase {
 
 
 
+
+
     public void setTheEstudiantesInscritos(List<Estudiante> theEstudiantesInscritos) {
         this.theEstudiantesInscritos = theEstudiantesInscritos;
     }

@@ -90,5 +90,13 @@ public class EvaluacionProgreso {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+
+    public Profesor getTheEvaluador() {
+        return theEvaluador;
+    }
+
+    public void setTheEvaluador(Profesor theEvaluador) {
+        this.theEvaluador = theEvaluador;
+    }
 }
 

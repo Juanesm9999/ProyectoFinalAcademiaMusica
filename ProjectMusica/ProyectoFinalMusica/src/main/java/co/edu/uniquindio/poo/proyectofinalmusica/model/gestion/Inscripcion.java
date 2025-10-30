@@ -23,4 +23,68 @@ public class Inscripcion {
 
 
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Estudiante getTheEstudiante() {
+        return theEstudiante;
+    }
+
+    public void setTheEstudiante(Estudiante theEstudiante) {
+        this.theEstudiante = theEstudiante;
+    }
+
+    public Curso getTheCurso() {
+        return theCurso;
+    }
+
+    public void setTheCurso(Curso theCurso) {
+        this.theCurso = theCurso;
+    }
+
+    public String getFechaInscripcion() {
+        return fechaInscripcion;
+    }
+
+    public void setFechaInscripcion(String fechaInscripcion) {
+        this.fechaInscripcion = fechaInscripcion;
+    }
+
+    public EstadoInscripcion getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoInscripcion estado) {
+        this.estado = estado;
+    }
+
+    public boolean isActiva() {
+        return activa;
+    }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
+    }
+
+    public boolean isAprobada() {
+        return aprobada;
+    }
+
+    public void setAprobada(boolean aprobada) {
+        this.aprobada = aprobada;
+    }
+
+    public double getCalificacionFinal() {
+        return calificacionFinal;
+    }
+
+    public void setCalificacionFinal(double calificacionFinal) {
+        this.calificacionFinal = calificacionFinal;
+    }
 }

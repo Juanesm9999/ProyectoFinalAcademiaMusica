@@ -16,8 +16,8 @@ public class Estudiante extends Persona implements IReportable {
     private List<Asistencia> theHistorialAsistencia; // 1 a muchos
     private List<EvaluacionProgreso> theEvaluaciones; // 1 a muchos
 
-    public Estudiante(String matricula,String fechaIngreso , boolean activo, String  id, String nombre, String apellido, String email, String telefono, String direccion,  String fechaNacimiento) {
-        super(id, nombre,apellido,email,telefono,direccion, fechaNacimiento);
+    public Estudiante(String matricula, String fechaIngreso , boolean activo, String  id, String nombre, String apellido, String email, String telefono, String direccion,  String fechaNacimiento) {
+        super(id, nombre,email,telefono,direccion, fechaNacimiento);
         this.matricula = matricula;
         this.fechaIngreso = fechaIngreso;
         this.activo = activo;
@@ -48,10 +48,44 @@ public class Estudiante extends Persona implements IReportable {
         this.activo = activo;
     }
 
+    public List<Inscripcion> getTheInscripciones() {
+        return theInscripciones;
+    }
+
+    public void setTheInscripciones(List<Inscripcion> theInscripciones) {
+        this.theInscripciones = theInscripciones;
+    }
+
+    public List<NivelAprobado> getTheNivelesAprobados() {
+        return theNivelesAprobados;
+    }
+
+    public void setTheNivelesAprobados(List<NivelAprobado> theNivelesAprobados) {
+        this.theNivelesAprobados = theNivelesAprobados;
+    }
+
+    public List<Asistencia> getTheHistorialAsistencia() {
+        return theHistorialAsistencia;
+    }
+
+    public void setTheHistorialAsistencia(List<Asistencia> theHistorialAsistencia) {
+        this.theHistorialAsistencia = theHistorialAsistencia;
+    }
+
+    public List<EvaluacionProgreso> getTheEvaluaciones() {
+        return theEvaluaciones;
+    }
+
+    public void setTheEvaluaciones(List<EvaluacionProgreso> theEvaluaciones) {
+        this.theEvaluaciones = theEvaluaciones;
+    }
+
     @Override
     public String generarReporte() {
         return "";
     }
+
+
 
 
 }

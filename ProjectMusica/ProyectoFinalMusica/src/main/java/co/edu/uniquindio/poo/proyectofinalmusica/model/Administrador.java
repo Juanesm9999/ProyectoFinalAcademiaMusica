@@ -35,4 +35,6 @@ public class Administrador extends Persona {
     public void setFechaIngreso(String fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
+
+
 }
