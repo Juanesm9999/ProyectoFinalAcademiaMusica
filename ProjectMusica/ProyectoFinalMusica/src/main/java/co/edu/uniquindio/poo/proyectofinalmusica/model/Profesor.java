@@ -1,6 +1,6 @@
 package ProyectoFinal.model;
 
-import ProyectoFinal.model.gestion.BloqueDisponibilidad;
+import main.java.co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.BloqueDisponibilidad;
 
 import java.util.List;
 

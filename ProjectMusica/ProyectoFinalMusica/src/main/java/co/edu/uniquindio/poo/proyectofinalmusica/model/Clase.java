@@ -1,6 +1,6 @@
 package ProyectoFinal.model;
 
-import ProyectoFinal.model.gestion.Aula;
+import main.java.co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.Aula;
 
 public abstract class Clase implements IEvaluable {
     protected String id;

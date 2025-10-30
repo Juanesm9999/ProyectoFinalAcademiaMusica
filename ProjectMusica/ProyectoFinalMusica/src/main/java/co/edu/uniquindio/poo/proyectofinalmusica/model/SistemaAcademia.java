@@ -8,7 +8,7 @@ import java.util.List;
 public class SistemaAcademia {
     private String nombre;
     private String nit;
-    private LinkedList<Estudiante> listEstudiantes;
+    private List<Estudiante> listEstudiantes;
     private List<Profesor> theProfesores;
     private List<Administrador> theAdministradores;
     private List<Curso> theCursos;

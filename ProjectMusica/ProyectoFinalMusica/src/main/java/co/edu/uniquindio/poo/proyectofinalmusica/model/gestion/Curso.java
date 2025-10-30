@@ -1,11 +1,10 @@
-package ProyectoFinal.model.gestion;
+package main.java.co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
 
 import ProyectoFinal.model.EstadoCurso;
 import ProyectoFinal.model.Estudiante;
 import ProyectoFinal.model.IReportable;
 import ProyectoFinal.model.TipoInstrumento;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Curso implements IReportable {

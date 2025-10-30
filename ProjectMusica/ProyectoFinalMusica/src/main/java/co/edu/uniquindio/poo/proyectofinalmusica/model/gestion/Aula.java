@@ -1,4 +1,4 @@
-package ProyectoFinal.model.gestion;
+package main.java.co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
 
 import java.util.List;
 
