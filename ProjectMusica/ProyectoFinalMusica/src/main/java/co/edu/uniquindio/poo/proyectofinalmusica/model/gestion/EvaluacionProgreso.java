@@ -1,8 +1,8 @@
-package main.java.co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
+package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
 
-import ProyectoFinal.model.Clase;
-import ProyectoFinal.model.Estudiante;
-import ProyectoFinal.model.Profesor;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.Clase;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.Estudiante;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.Profesor;
 
 public class EvaluacionProgreso {
     private String id;

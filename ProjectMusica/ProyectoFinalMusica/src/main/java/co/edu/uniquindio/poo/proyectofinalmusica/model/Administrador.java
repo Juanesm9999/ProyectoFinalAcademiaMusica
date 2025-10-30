@@ -1,12 +1,12 @@
-package ProyectoFinal.model;
+package co.edu.uniquindio.poo.proyectofinalmusica.model;
 
 public class Administrador extends Persona {
     private String cargo;
     private String departamento;
     private String fechaIngreso;
 
-    public Administrador(String cargo, String departamento, String fechaIngreso,String  id, String nombre, String apellido, String email, String telefono, String direccion,  String fechaNacimiento) {
-        super(id, nombre,apellido,email,telefono,direccion, fechaNacimiento);
+    public Administrador(String cargo, String departamento, String fechaIngreso,String  id, String nombre, String email, String telefono, String direccion,  String fechaNacimiento) {
+        super(id, nombre,email,telefono,direccion, fechaNacimiento);
         this.cargo = cargo;
         this.departamento = departamento;
         this.fechaIngreso = fechaIngreso;

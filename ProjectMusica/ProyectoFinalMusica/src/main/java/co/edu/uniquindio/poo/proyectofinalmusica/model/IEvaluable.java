@@ -1,4 +1,4 @@
-package ProyectoFinal.model;
+package co.edu.uniquindio.poo.proyectofinalmusica.model;
 
 public interface IEvaluable {
     void registrarAsistencia(Estudiante estudiante, boolean presente);

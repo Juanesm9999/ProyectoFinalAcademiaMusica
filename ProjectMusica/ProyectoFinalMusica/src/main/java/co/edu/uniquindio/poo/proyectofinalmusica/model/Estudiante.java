@@ -1,9 +1,9 @@
-package ProyectoFinal.model;
+package co.edu.uniquindio.poo.proyectofinalmusica.model;
 
-import main.java.co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.Asistencia;
-import main.java.co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.EvaluacionProgreso;
-import main.java.co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.Inscripcion;
-import main.java.co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.NivelAprobado;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.Asistencia;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.EvaluacionProgreso;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.Inscripcion;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.NivelAprobado;
 
 import java.util.List;
 

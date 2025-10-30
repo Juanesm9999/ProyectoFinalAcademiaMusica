@@ -1,18 +1,16 @@
-package ProyectoFinal.model;
+package co.edu.uniquindio.poo.proyectofinalmusica.model;
 
 public abstract class Persona {
     protected String id;
     protected String nombre;
-    protected String apellido;
     protected String email;
     protected String telefono;
     protected String direccion;
     protected String fechaNacimiento;
 
-    public Persona(String  id, String nombre, String apellido, String email, String telefono, String direccion,  String fechaNacimiento) {
+    public Persona(String  id, String nombre, String email, String telefono, String direccion,  String fechaNacimiento) {
         this.id = id;
         this.nombre = nombre;
-        this.apellido = apellido;
         this.email = email;
         this.telefono = telefono;
         this.direccion = direccion;
@@ -34,14 +32,6 @@ public abstract class Persona {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
     }
 
     public String getEmail() {

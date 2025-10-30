@@ -1,4 +1,4 @@
-package ProyectoFinal.ViewController;
+package co.edu.uniquindio.poo.proyectofinalmusica.model.viewController;
 
 public class ProfesorViewController {
 }

@@ -1,4 +1,4 @@
-package ProyectoFinal.Controller;
+package co.edu.uniquindio.poo.proyectofinalmusica.controller;
 
 public class AdministradorController {
 

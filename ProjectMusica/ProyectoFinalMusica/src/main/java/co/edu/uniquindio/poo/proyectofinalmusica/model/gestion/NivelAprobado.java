@@ -1,6 +1,6 @@
-package main.java.co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
+package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
 
-import ProyectoFinal.model.TipoInstrumento;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.TipoInstrumento;
 
 public class NivelAprobado {
     private String id;

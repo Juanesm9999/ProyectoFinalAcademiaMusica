@@ -1,6 +1,6 @@
-package main.java.co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
+package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
 
-import ProyectoFinal.model.Profesor;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.Profesor;
 
 public class BloqueDisponibilidad {
     private String id;

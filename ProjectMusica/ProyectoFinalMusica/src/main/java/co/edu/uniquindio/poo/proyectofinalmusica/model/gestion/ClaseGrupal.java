@@ -1,8 +1,8 @@
-package main.java.co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
+package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
 
-import ProyectoFinal.model.Clase;
-import ProyectoFinal.model.Estudiante;
-import ProyectoFinal.model.TipoInstrumento;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.Clase;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.Estudiante;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.TipoInstrumento;
 
 import java.util.List;
 
@@ -50,6 +50,8 @@ public class ClaseGrupal extends Clase {
         return theEstudiantesInscritos;
     }
 
+
+
     public void setTheEstudiantesInscritos(List<Estudiante> theEstudiantesInscritos) {
         this.theEstudiantesInscritos = theEstudiantesInscritos;
     }
@@ -62,13 +64,14 @@ public class ClaseGrupal extends Clase {
         this.descripcion = descripcion;
     }
 
+
     @Override
-    public void registrarAsistenciaGrupal(Estudiante estudiante, boolean presente) {
+    public void registrarAsistencia(Estudiante estudiante, boolean presente) {
 
     }
 
     @Override
-    public void evaluarProgresoGrupal(Estudiante estudiante, double calificacion, String comentarios) {
+    public void evaluarProgreso(Estudiante estudiante, double calificacion, String comentarios) {
 
     }
 }

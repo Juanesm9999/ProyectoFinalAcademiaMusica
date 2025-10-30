@@ -1,8 +1,8 @@
-package main.java.co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
+package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
 
-import ProyectoFinal.model.Clase;
-import ProyectoFinal.model.Estudiante;
-import ProyectoFinal.model.TipoInstrumento;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.Clase;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.Estudiante;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.TipoInstrumento;
 
 public class ClaseIndividual extends Clase {
     private Estudiante theEstudiante; // 1 a 1
@@ -16,13 +16,14 @@ public class ClaseIndividual extends Clase {
         this.objetivos = objetivos;
         this.observaciones = observaciones;
     }
+
     @Override
-    public void registrarAsistenciaClaseIndividual(Estudiante estudiante, boolean presente) {   
+    public void registrarAsistencia(Estudiante estudiante, boolean presente) {
 
     }
 
     @Override
-    public void evaluarProgresoClaseIndividual(Estudiante estudiante, double calificacion, String comentarios) {
+    public void evaluarProgreso(Estudiante estudiante, double calificacion, String comentarios) {
 
     }
 }

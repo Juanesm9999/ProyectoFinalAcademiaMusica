@@ -1,7 +1,7 @@
-package main.java.co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
+package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
 
-import ProyectoFinal.model.EstadoInscripcion;
-import ProyectoFinal.model.Estudiante;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.EstadoInscripcion;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.Estudiante;
 
 public class Inscripcion {
     private String id;

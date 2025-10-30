@@ -1,9 +1,9 @@
-package main.java.co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
+package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
 
-import ProyectoFinal.model.EstadoCurso;
-import ProyectoFinal.model.Estudiante;
-import ProyectoFinal.model.IReportable;
-import ProyectoFinal.model.TipoInstrumento;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.EstadoCurso;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.Estudiante;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.IReportable;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.TipoInstrumento;
 
 import java.util.List;
 
@@ -22,9 +22,9 @@ public class Curso implements IReportable {
     private String fechaFin;
     private int duracionSemanas;
     private List<ClaseGrupal> theClases; // 1 a muchos
-    private List<Estudiante> theEstudiantes; // 1 a muchos
+    private List<Estudiante> theEstudiantes;// 1 a muchos
 
-    public Curso(String id, String codigo, String nombre, TipoInstrumento instrumento,int nivel,String descripcion,int capacidadMaxima,int capacidadActual,EstadoCurso estado,String fechaInicio,String fechaFin,int duracionSemanas) {
+    public Curso(String id, String codigo, String nombre, TipoInstrumento instrumento, int nivel, String descripcion, int capacidadMaxima, int capacidadActual, EstadoCurso estado, String fechaInicio, String fechaFin, int duracionSemanas) {
         this.id = id;
         this.codigo = codigo;
         this.nombre = nombre;
@@ -135,8 +135,33 @@ public class Curso implements IReportable {
         this.thePrerrequisitos = thePrerrequisitos;
     }
 
+    public List<ClaseGrupal> getTheClases() {
+        return theClases;
+    }
+
+    public void setTheClases(List<ClaseGrupal> theClases) {
+        this.theClases = theClases;
+    }
+
+    public int getDuracionSemanas() {
+        return duracionSemanas;
+    }
+
+    public void setDuracionSemanas() {
+        this.duracionSemanas = duracionSemanas;
+    }
+
+    public List<Estudiante> getTheEstudiantes() {
+        return theEstudiantes;
+    }
+
+    public void setTheEstudiantes(List<Estudiante> theEstudiantes) {
+        this.theEstudiantes = theEstudiantes;
+    }
+
     @Override
     public String generarReporte() {
         return "";
     }
+
 }
