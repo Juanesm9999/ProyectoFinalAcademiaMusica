@@ -41,7 +41,7 @@ public class Estudiante extends Persona implements IReportable {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public boolean isActivo() {
+    public boolean getActivo() {
         return activo;
     }
 

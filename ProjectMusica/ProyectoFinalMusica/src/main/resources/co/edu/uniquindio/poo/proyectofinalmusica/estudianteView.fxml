@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="592.0" prefWidth="748.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyectofinalmusica.controller.EstudianteController">
+   <children>
+      <DatePicker layoutX="63.0" layoutY="37.0" />
+      <TextField fx:id="txtMatricula" layoutX="76.0" layoutY="94.0" />
+   </children>
+</AnchorPane>

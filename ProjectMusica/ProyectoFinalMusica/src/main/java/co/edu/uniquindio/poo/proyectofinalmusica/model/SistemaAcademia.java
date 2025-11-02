@@ -9,7 +9,7 @@ import java.util.List;
 public class SistemaAcademia {
     private String nombre;
     private String nit;
-    private List<Estudiante> listEstudiantes;
+    private static List<Estudiante> listEstudiantes;
     private List<Profesor> listProfesores;
     private List<Administrador> listAdministradores;
     private List<Curso> listCursos;
@@ -68,7 +68,7 @@ public class SistemaAcademia {
         return centinela;
     }
 
-    public boolean verificarEstudiante(String id) {
+    public static boolean verificarEstudiante(String id) {
         boolean centinela = false;
         for (Estudiante estudiante : listEstudiantes) {
             if (estudiante.getId().equals(id)) {
@@ -467,6 +467,8 @@ public class SistemaAcademia {
     public void setListEvaluaciones(List<EvaluacionProgreso> listEvaluaciones) {
         this.listEvaluaciones = listEvaluaciones;
     }
+
+
 }
 
 

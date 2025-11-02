@@ -25,7 +25,7 @@ public class App extends Application {
 
 
     private Stage primaryStage;
-    public static SistemaAcademia veterinaria = new SistemaAcademia("Academia UQ", "123");
+    public static SistemaAcademia sistemaAcademia = new SistemaAcademia("Academia UQ", "123");
 
 
     @Override
