@@ -6,6 +6,7 @@ import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.Inscripcion;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.NivelAprobado;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Estudiante extends Persona implements IReportable {
@@ -22,6 +23,11 @@ public class Estudiante extends Persona implements IReportable {
         this.matricula = matricula;
         this.fechaIngreso = fechaIngreso;
         this.activo = activo;
+        this.theInscripciones = new ArrayList<>();
+        this.theNivelesAprobados = new ArrayList<>();
+        this.theHistorialAsistencia = new ArrayList<>();
+        this.theEvaluaciones = new ArrayList<>();
+
 
     }
 

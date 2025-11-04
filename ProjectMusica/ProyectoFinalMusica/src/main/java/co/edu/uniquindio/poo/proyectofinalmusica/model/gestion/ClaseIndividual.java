@@ -51,11 +51,11 @@ public class ClaseIndividual extends Clase {
 
     @Override
     public void registrarAsistencia(Estudiante estudiante, boolean presente) {
-
+        //-----------implementar...............//
     }
 
     @Override
     public void evaluarProgreso(Estudiante estudiante, double calificacion, String comentarios) {
-
+        //-----------implementar...............//
     }
 }

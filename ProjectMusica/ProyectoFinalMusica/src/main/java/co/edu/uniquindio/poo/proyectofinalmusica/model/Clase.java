@@ -108,5 +108,14 @@ public abstract class Clase implements IEvaluable {
         this.activa = activa;
     }
 
+    @Override
+    public void registrarAsistencia(Estudiante estudiante, boolean presente) {
+
+    }
+
+    @Override
+    public void evaluarProgreso(Estudiante estudiante, double calificacion, String comentarios) {
+
+    }
 
 }

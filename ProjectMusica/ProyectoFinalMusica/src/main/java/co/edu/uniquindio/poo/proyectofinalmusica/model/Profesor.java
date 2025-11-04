@@ -3,6 +3,8 @@ package co.edu.uniquindio.poo.proyectofinalmusica.model;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.BloqueDisponibilidad;
 
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Profesor extends Persona {
@@ -14,12 +16,16 @@ public class Profesor extends Persona {
     private List<BloqueDisponibilidad> theDisponibilidad; // 1 a muchos
     private List<Clase> theClasesAsignadas; // 1 a muchos
 
-    public Profesor(String codigo, String especialidad,String fechaContratacion,boolean activo, String  id, String nombre, String email, String telefono, String direccion,  String fechaNacimiento) {
+    public Profesor(String codigo, String especialidad,String fechaContratacion,boolean activo, String  id, String nombre, String email, String telefono, String direccion,  LocalDate fechaNacimiento) {
         super(id, nombre,email,telefono,direccion, fechaNacimiento);
         this.codigo = codigo;
         this.especialidad = especialidad;
         this.fechaContratacion = fechaContratacion;
         this.activo = activo;
+        this.theInstrumentosImpartidos = new ArrayList<>();
+        this.theDisponibilidad = new ArrayList<>();
+        this.theClasesAsignadas = new ArrayList<>();
+
     }
 
     public String getCodigo() {

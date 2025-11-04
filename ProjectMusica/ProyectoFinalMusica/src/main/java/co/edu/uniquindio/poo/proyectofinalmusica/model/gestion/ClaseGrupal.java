@@ -4,6 +4,7 @@ import co.edu.uniquindio.poo.proyectofinalmusica.model.Clase;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.Estudiante;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.TipoInstrumento;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClaseGrupal extends Clase {
@@ -19,6 +20,7 @@ public class ClaseGrupal extends Clase {
         this.capacidadActual = capacidadActual;
         this.cuposDisponibles = cuposDisponibles;
         this.descripcion = descripcion;
+        this.theEstudiantesInscritos = new ArrayList<>();
 
     }
 
@@ -69,11 +71,11 @@ public class ClaseGrupal extends Clase {
 
     @Override
     public void registrarAsistencia(Estudiante estudiante, boolean presente) {
-
+            //-----------implementar...............//
     }
 
     @Override
     public void evaluarProgreso(Estudiante estudiante, double calificacion, String comentarios) {
-
+        //-----------implementar...............//
     }
 }

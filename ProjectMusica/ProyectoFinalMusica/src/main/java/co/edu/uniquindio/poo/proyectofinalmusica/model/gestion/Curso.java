@@ -5,6 +5,7 @@ import co.edu.uniquindio.poo.proyectofinalmusica.model.Estudiante;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.IReportable;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.TipoInstrumento;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Curso implements IReportable {
@@ -36,6 +37,8 @@ public class Curso implements IReportable {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.duracionSemanas = duracionSemanas;
+        this.theClases = new ArrayList<>();
+        this.theEstudiantes = new ArrayList<>();
 
     }
 

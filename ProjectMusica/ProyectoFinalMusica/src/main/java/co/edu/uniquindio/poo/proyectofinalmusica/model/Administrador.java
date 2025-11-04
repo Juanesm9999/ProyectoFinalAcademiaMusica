@@ -1,11 +1,13 @@
 package co.edu.uniquindio.poo.proyectofinalmusica.model;
 
+import java.time.LocalDate;
+
 public class Administrador extends Persona {
     private String cargo;
     private String departamento;
     private String fechaIngreso;
 
-    public Administrador(String cargo, String departamento, String fechaIngreso,String  id, String nombre, String email, String telefono, String direccion,  String fechaNacimiento) {
+    public Administrador(String cargo, String departamento, String fechaIngreso,String  id, String nombre, String email, String telefono, String direccion,  LocalDate fechaNacimiento) {
         super(id, nombre,email,telefono,direccion, fechaNacimiento);
         this.cargo = cargo;
         this.departamento = departamento;

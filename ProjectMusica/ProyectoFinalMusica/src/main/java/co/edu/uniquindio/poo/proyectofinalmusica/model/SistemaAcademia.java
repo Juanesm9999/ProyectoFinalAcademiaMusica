@@ -9,7 +9,7 @@ import java.util.List;
 public class SistemaAcademia {
     private String nombre;
     private String nit;
-    private static List<Estudiante> listEstudiantes;
+    private List<Estudiante> listEstudiantes;
     private List<Profesor> listProfesores;
     private List<Administrador> listAdministradores;
     private List<Curso> listCursos;
@@ -36,7 +36,7 @@ public class SistemaAcademia {
 
     //---------------------------------------- CRUD ESTUDIANTE -----------------------------------------------
 
-    public static boolean registrarEstudiante(Estudiante estudiante) {
+    public boolean registrarEstudiante(Estudiante estudiante) {
 
         boolean centinela = false;
         if (!verificarEstudiante(estudiante.getId())) {
@@ -59,7 +59,7 @@ public class SistemaAcademia {
                 estudiante.setFechaNacimiento(actualizado.getFechaNacimiento());
                 estudiante.setMatricula(actualizado.getMatricula());
                 estudiante.setFechaIngreso(actualizado.getFechaIngreso());
-                estudiante.setActivo(actualizado.isActivo());
+                estudiante.setActivo(actualizado.getActivo());
 
                 centinela = true;
                 break;
@@ -68,7 +68,7 @@ public class SistemaAcademia {
         return centinela;
     }
 
-    public static boolean verificarEstudiante(String id) {
+    public boolean verificarEstudiante(String id) {
         boolean centinela = false;
         for (Estudiante estudiante : listEstudiantes) {
             if (estudiante.getId().equals(id)) {
@@ -134,7 +134,7 @@ public class SistemaAcademia {
         for (Profesor profesor: listProfesores) {
             if (profesor.getId().equals(id)) {
                 // CORREGIDO: debe eliminar de listPropietarios, NO de listMascotas
-                listEstudiantes.remove(profesor);
+                listProfesores.remove(profesor);
                 centinela = true;
                 break;
             }
@@ -357,20 +357,29 @@ public class SistemaAcademia {
 
 
     public boolean verificarConflictoHorario(Profesor profesor, String horario) {
+
         return false;
     }
+
+
     public boolean verificarConflictoAula(Aula aula, String horario) {
+
         return false;
     }
-    public boolean verificarPrerrequisitos(Estudiante estudiante, Curso curso) {return false;}
+
+    public boolean verificarPrerrequisitos(Estudiante estudiante, Curso curso) {
+        return false;}
+
     public boolean verificarCuposDisponibles(Curso curso) {
+
         return false;
     }
 
     //-------------------------------------------- REPORTES -------------------------------------------------------
 
 
-    public List<String> generarReporteAsistencia(Curso curso) {return null;}
+    public List<String> generarReporteAsistencia(Curso curso) {
+        return null;}
     public List<String> generarReporteProgreso(TipoInstrumento instrumento, int nivel) {
         return null;
     }
