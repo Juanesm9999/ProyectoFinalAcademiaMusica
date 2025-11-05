@@ -218,8 +218,66 @@ public class SistemaAcademia {
     //-------------------------------------------- INSCRIPCIÓN -------------------------------------------------------
 
 
-    public void inscribirEstudiante(Estudiante estudiante, Curso curso) {
+    public boolean inscribirEstudiante(Estudiante estudiante, Curso curso) {
 
+        if (!estudiante.getActivo()) {
+            System.out.println("Error: El estudiante no está activo");
+            return false;
+        }
+
+        // 2. Verificar que el curso esté activo
+        if (curso.getEstado() != EstadoCurso.ACTIVO) {
+            System.out.println("Error: El curso no está activo");
+            return false;
+        }
+
+        // 3. Verificar prerrequisitos
+        if (!verificarPrerrequisitos(estudiante, curso)) {
+            System.out.println("Error: El estudiante no cumple con los prerrequisitos");
+            return false;
+        }
+
+        // 4. Verificar cupos disponibles
+        if (!verificarCuposDisponibles(curso)) {
+            System.out.println("Error: No hay cupos disponibles en el curso");
+            return false;
+        }
+
+        // 5. Verificar que no esté ya inscrito
+        for (Inscripcion insc : listInscripciones) {
+            if (insc.getTheEstudiante().getId().equals(estudiante.getId()) &&
+                    insc.getTheCurso().getId().equals(curso.getId()) &&
+                    insc.isActiva()) {
+                System.out.println("Error: El estudiante ya está inscrito en este curso");
+                return false;
+            }
+        }
+
+        // 6. Crear la inscripción
+        String idInscripcion = "INS-" + System.currentTimeMillis();
+        Inscripcion nuevaInscripcion = new Inscripcion(
+                idInscripcion,
+                java.time.LocalDate.now().toString(),
+                EstadoInscripcion.ACTIVA,
+                true,
+                false,
+                0.0
+        );
+        nuevaInscripcion.setTheEstudiante(estudiante);
+        nuevaInscripcion.setTheCurso(curso);
+
+        // 7. Agregar inscripción al sistema
+        listInscripciones.add(nuevaInscripcion);
+
+        // 8. Agregar estudiante al curso
+        curso.getTheEstudiantes().add(estudiante);
+        curso.setCapacidadActual(curso.getCapacidadActual() + 1);
+
+        // 9. Agregar inscripción al estudiante
+        estudiante.getTheInscripciones().add(nuevaInscripcion);
+
+        System.out.println("Inscripción exitosa: " + estudiante.getNombre() + " en " + curso.getNombre());
+        return true;
 
     }
 
@@ -261,8 +319,23 @@ public class SistemaAcademia {
         return true;
     }
      */
-    public void cancelarInscripcion(String inscripcionId) {
+    public boolean cancelarInscripcion(String inscripcionId) {
+        for (Inscripcion inscripcion : listInscripciones) {
+            if (inscripcion.getId().equals(inscripcionId)) {
+                // Cambiar estado
+                inscripcion.setActiva(false);
+                inscripcion.setEstado(EstadoInscripcion.CANCELADA);
 
+                // Liberar cupo en el curso
+                Curso curso = inscripcion.getTheCurso();
+                curso.setCapacidadActual(curso.getCapacidadActual() - 1);
+
+                System.out.println("Inscripción cancelada exitosamente");
+                return true;
+            }
+        }
+        System.out.println("Error: Inscripción no encontrada");
+        return false;
 
     }
 
@@ -463,7 +536,7 @@ public class SistemaAcademia {
             return true;
         }
 
-
+// Verificar que tenga aprobado el nivel anterior del mismo instrumento
         for (NivelAprobado nivelAprobado : estudiante.getTheNivelesAprobados()) {
             if (nivelAprobado.getInstrumento() == curso.getInstrumento() &&
                     nivelAprobado.getNivel() >= (curso.getNivel() - 1)) {
@@ -482,6 +555,8 @@ public class SistemaAcademia {
 
 
     public List<String> generarReporteAsistencia(Curso curso) {
+
+
         return null;}
     public List<String> generarReporteProgreso(TipoInstrumento instrumento, int nivel) {
         return null;
@@ -579,6 +654,8 @@ public class SistemaAcademia {
     public void setListEvaluaciones(List<EvaluacionProgreso> listEvaluaciones) {
         this.listEvaluaciones = listEvaluaciones;
     }
+
+
 
 
 }
