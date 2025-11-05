@@ -25,16 +25,16 @@ public class AdministradorController {
 
 
     public boolean eliminarPropietario(String id) {
-        return veterinaria.eliminarPropietario(id);
+        return sistemaAcademia.eliminarPropietario(id);
     }
 
 
     public boolean actualizarPropietario(String id, Propietario propietario) {
-        return veterinaria.actualizarPropietario(id, propietario);
+        return sistemaAcademia.actualizarPropietario(id, propietario);
     }
 
 
-    public void setVeterinaria(Veterinaria veterinaria) {
+    public void setVeterinaria(SistemaAcademia sistemaAcademia) {
     }
 }
 

@@ -218,8 +218,80 @@ public class SistemaAcademia {
     //-------------------------------------------- INSCRIPCIÓN -------------------------------------------------------
 
 
-    public void inscribirEstudiante(Estudiante estudiante, Curso curso) {}
-    public void cancelarInscripcion(String inscripcionId) {}
+    public void inscribirEstudiante(Estudiante estudiante, Curso curso) {
+
+
+    }
+
+    /*public boolean inscribirEstudiante(Estudiante estudiante) throws InscripcionException {
+        // Verificar que el estudiante no sea nulo
+        if (estudiante == null) {
+            throw new InscripcionException("El estudiante no puede ser nulo");
+        }
+
+        // Verificar que no esté ya inscrito
+        if (estudiantesInscritos.contains(estudiante)) {
+            throw new InscripcionException("El estudiante ya está inscrito en este curso");
+        }
+
+        // Verificar capacidad del grupo (Regla de negocio #1)
+        if (estudiantesInscritos.size() >= capacidadMaxima) {
+            throw new InscripcionException("El curso ha alcanzado su capacidad máxima");
+        }
+
+        // Verificar prerrequisitos (Regla de negocio #3)
+        if (!cumplePrerequisitos(estudiante)) {
+            throw new InscripcionException(
+                "El estudiante no cumple con los prerrequisitos. " +
+                "Debe aprobar el nivel " + nivelPrerequisito + " primero"
+            );
+        }
+
+        // Verificar conflicto de horarios para el estudiante
+        if (tieneConflictoHorario(estudiante)) {
+            throw new InscripcionException(
+                "El estudiante tiene un conflicto de horario con otro curso"
+            );
+        }
+
+        // Inscribir al estudiante
+        estudiantesInscritos.add(estudiante);
+        estudiante.agregarCurso(estudiante); // Mantener la relación bidireccional
+
+        return true;
+    }
+     */
+    public void cancelarInscripcion(String inscripcionId) {
+
+
+    }
+
+    /* public boolean cancelarInscripcion(Estudiante estudiante) throws InscripcionException {
+        // Verificar que el estudiante no sea nulo
+        if (estudiante == null) {
+            throw new InscripcionException("El estudiante no puede ser nulo");
+        }
+
+        // Verificar que el estudiante esté inscrito
+        if (!estudiantesInscritos.contains(estudiante)) {
+            throw new InscripcionException("El estudiante no está inscrito en este curso");
+        }
+
+        // Verificar si el curso ya comenzó o tiene asistencias registradas
+        if (tieneAsistenciasRegistradas(estudiante)) {
+            throw new InscripcionException(
+                "No se puede cancelar la inscripción. " +
+                "El curso ya tiene asistencias registradas"
+            );
+        }
+
+        // Remover al estudiante
+        estudiantesInscritos.remove(estudiante);
+        estudiante.removerCurso(this); // Mantener la relación bidireccional
+
+        return true;
+    }
+     */
 
     //-------------------------------------------- CLASE GRUPAL -------------------------------------------------------
 
@@ -358,8 +430,18 @@ public class SistemaAcademia {
 
     public boolean verificarConflictoHorario(Profesor profesor, String horario) {
 
-        return false;
-    }
+
+            for (Clase clase : listClases) {
+                if (clase.getTheProfesor() != null &&
+                        clase.getTheProfesor().getId().equals(profesor.getId()) &&
+                        clase.getHorario().equals(horario) &&
+                        clase.isActiva()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
 
     public boolean verificarConflictoAula(Aula aula, String horario) {
