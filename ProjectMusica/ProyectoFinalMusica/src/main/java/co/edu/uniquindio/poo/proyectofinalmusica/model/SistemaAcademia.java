@@ -429,9 +429,7 @@ public class SistemaAcademia {
 
 
     public boolean verificarConflictoHorario(Profesor profesor, String horario) {
-
-
-            for (Clase clase : listClases) {
+        for (Clase clase : listClases) {
                 if (clase.getTheProfesor() != null &&
                         clase.getTheProfesor().getId().equals(profesor.getId()) &&
                         clase.getHorario().equals(horario) &&
@@ -441,20 +439,43 @@ public class SistemaAcademia {
             }
             return false;
         }
+        
+
 
 
 
     public boolean verificarConflictoAula(Aula aula, String horario) {
+        // Verificar si el aula está ocupada en ese horario
+        for (Clase clase : listClases) {
+            if (clase.getTheAula() != null &&
+                    clase.getTheAula().getId().equals(aula.getId()) &&
+                    clase.getHorario().equals(horario) &&
+                    clase.isActiva()) {
+                return true; // HAY conflicto
+            }
+        }
+        return false; // NO hay conflicto
+    }
+
+    public boolean verificarPrerrequisitos(Estudiante estudiante, Curso curso) {
+
+        if (curso.getNivel() == 1) {
+            return true;
+        }
+
+
+        for (NivelAprobado nivelAprobado : estudiante.getTheNivelesAprobados()) {
+            if (nivelAprobado.getInstrumento() == curso.getInstrumento() &&
+                    nivelAprobado.getNivel() >= (curso.getNivel() - 1)) {
+                return true;
+            }
+        }
 
         return false;
     }
 
-    public boolean verificarPrerrequisitos(Estudiante estudiante, Curso curso) {
-        return false;}
-
     public boolean verificarCuposDisponibles(Curso curso) {
-
-        return false;
+        return curso.getCapacidadActual() < curso.getCapacidadMaxima();
     }
 
     //-------------------------------------------- REPORTES -------------------------------------------------------
