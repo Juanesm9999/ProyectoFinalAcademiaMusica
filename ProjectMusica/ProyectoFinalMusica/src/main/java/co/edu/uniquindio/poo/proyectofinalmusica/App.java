@@ -1,25 +1,18 @@
 package co.edu.uniquindio.poo.proyectofinalmusica;
 
 
-import co.edu.uniquindio.poo.proyectofinalmusica.model.Administrador;
-
-
 import co.edu.uniquindio.poo.proyectofinalmusica.model.Estudiante;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.SistemaAcademia;
-import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.Asistencia;
-import co.edu.uniquindio.poo.proyectofinalmusica.viewController.*;
+import co.edu.uniquindio.poo.proyectofinalmusica.ViewController.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class App extends Application {
 

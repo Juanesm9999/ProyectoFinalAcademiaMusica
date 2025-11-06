@@ -165,7 +165,7 @@ public class SistemaAcademia {
         }
         return centinela;
     }
-
+        
     //      id,codigo,nombre,instrumento,nivel,descripcion,capacidadMaxima,capacidadActual, estado,fechaInicio,fechaFin,duracionSemanas
     public boolean modificarCurso(String id, Curso actualizado) {
         boolean centinela = false;
@@ -254,7 +254,7 @@ public class SistemaAcademia {
         }
 
         // 6. Crear la inscripción
-        String idInscripcion = "INS-" + System.currentTimeMillis();
+        String idInscripcion = "INSCRIPCION-" + System.currentTimeMillis();
         Inscripcion nuevaInscripcion = new Inscripcion(
                 idInscripcion,
                 java.time.LocalDate.now().toString(),
@@ -655,6 +655,116 @@ public class SistemaAcademia {
         this.listEvaluaciones = listEvaluaciones;
     }
 
+    //------------------------------------------- CRUD ADMINISTRADOR -----------------------------------------------------
+
+    public boolean agregarAdministrador(Administrador administrador) {
+        boolean centinela = false;
+        if (!verificarAdministrador(administrador.getId())) {
+            listAdministradores.add(administrador);
+            centinela = true;
+        }
+        return centinela;
+    }
+
+    public boolean actualizarAdministrador(String id, Administrador actualizado) {
+        boolean centinela = false;
+        for (Administrador administrador : listAdministradores) {
+            if (administrador.getId().equals(id)) {
+                administrador.setId(actualizado.getId());
+                administrador.setNombre(actualizado.getNombre());
+                administrador.setEmail(actualizado.getEmail());
+                administrador.setTelefono(actualizado.getTelefono());
+                administrador.setDireccion(actualizado.getDireccion());
+                administrador.setFechaNacimiento(actualizado.getFechaNacimiento());
+                administrador.setCargo(actualizado.getCargo());
+                administrador.setDepartamento(actualizado.getDepartamento());
+                administrador.setFechaIngreso(actualizado.getFechaIngreso());
+                administrador.setUsuario(actualizado.getUsuario());
+                administrador.setContrasenia(actualizado.getContrasenia());
+                centinela = true;
+                break;
+            }
+        }
+        return centinela;
+    }
+
+    public boolean eliminarAdministrador(String id) {
+        boolean centinela = false;
+        for (Administrador administrador : listAdministradores) {
+            if (administrador.getId().equals(id)) {
+                listAdministradores.remove(administrador);
+                centinela = true;
+                break;
+            }
+        }
+        return centinela;
+    }
+
+    public boolean verificarAdministrador(String id) {
+        boolean centinela = false;
+        for (Administrador administrador : listAdministradores) {
+            if (administrador.getId().equals(id)) {
+                centinela = true;
+            }
+        }
+        return centinela;
+    }
+
+    //-------------------------------------------- LOGIN Y AUTENTICACIÓN -------------------------------------------------------
+
+    public Persona iniciarSesion(String usuario, String contrasena, String tipoRol) {
+        switch (tipoRol) {
+            case "ESTUDIANTE":
+                for (Estudiante est : listEstudiantes) {
+                    if (est.getUsuario() != null && est.getUsuario().equals(usuario) &&
+                            est.getContrasenia() != null && est.getContrasenia().equals(contrasena)) {
+                        return est;
+                    }
+                }
+                break;
+
+            case "PROFESOR":
+                for (Profesor prof : listProfesores) {
+                    if (prof.getUsuario() != null && prof.getUsuario().equals(usuario) &&
+                            prof.getContrasenia() != null && prof.getContrasenia().equals(contrasena)) {
+                        return prof;
+                    }
+                }
+                break;
+
+            case "ADMINISTRADOR":
+                for (Administrador admin : listAdministradores) {
+                    if (admin.getUsuario() != null && admin.getUsuario().equals(usuario) &&
+                            admin.getContrasenia() != null && admin.getContrasenia().equals(contrasena)) {
+                        return admin;
+                    }
+                }
+                break;
+        }
+        return null;
+    }
+
+    public boolean verificarUsuarioExiste(String usuario) {
+        for (Estudiante est : listEstudiantes) {
+            if (est.getUsuario() != null && est.getUsuario().equals(usuario)) {
+                return true;
+            }
+        }
+
+        for (Profesor prof : listProfesores) {
+            if (prof.getUsuario() != null && prof.getUsuario().equals(usuario)) {
+                return true;
+            }
+        }
+
+        for (Administrador admin : listAdministradores) {
+            if (admin.getUsuario() != null && admin.getUsuario().equals(usuario)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 
 

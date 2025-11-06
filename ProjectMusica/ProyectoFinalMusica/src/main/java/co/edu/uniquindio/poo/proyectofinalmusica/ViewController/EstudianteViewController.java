@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.proyectofinalmusica.viewController;
+﻿package co.edu.uniquindio.poo.proyectofinalmusica.ViewController;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.App;
 import co.edu.uniquindio.poo.proyectofinalmusica.controller.EstudianteController;
@@ -10,13 +10,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-
-public class EstudianteViewController{
+public class EstudianteViewController {
     EstudianteController estudianteController;
     ObservableList<Estudiante> listEstudiantes = FXCollections.observableArrayList();
     Estudiante selectedEstudiante;
@@ -57,31 +55,41 @@ public class EstudianteViewController{
     @FXML
     private RadioButton rbActivoNo;
 
+    @FXML
     private ToggleGroup toggleGroupActivo;
+
+    @FXML
+    private TextField txtUsuario;
+
+    @FXML
+    private TextField txtContrasenia;
+
+    @FXML
+    private Button btnAgregar;
+
+    @FXML
+    private Button btnActualizar;
+
+    @FXML
+    private Button btnEliminar;
 
     @FXML
     private Button btnLimpiar;
 
     @FXML
+    private Button btnRegresarMenu;
+
+    @FXML
     private TableView<Estudiante> tblListEstudiantes;
+
+    @FXML
+    private TableColumn<Estudiante, String> tbcId;
 
     @FXML
     private TableColumn<Estudiante, String> tbcNombre;
 
     @FXML
     private TableColumn<Estudiante, String> tbcMatricula;
-
-    @FXML
-    private TableColumn<Estudiante, String> tbcFechaNacimiento;
-
-    @FXML
-    private TableColumn<Estudiante, String> tbcFechaIngreso;
-
-    @FXML
-    private TableColumn<Estudiante, String> tbcActivo;
-
-    @FXML
-    private TableColumn<Estudiante, String> tbcId;
 
     @FXML
     private TableColumn<Estudiante, String> tbcEmail;
@@ -93,42 +101,47 @@ public class EstudianteViewController{
     private TableColumn<Estudiante, String> tbcDireccion;
 
     @FXML
-    private Button btnRegresarMenu;
+    private TableColumn<Estudiante, String> tbcFechaNacimiento;
+
+    @FXML
+    private TableColumn<Estudiante, String> tbcFechaIngreso;
+
+    @FXML
+    private TableColumn<Estudiante, Boolean> tbcActivo;
+
+    private App app;
 
     @FXML
     void onRegresarMenu() {
         app.openViewPrincipal();
     }
 
-    private App app;
-
-
     @FXML
-    void onAgregarPropietario() {
+    void onAgregar() {
         agregarEstudiante();
     }
 
-
     @FXML
-    void onActualizarPropietario() {
+    void onActualizar() {
         actualizarEstudiante();
     }
-
 
     @FXML
     void onLimpiar() {
         limpiarSeleccion();
     }
 
-
     @FXML
     void onEliminar() {
         eliminarEstudiante();
     }
 
-
     @FXML
     void initialize() {
+        toggleGroupActivo = new ToggleGroup();
+        rbActivoSi.setToggleGroup(toggleGroupActivo);
+        rbActivoNo.setToggleGroup(toggleGroupActivo);
+        rbActivoSi.setSelected(true);
     }
 
     public void setApp(App app) {
@@ -137,45 +150,29 @@ public class EstudianteViewController{
         initView();
     }
 
-
     private void initView() {
         initDataBinding();
-
-
-        obtenerEstudiante();
-
-
+        obtenerEstudiantes();
         tblListEstudiantes.getItems().clear();
-
-
         tblListEstudiantes.setItems(listEstudiantes);
-
-
         listenerSelection();
     }
-
-// String matricula, LocalDate fechaIngreso , boolean activo, String  id, String nombre, String email, String telefono, String direccion,  LocalDate fechaNacimiento
 
     private void initDataBinding() {
         tbcId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         tbcNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
-        tbcDireccion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDireccion()));
-        tbcActivo.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getActivo()));
         tbcMatricula.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMatricula()));
         tbcEmail.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
         tbcTelefono.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelefono()));
-        tbcFechaNacimiento.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getFechaNacimiento()));
-        tbcFechaIngreso.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getFechaIngreso()));
-
-
-
+        tbcDireccion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDireccion()));
+        tbcFechaNacimiento.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaNacimiento() != null ? cellData.getValue().getFechaNacimiento().toString() : ""));
+        tbcFechaIngreso.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaIngreso() != null ? cellData.getValue().getFechaIngreso().toString() : ""));
+        tbcActivo.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getActivo()));
     }
 
-
-    private void obtenerEstudiante() {
+    private void obtenerEstudiantes() {
         listEstudiantes.addAll(estudianteController.obtenerListaEstudiantes());
     }
-
 
     private void listenerSelection() {
         tblListEstudiantes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -184,42 +181,41 @@ public class EstudianteViewController{
         });
     }
 
-
     private void mostrarInformacionEstudiante(Estudiante estudiante) {
         if (estudiante != null) {
             txtId.setText(estudiante.getId());
-            txtDireccion.setText(estudiante.getDireccion());
-            txtEmail.setText(estudiante.getEmail());
             txtNombre.setText(estudiante.getNombre());
-            txtMatricula.setText(estudiante.getMatricula());
+            txtEmail.setText(estudiante.getEmail());
             txtTelefono.setText(estudiante.getTelefono());
+            txtDireccion.setText(estudiante.getDireccion());
+            txtMatricula.setText(estudiante.getMatricula());
+            txtUsuario.setText(estudiante.getUsuario());
+            txtContrasenia.setText(estudiante.getContrasenia());
+            dpFechaNacimiento.setValue(estudiante.getFechaNacimiento());
+            dpFechaIngreso.setValue(estudiante.getFechaIngreso());
             if (estudiante.getActivo()) {
                 rbActivoSi.setSelected(true);
             } else {
-                rbActivoNo.setSelected(false);
+                rbActivoNo.setSelected(true);
             }
-            dpFechaIngreso.setValue(estudiante.getFechaIngreso());
-            dpFechaNacimiento.setValue(estudiante.getFechaNacimiento());
         }
     }
 
-
     private void agregarEstudiante() {
         Estudiante estudiante = buildEstudiante();
-        if (estudianteController.crearEstudiante(estudiante)) {
+        if (estudiante != null && estudianteController.crearEstudiante(estudiante)) {
             listEstudiantes.add(estudiante);
             limpiarCamposEstudiante();
         }
     }
 
-
     private Estudiante buildEstudiante() {
+        try {
+            LocalDate fechaIngreso = dpFechaIngreso.getValue() != null ? dpFechaIngreso.getValue() : LocalDate.now();
+            LocalDate fechaNacimiento = dpFechaNacimiento.getValue() != null ? dpFechaNacimiento.getValue() : LocalDate.now();
+            boolean activo = rbActivoSi.isSelected();
 
-        LocalDate fechaIngreso = LocalDate.now();
-        LocalDate fechaNacimiento = dpFechaNacimiento.getValue();
-        boolean activo = rbActivoSi.isSelected();
-
-        Estudiante estudiante = new Estudiante(
+            return new Estudiante(
                 txtMatricula.getText(),
                 fechaIngreso,
                 activo,
@@ -228,64 +224,53 @@ public class EstudianteViewController{
                 txtEmail.getText(),
                 txtTelefono.getText(),
                 txtDireccion.getText(),
-                fechaNacimiento);
-        return estudiante;
+                fechaNacimiento,
+                txtUsuario.getText(),
+                txtContrasenia.getText()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-
     private void eliminarEstudiante() {
-        if (estudianteController.eliminarEstudiante(txtId.getText())) {
+        if (selectedEstudiante != null && estudianteController.eliminarEstudiante(selectedEstudiante.getId())) {
             listEstudiantes.remove(selectedEstudiante);
             limpiarCamposEstudiante();
             limpiarSeleccion();
         }
     }
 
-
     private void actualizarEstudiante() {
-
-
-        if (selectedEstudiante != null &&
-                estudianteController.actualizarEstudiante(selectedEstudiante.getId(), buildEstudiante())) {
-
-
+        if (selectedEstudiante != null && estudianteController.actualizarEstudiante(selectedEstudiante.getId(), buildEstudiante())) {
             int index = listEstudiantes.indexOf(selectedEstudiante);
             if (index >= 0) {
                 listEstudiantes.set(index, buildEstudiante());
             }
-
-
             tblListEstudiantes.refresh();
             limpiarSeleccion();
             limpiarCamposEstudiante();
         }
     }
 
-
     private void limpiarSeleccion() {
         tblListEstudiantes.getSelectionModel().clearSelection();
         limpiarCamposEstudiante();
     }
 
-
     private void limpiarCamposEstudiante() {
         txtId.clear();
         txtNombre.clear();
-        txtDireccion.clear();
-        txtTelefono.clear();
         txtEmail.clear();
+        txtTelefono.clear();
+        txtDireccion.clear();
         txtMatricula.clear();
-        rbActivoSi.setSelected(false);
-        rbActivoNo.setSelected(false);
-        dpFechaIngreso.setValue(null);
+        txtUsuario.clear();
+        txtContrasenia.clear();
         dpFechaNacimiento.setValue(null);
-    }
-
-
-
-
-    public EstudianteController getEstudianteController() {
-
-        return null;
+        dpFechaIngreso.setValue(null);
+        rbActivoSi.setSelected(true);
+        rbActivoNo.setSelected(false);
     }
 }

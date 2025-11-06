@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.proyectofinalmusica.viewController;
+package co.edu.uniquindio.poo.proyectofinalmusica.ViewController;
 
 import co.edu.uniquindio.poo.veterinariajfx.App;
 import javafx.fxml.FXML;

@@ -6,6 +6,9 @@ import co.edu.uniquindio.poo.proyectofinalmusica.model.TipoInstrumento;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.Asistencia;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.EvaluacionProgreso;
 
 public class ClaseGrupal extends Clase {
     private int capacidadMaxima;
@@ -71,11 +74,57 @@ public class ClaseGrupal extends Clase {
 
     @Override
     public void registrarAsistencia(Estudiante estudiante, boolean presente) {
-            //-----------implementar...............//
+        // Verificar que el estudiante esté inscrito en la clase grupal
+        if (theEstudiantesInscritos.contains(estudiante)) {
+            LocalDate fechaActual = LocalDate.now();
+            
+            // Generar ID único para la asistencia
+            String idAsistencia = "AST-" + this.id + "-" + estudiante.getId() + "-" + 
+                                  fechaActual.toString().replace("-", "");
+            
+            // Crear nueva asistencia
+            Asistencia asistencia = new Asistencia(
+                idAsistencia,
+                estudiante,
+                this,
+                fechaActual,
+                presente,
+                presente ? "Presente" : "Ausente"
+            );
+            
+            // Agregar al historial de asistencia del estudiante
+            estudiante.getTheHistorialAsistencia().add(asistencia);
+        }
     }
 
     @Override
     public void evaluarProgreso(Estudiante estudiante, double calificacion, String comentarios) {
-        //-----------implementar...............//
+        // Verificar que el estudiante esté inscrito en la clase grupal
+        if (theEstudiantesInscritos.contains(estudiante)) {
+            LocalDate fechaActual = LocalDate.now();
+            
+            // Generar ID único para la evaluación
+            String idEvaluacion = "EVAL-" + this.id + "-" + estudiante.getId() + "-" + 
+                                  fechaActual.toString().replace("-", "");
+            
+            // Crear nueva evaluación de progreso
+            EvaluacionProgreso evaluacion = new EvaluacionProgreso(
+                idEvaluacion,
+                calificacion,
+                comentarios,
+                "", // areasAMejorar inicialmente vacío
+                fechaActual.toString() // Convierte LocalDate a String en formato ISO (yyyy-MM-dd)
+            );
+            
+            // Configurar relaciones
+            evaluacion.setTheEstudiante(estudiante);
+            evaluacion.setTheClase(this);
+            if (theProfesor != null) {
+                evaluacion.setTheEvaluador(theProfesor);
+            }
+            
+            // Agregar a las evaluaciones del estudiante
+            estudiante.getTheEvaluaciones().add(evaluacion);
+        }
     }
 }

@@ -16,8 +16,8 @@ public class Profesor extends Persona {
     private List<BloqueDisponibilidad> theDisponibilidad; // 1 a muchos
     private List<Clase> theClasesAsignadas; // 1 a muchos
 
-    public Profesor(String codigo, String especialidad,String fechaContratacion,boolean activo, String  id, String nombre, String email, String telefono, String direccion,  LocalDate fechaNacimiento) {
-        super(id, nombre,email,telefono,direccion, fechaNacimiento);
+    public Profesor(String codigo, String especialidad,String fechaContratacion,boolean activo, String  id, String nombre, String email, String telefono, String direccion,  LocalDate fechaNacimiento,String usuario,String contrasenia) {
+        super(id, nombre,email,telefono,direccion, fechaNacimiento,usuario,contrasenia);
         this.codigo = codigo;
         this.especialidad = especialidad;
         this.fechaContratacion = fechaContratacion;

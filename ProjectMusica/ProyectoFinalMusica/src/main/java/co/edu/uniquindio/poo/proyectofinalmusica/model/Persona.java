@@ -9,14 +9,17 @@ public abstract class Persona {
     protected String telefono;
     protected String direccion;
     protected LocalDate fechaNacimiento;
-
-    public Persona(String  id, String nombre, String email, String telefono, String direccion,  LocalDate fechaNacimiento) {
+    protected String usuario;
+    protected String contrasenia;
+    public Persona(String  id, String nombre, String email, String telefono, String direccion,  LocalDate fechaNacimiento,String usuario,String contrasenia) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
         this.direccion = direccion;
         this.fechaNacimiento = fechaNacimiento;
+        this.usuario = usuario;
+        this.contrasenia = contrasenia;
 
     }
 
@@ -66,5 +69,21 @@ public abstract class Persona {
 
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 }

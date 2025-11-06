@@ -7,8 +7,8 @@ public class Administrador extends Persona {
     private String departamento;
     private String fechaIngreso;
 
-    public Administrador(String cargo, String departamento, String fechaIngreso,String  id, String nombre, String email, String telefono, String direccion,  LocalDate fechaNacimiento) {
-        super(id, nombre,email,telefono,direccion, fechaNacimiento);
+    public Administrador(String cargo, String departamento, String fechaIngreso,String  id, String nombre, String email, String telefono, String direccion,  LocalDate fechaNacimiento,String usuario,String contrasenia) {
+        super(id, nombre,email,telefono,direccion, fechaNacimiento,usuario,contrasenia);
         this.cargo = cargo;
         this.departamento = departamento;
         this.fechaIngreso = fechaIngreso;

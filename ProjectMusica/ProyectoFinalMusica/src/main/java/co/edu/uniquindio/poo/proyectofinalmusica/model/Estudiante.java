@@ -18,8 +18,8 @@ public class Estudiante extends Persona implements IReportable {
     private List<Asistencia> theHistorialAsistencia; // 1 a muchos
     private List<EvaluacionProgreso> theEvaluaciones; // 1 a muchos
 
-    public Estudiante(String matricula, LocalDate fechaIngreso , boolean activo, String  id, String nombre, String email, String telefono, String direccion,  LocalDate fechaNacimiento) {
-        super(id, nombre,email,telefono,direccion, fechaNacimiento);
+    public Estudiante(String matricula, LocalDate fechaIngreso , boolean activo, String  id, String nombre, String email, String telefono, String direccion,  LocalDate fechaNacimiento,String usuario,String contrasenia) {
+        super(id, nombre,email,telefono,direccion, fechaNacimiento,usuario,contrasenia);
         this.matricula = matricula;
         this.fechaIngreso = fechaIngreso;
         this.activo = activo;
