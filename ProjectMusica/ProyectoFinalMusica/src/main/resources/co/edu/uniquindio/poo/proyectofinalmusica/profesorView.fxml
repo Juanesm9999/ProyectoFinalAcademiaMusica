@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="co.edu.uniquindio.poo.proyectofinalmusica.ViewController.ProfesorViewController"
+      spacing="15" style="-fx-background-color: #f5f5f5;">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <HBox alignment="CENTER">
+        <Label text="Gestión de Profesores" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+    </HBox>
+
+    <Separator/>
+
+    <ScrollPane fitToWidth="true" style="-fx-background: transparent;">
+        <VBox spacing="15">
+            <GridPane hgap="10" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="120" prefWidth="120"/>
+                    <ColumnConstraints minWidth="200" prefWidth="200"/>
+                    <ColumnConstraints minWidth="120" prefWidth="120"/>
+                    <ColumnConstraints minWidth="200" prefWidth="200"/>
+                </columnConstraints>
+
+                <Label text="ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtId" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Código:" GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtCodigo" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+                <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Label text="Email:" GridPane.columnIndex="2" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtEmail" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+                <Label text="Teléfono:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtTelefono" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                <Label text="Dirección:" GridPane.columnIndex="2" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtDireccion" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+
+                <Label text="Fecha Nacimiento:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+                <DatePicker fx:id="dpFechaNacimiento" GridPane.columnIndex="1" GridPane.rowIndex="3" prefWidth="200"/>
+
+                <Label text="Especialidad:" GridPane.columnIndex="2" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtEspecialidad" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+
+                <Label text="Fecha Contratación:" GridPane.columnIndex="0" GridPane.rowIndex="4" style="-fx-font-weight: bold;"/>
+                <DatePicker fx:id="dpFechaContratacion" GridPane.columnIndex="1" GridPane.rowIndex="4" prefWidth="200"/>
+
+                <Label text="Usuario:" GridPane.columnIndex="2" GridPane.rowIndex="4" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtUsuario" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+
+                <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="5" style="-fx-font-weight: bold;"/>
+                <PasswordField fx:id="txtContrasena" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+                <Label text="Estado:" GridPane.columnIndex="2" GridPane.rowIndex="5" style="-fx-font-weight: bold;"/>
+                <CheckBox fx:id="chkActivo" text="Activo" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
+            </GridPane>
+
+            <Separator/>
+
+            <!-- Gestión de Instrumentos -->
+            <HBox spacing="20" alignment="CENTER">
+                <VBox spacing="10">
+                    <Label text="Instrumentos Disponibles" style="-fx-font-weight: bold;"/>
+                    <ListView fx:id="lstInstrumentosDisponibles" prefHeight="150" prefWidth="200"/>
+                    <Button fx:id="btnAgregarInstrumento" text="Agregar ►" onAction="#onAgregarInstrumento"
+                            style="-fx-background-color: #3498db; -fx-text-fill: white;" prefWidth="200"/>
+                </VBox>
+
+                <VBox spacing="10">
+                    <Label text="Instrumentos Asignados" style="-fx-font-weight: bold;"/>
+                    <ListView fx:id="lstInstrumentosAsignados" prefHeight="150" prefWidth="200"/>
+                    <Button fx:id="btnQuitarInstrumento" text="◄ Quitar" onAction="#onQuitarInstrumento"
+                            style="-fx-background-color: #e74c3c; -fx-text-fill: white;" prefWidth="200"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </ScrollPane>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="btnAgregar" text="Agregar" onAction="#onAgregar"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" prefWidth="100"/>
+        <Button fx:id="btnActualizar" text="Actualizar" onAction="#onActualizar"
+                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;" prefWidth="100"/>
+        <Button fx:id="btnEliminar" text="Eliminar" onAction="#onEliminar"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;" prefWidth="100"/>
+        <Button fx:id="btnLimpiar" text="Limpiar" onAction="#onLimpiar"
+                style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold;" prefWidth="100"/>
+    </HBox>
+
+    <Separator/>
+
+    <VBox VBox.vgrow="ALWAYS">
+        <Label text="Lista de Profesores" style="-fx-font-size: 16px; -fx-font-weight: bold;">
+            <padding><Insets bottom="5"/></padding>
+        </Label>
+
+        <TableView fx:id="tblProfesores" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="tbcCodigo" text="Código" prefWidth="100"/>
+                <TableColumn fx:id="tbcNombre" text="Nombre" prefWidth="200"/>
+                <TableColumn fx:id="tbcEmail" text="Email" prefWidth="180"/>
+                <TableColumn fx:id="tbcEspecialidad" text="Especialidad" prefWidth="150"/>
+                <TableColumn fx:id="tbcEstado" text="Estado" prefWidth="100"/>
+            </columns>
+        </TableView>
+    </VBox>
+
+    <HBox alignment="CENTER_RIGHT">
+        <Button fx:id="btnRegresar" text="Regresar" onAction="#onRegresar"
+                style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-weight: bold;" prefWidth="100"/>
+    </HBox>
+</VBox>

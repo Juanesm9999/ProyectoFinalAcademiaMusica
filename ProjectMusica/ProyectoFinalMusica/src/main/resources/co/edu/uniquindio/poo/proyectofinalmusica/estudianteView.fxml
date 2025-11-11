@@ -1,12 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="592.0" prefWidth="748.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyectofinalmusica.controller.EstudianteController">
-   <children>
-      <DatePicker layoutX="63.0" layoutY="37.0" />
-      <TextField fx:id="txtMatricula" layoutX="76.0" layoutY="94.0" />
-   </children>
-</AnchorPane>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="co.edu.uniquindio.poo.proyectofinalmusica.viewController.EstudianteViewController"
+      spacing="15" style="-fx-background-color: #f5f5f5;">
+
+   <padding>
+      <Insets top="20" right="20" bottom="20" left="20"/>
+   </padding>
+
+   <!-- Título -->
+   <HBox alignment="CENTER">
+      <Label text="Gestión de Estudiantes" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+   </HBox>
+
+   <Separator/>
+
+   <!-- Formulario -->
+   <GridPane hgap="10" vgap="10">
+      <columnConstraints>
+         <ColumnConstraints minWidth="120" prefWidth="120"/>
+         <ColumnConstraints minWidth="200" prefWidth="200"/>
+         <ColumnConstraints minWidth="120" prefWidth="120"/>
+         <ColumnConstraints minWidth="200" prefWidth="200"/>
+      </columnConstraints>
+
+      <Label text="ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+      <TextField fx:id="txtId" GridPane.columnIndex="1" GridPane.rowIndex="0" promptText="ID del estudiante"/>
+
+      <Label text="Nombre:" GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+      <TextField fx:id="txtNombre" GridPane.columnIndex="3" GridPane.rowIndex="0" promptText="Nombre completo"/>
+
+      <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+      <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="1" promptText="correo@ejemplo.com"/>
+
+      <Label text="Teléfono:" GridPane.columnIndex="2" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+      <TextField fx:id="txtTelefono" GridPane.columnIndex="3" GridPane.rowIndex="1" promptText="Número de teléfono"/>
+
+      <Label text="Dirección:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+      <TextField fx:id="txtDireccion" GridPane.columnIndex="1" GridPane.rowIndex="2" promptText="Dirección"/>
+
+      <Label text="Fecha Nacimiento:" GridPane.columnIndex="2" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+      <DatePicker fx:id="dpFechaNacimiento" GridPane.columnIndex="3" GridPane.rowIndex="2" prefWidth="200"/>
+
+      <Label text="Matrícula:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+      <TextField fx:id="txtMatricula" GridPane.columnIndex="1" GridPane.rowIndex="3" promptText="Número de matrícula"/>
+
+      <Label text="Fecha Ingreso:" GridPane.columnIndex="2" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+      <DatePicker fx:id="dpFechaIngreso" GridPane.columnIndex="3" GridPane.rowIndex="3" prefWidth="200"/>
+
+      <Label text="Usuario:" GridPane.columnIndex="0" GridPane.rowIndex="4" style="-fx-font-weight: bold;"/>
+      <TextField fx:id="txtUsuario" GridPane.columnIndex="1" GridPane.rowIndex="4" promptText="Usuario para login"/>
+
+      <Label text="Contraseña:" GridPane.columnIndex="2" GridPane.rowIndex="4" style="-fx-font-weight: bold;"/>
+      <PasswordField fx:id="txtContrasena" GridPane.columnIndex="3" GridPane.rowIndex="4" promptText="Contraseña"/>
+
+      <Label text="Estado:" GridPane.columnIndex="0" GridPane.rowIndex="5" style="-fx-font-weight: bold;"/>
+      <CheckBox fx:id="chkActivo" text="Activo" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+   </GridPane>
+
+   <!-- Botones de acción -->
+   <HBox spacing="10" alignment="CENTER">
+      <Button fx:id="btnAgregar" text="Agregar" onAction="#onAgregar"
+              style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"
+              prefWidth="100"/>
+      <Button fx:id="btnActualizar" text="Actualizar" onAction="#onActualizar"
+              style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;"
+              prefWidth="100"/>
+      <Button fx:id="btnEliminar" text="Eliminar" onAction="#onEliminar"
+              style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;"
+              prefWidth="100"/>
+      <Button fx:id="btnLimpiar" text="Limpiar" onAction="#onLimpiar"
+              style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold;"
+              prefWidth="100"/>
+   </HBox>
+
+   <Separator/>
+
+   <!-- Tabla de estudiantes -->
+   <VBox VBox.vgrow="ALWAYS">
+      <Label text="Lista de Estudiantes" style="-fx-font-size: 16px; -fx-font-weight: bold;">
+         <padding>
+            <Insets bottom="5"/>
+         </padding>
+      </Label>
+
+      <TableView fx:id="tblEstudiantes" VBox.vgrow="ALWAYS">
+         <columns>
+            <TableColumn fx:id="tbcId" text="ID" prefWidth="100"/>
+            <TableColumn fx:id="tbcNombre" text="Nombre" prefWidth="200"/>
+            <TableColumn fx:id="tbcEmail" text="Email" prefWidth="180"/>
+            <TableColumn fx:id="tbcMatricula" text="Matrícula" prefWidth="120"/>
+            <TableColumn fx:id="tbcEstado" text="Estado" prefWidth="100"/>
+         </columns>
+      </TableView>
+   </VBox>
+
+   <!-- Botón regresar -->
+   <HBox alignment="CENTER_RIGHT">
+      <Button fx:id="btnRegresar" text="Regresar" onAction="#onRegresar"
+              style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-weight: bold;"
+              prefWidth="100"/>
+   </HBox>
+</VBox>

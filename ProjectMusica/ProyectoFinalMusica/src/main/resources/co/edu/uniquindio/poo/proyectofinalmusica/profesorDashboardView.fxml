@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="co.edu.uniquindio.poo.proyectofinalmusica.ViewController.ProfesorDashboardViewController"
+      alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);">
+
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+
+    <VBox alignment="CENTER" spacing="25" maxWidth="900"
+          style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 25, 0, 0, 5);">
+
+        <padding>
+            <Insets top="30" right="40" bottom="30" left="40"/>
+        </padding>
+
+        <!-- Header -->
+        <VBox alignment="CENTER" spacing="8">
+            <Label text="👨‍🏫" style="-fx-font-size: 50px;"/>
+            <Label fx:id="lblBienvenida" text="Bienvenido, Profesor"
+                   style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #667eea;"/>
+            <Label fx:id="lblCodigo" text="Código: "
+                   style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
+            <Label fx:id="lblEspecialidad" text="Especialidad: "
+                   style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
+        </VBox>
+
+        <Separator prefWidth="800"/>
+
+        <!-- Estadística -->
+        <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #9b59b6; -fx-padding: 20; -fx-background-radius: 10;">
+            <Label fx:id="lblNumeroClases" text="Clases asignadas: 0"
+                   style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+        </VBox>
+
+        <!-- Información -->
+        <HBox spacing="20" alignment="CENTER">
+            <!-- Instrumentos que imparte -->
+            <VBox spacing="10" prefWidth="380">
+                <Label text="Instrumentos que Imparto" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <ListView fx:id="lstInstrumentos" prefHeight="200"
+                          style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #ddd;"/>
+            </VBox>
+
+            <!-- Clases Asignadas -->
+            <VBox spacing="10" prefWidth="380">
+                <Label text="Mis Clases Asignadas" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <ListView fx:id="lstClasesAsignadas" prefHeight="200"
+                          style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #ddd;"/>
+            </VBox>
+        </HBox>
+
+        <Separator prefWidth="800"/>
+
+        <!-- Botones de Acción -->
+        <HBox spacing="15" alignment="CENTER">
+            <Button fx:id="btnGestionarDisponibilidad" text="📅 Gestionar Disponibilidad" onAction="#onGestionarDisponibilidad"
+                    style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px;
+                           -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 12 25;"/>
+
+            <Button fx:id="btnRegistrarAsistencia" text="✅ Registrar Asistencia" onAction="#onRegistrarAsistencia"
+                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 14px;
+                           -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 12 25;"/>
+
+            <Button fx:id="btnEvaluarEstudiantes" text="📝 Evaluar Estudiantes" onAction="#onEvaluarEstudiantes"
+                    style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-size: 14px;
+                           -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 12 25;"/>
+        </HBox>
+
+        <Separator prefWidth="800"/>
+
+        <!-- Cerrar Sesión -->
+        <Button fx:id="btnCerrarSesion" text="Cerrar Sesión" onAction="#onCerrarSesion"
+                style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-size: 14px;
+                       -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 12 30;"
+                prefWidth="200"/>
+    </VBox>
+</VBox>

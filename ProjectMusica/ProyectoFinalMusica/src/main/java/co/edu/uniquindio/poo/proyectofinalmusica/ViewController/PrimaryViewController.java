@@ -1,6 +1,6 @@
 package co.edu.uniquindio.poo.proyectofinalmusica.ViewController;
 
-import co.edu.uniquindio.poo.veterinariajfx.App;
+import co.edu.uniquindio.poo.proyectofinalmusica.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="co.edu.uniquindio.poo.proyectofinalmusica.ViewController.AdministradorDashboardViewController"
+      alignment="CENTER" spacing="30" style="-fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);">
+
+    <padding>
+        <Insets top="40" right="40" bottom="40" left="40"/>
+    </padding>
+
+    <!-- Panel Principal -->
+    <VBox alignment="CENTER" spacing="30" maxWidth="800"
+          style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 25, 0, 0, 5);">
+
+        <padding>
+            <Insets top="40" right="60" bottom="40" left="60"/>
+        </padding>
+
+        <!-- Header -->
+        <VBox alignment="CENTER" spacing="10">
+            <Label text="🎵" style="-fx-font-size: 60px;"/>
+            <Label fx:id="lblBienvenida" text="Bienvenido, Administrador"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #667eea;"/>
+            <Label text="Panel de Control Administrativo"
+                   style="-fx-font-size: 16px; -fx-text-fill: #666;"/>
+        </VBox>
+
+        <Separator prefWidth="700"/>
+
+        <!-- Opciones del Menú -->
+        <GridPane hgap="20" vgap="20" alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints prefWidth="320"/>
+                <ColumnConstraints prefWidth="320"/>
+            </columnConstraints>
+
+            <!-- Gestión de Estudiantes -->
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                  style="-fx-background-color: #3498db; -fx-background-radius: 15; -fx-padding: 25; -fx-cursor: hand;"
+                  onMouseClicked="#onGestionEstudiantes">
+                <Label text="👨‍🎓" style="-fx-font-size: 40px;"/>
+                <Label text="Gestión de Estudiantes"
+                       style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="Registrar, editar y consultar estudiantes"
+                       style="-fx-text-fill: white; -fx-font-size: 12px;" wrapText="true" textAlignment="CENTER"/>
+            </VBox>
+
+            <!-- Gestión de Profesores -->
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                  style="-fx-background-color: #9b59b6; -fx-background-radius: 15; -fx-padding: 25; -fx-cursor: hand;"
+                  onMouseClicked="#onGestionProfesores">
+                <Label text="👨‍🏫" style="-fx-font-size: 40px;"/>
+                <Label text="Gestión de Profesores"
+                       style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="Administrar el cuerpo docente"
+                       style="-fx-text-fill: white; -fx-font-size: 12px;"/>
+            </VBox>
+
+            <!-- Gestión de Cursos -->
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                  style="-fx-background-color: #e74c3c; -fx-background-radius: 15; -fx-padding: 25; -fx-cursor: hand;"
+                  onMouseClicked="#onGestionCursos">
+                <Label text="📚" style="-fx-font-size: 40px;"/>
+                <Label text="Gestión de Cursos"
+                       style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="Crear y administrar cursos"
+                       style="-fx-text-fill: white; -fx-font-size: 12px;"/>
+            </VBox>
+
+            <!-- Gestión de Clases -->
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                  style="-fx-background-color: #f39c12; -fx-background-radius: 15; -fx-padding: 25; -fx-cursor: hand;"
+                  onMouseClicked="#onGestionClases">
+                <Label text="📅" style="-fx-font-size: 40px;"/>
+                <Label text="Gestión de Clases"
+                       style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="Programar clases grupales e individuales"
+                       style="-fx-text-fill: white; -fx-font-size: 12px;"/>
+            </VBox>
+
+            <!-- Gestión de Aulas -->
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                  style="-fx-background-color: #16a085; -fx-background-radius: 15; -fx-padding: 25; -fx-cursor: hand;"
+                  onMouseClicked="#onGestionAulas">
+                <Label text="🏫" style="-fx-font-size: 40px;"/>
+                <Label text="Gestión de Aulas"
+                       style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="Administrar espacios físicos"
+                       style="-fx-text-fill: white; -fx-font-size: 12px;"/>
+            </VBox>
+
+            <!-- Reportes -->
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                  style="-fx-background-color: #27ae60; -fx-background-radius: 15; -fx-padding: 25; -fx-cursor: hand;"
+                  onMouseClicked="#onReportes">
+                <Label text="📊" style="-fx-font-size: 40px;"/>
+                <Label text="Reportes"
+                       style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="Generar informes y estadísticas"
+                       style="-fx-text-fill: white; -fx-font-size: 12px;"/>
+            </VBox>
+        </GridPane>
+
+        <Separator prefWidth="700"/>
+
+        <!-- Botón Cerrar Sesión -->
+        <Button fx:id="btnCerrarSesion" text="Cerrar Sesión" onAction="#onCerrarSesion"
+                style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-size: 14px;
+                       -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 12 30;"
+                prefWidth="200"/>
+    </VBox>
+</VBox>
