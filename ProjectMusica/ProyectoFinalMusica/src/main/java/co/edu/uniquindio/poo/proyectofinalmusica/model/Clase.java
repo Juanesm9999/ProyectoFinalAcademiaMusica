@@ -118,5 +118,8 @@ public abstract class Clase {
     }
 
     // Métodos abstractos que deben implementar las clases hijas
-    public abstract void registrarAsistencia(Estudiante estudiante, boolean presente){
+    public abstract void registrarAsistencia(Estudiante estudiante, boolean presente);
+
+
+    public abstract void evaluarProgreso(Estudiante estudiante, double calificacion, String comentarios);
 }

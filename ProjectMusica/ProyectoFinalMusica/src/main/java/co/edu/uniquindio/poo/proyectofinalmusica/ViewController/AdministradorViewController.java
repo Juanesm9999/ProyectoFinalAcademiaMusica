@@ -1,4 +1,4 @@
-﻿package co.edu.uniquindio.poo.proyectofinalmusica.ViewController;
+package co.edu.uniquindio.poo.proyectofinalmusica.ViewController;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.App;
 import co.edu.uniquindio.poo.proyectofinalmusica.controller.AdministradorController;
@@ -203,19 +203,19 @@ public class AdministradorViewController {
     private Administrador buildAdministrador() {
         try {
             LocalDate fechaNacimiento = dpFechaNacimiento.getValue() != null ? dpFechaNacimiento.getValue() : LocalDate.now();
-            
+
             return new Administrador(
-                txtCargo.getText(),
-                txtDepartamento.getText(),
-                txtFechaIngreso.getText(),
-                txtId.getText(),
-                txtNombre.getText(),
-                txtEmail.getText(),
-                txtTelefono.getText(),
-                txtDireccion.getText(),
-                fechaNacimiento,
-                txtUsuario.getText(),
-                txtContrasenia.getText()
+                    txtCargo.getText(),
+                    txtDepartamento.getText(),
+                    txtFechaIngreso.getText(),
+                    txtId.getText(),
+                    txtNombre.getText(),
+                    txtEmail.getText(),
+                    txtTelefono.getText(),
+                    txtDireccion.getText(),
+                    fechaNacimiento,
+                    txtUsuario.getText(),
+                    txtContrasenia.getText()
             );
         } catch (Exception e) {
             e.printStackTrace();

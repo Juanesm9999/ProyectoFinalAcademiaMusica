@@ -1,4 +1,4 @@
-﻿package co.edu.uniquindio.poo.proyectofinalmusica.ViewController;
+package co.edu.uniquindio.poo.proyectofinalmusica.ViewController;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.App;
 import co.edu.uniquindio.poo.proyectofinalmusica.controller.EstudianteController;
