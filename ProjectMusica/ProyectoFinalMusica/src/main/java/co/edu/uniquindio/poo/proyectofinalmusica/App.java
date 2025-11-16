@@ -2082,4 +2082,7 @@ public class App extends Application {
                     existente.getEmail(),
                     existente.getTelefono(),
                     existente.getDireccion(),
-                    existente.getFechaNacimiento(),
+                    existente.getFechaNacimiento()
+
+    public <__TMP__> __TMP__ openAdministradorDashboard() {
+    }
