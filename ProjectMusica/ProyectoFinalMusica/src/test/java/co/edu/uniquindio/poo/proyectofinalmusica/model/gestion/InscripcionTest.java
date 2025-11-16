@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
+/* package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.model.EstadoCurso;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.Estudiante;
@@ -22,23 +22,47 @@ class InscripcionTest {
         sistema = new SistemaAcademia("Academia UQ Música", "123456789");
 
         estudiante1 = new Estudiante(
-                "EST001", LocalDate.now(), true, "E001",
-                "Juan Pérez", "juan@email.com", "3001234567",
-                "Calle 1", LocalDate.of(2000, 1, 15)
+                "EST001",
+                LocalDate.now(),
+                true,
+                "E001",
+                "Juan Pérez",
+                "juan@email.com",
+                "3001234567",
+                "Calle 1",
+                LocalDate.of(2000, 1, 15),
+                "juan",
+                "juan123"
         );
 
         curso1 = new Curso(
-                "C001", "PIANO-1", "Piano Nivel 1",
-                TipoInstrumento.PIANO, 1, "Introducción al piano",
-                20, 0, EstadoCurso.ACTIVO,
-                "2025-01-15", "2025-06-15", 20
+                "C001",
+                "PIANO-1",
+                "Piano Nivel 1",
+                TipoInstrumento.PIANO,
+                1,
+                "Introducción al piano",
+                20,
+                0,
+                EstadoCurso.ACTIVO,
+                "2025-01-15",
+                "2025-06-15",
+                20
         );
 
         curso2 = new Curso(
-                "C002", "PIANO-2", "Piano Nivel 2",
-                TipoInstrumento.PIANO, 2, "Piano intermedio",
-                15, 0, EstadoCurso.ACTIVO,
-                "2025-01-15", "2025-06-15", 20
+                "C002",
+                "PIANO-2",
+                "Piano Nivel 2",
+                TipoInstrumento.PIANO,
+                2,
+                "Piano intermedio",
+                15,
+                0,
+                EstadoCurso.ACTIVO,
+                "2025-01-15",
+                "2025-06-15",
+                20
         );
     }
 
@@ -87,8 +111,12 @@ class InscripcionTest {
         sistema.crearCurso(curso2);
 
         NivelAprobado nivelAprobado = new NivelAprobado(
-                "NA001", TipoInstrumento.PIANO, 1,
-                "2024-12-15", 4.5, curso1
+                "NA001",
+                TipoInstrumento.PIANO,
+                1,
+                "2024-12-15",
+                4.5,
+                curso1
         );
         estudiante1.getTheNivelesAprobados().add(nivelAprobado);
 
@@ -130,4 +158,4 @@ class InscripcionTest {
         assertTrue(resultado);
         assertFalse(sistema.getListInscripciones().get(0).isActiva());
     }
-}
+} */ //

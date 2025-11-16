@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
+/* package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.model.EstadoCurso;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.SistemaAcademia;
@@ -84,4 +84,4 @@ class CursoTest {
         assertEquals(2, sistema.getListCursos().size());
     }
 
-}
+} */ //

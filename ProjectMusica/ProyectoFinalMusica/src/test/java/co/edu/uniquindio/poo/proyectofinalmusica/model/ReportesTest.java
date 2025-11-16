@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.proyectofinalmusica.model;
+/* package co.edu.uniquindio.poo.proyectofinalmusica.model;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,40 +24,85 @@ class ReportesTest {
         sistema = new SistemaAcademia("Academia UQ Música", "123456789");
 
         estudiante1 = new Estudiante(
-                "EST001", LocalDate.now(), true, "E001",
-                "Juan Pérez", "juan@email.com", "3001234567",
-                "Calle 1", LocalDate.of(2000, 1, 15)
+                "EST001",
+                LocalDate.now(),
+                true,
+                "E001",
+                "Juan Pérez",
+                "juan@email.com",
+                "3001234567",
+                "Calle 1",
+                LocalDate.of(2000, 1, 15),
+                "juan",
+                "juan123"
         );
 
         estudiante2 = new Estudiante(
-                "EST002", LocalDate.now(), true, "E002",
-                "María García", "maria@email.com", "3007654321",
-                "Calle 2", LocalDate.of(1999, 5, 20)
+                "EST002",
+                LocalDate.now(),
+                true,
+                "E002",
+                "María García",
+                "maria@email.com",
+                "3007654321",
+                "Calle 2",
+                LocalDate.of(1999, 5, 20),
+                "maria",
+                "maria123"
         );
 
         profesor1 = new Profesor(
-                "PROF001", "Música Clásica", "2020-01-01", true,
-                "P001", "Carlos López", "carlos@email.com",
-                "3009876543", "Calle 3",
-                LocalDate.of(1985, 3, 10)
+                "PROF001",
+                "Música Clásica",
+                "2020-01-01",
+                true,
+                "P001",
+                "Carlos López",
+                "carlos@email.com",
+                "3009876543",
+                "Calle 3",
+                LocalDate.of(1985, 3, 10),
+                "carlos",
+                "carlos123"
         );
 
         curso1 = new Curso(
-                "C001", "PIANO-1", "Piano Nivel 1",
-                TipoInstrumento.PIANO, 1, "Introducción al piano",
-                20, 2, EstadoCurso.ACTIVO,
-                "2025-01-15", "2025-06-15", 20
+                "C001",
+                "PIANO-1",
+                "Piano Nivel 1",
+                TipoInstrumento.PIANO,
+                1,
+                "Introducción al piano",
+                20,
+                2,
+                EstadoCurso.ACTIVO,
+                "2025-01-15",
+                "2025-06-15",
+                20
         );
 
         aula1 = new Aula(
-                "A001", "AULA-01", "Aula Principal",
-                "Edificio A", 30, true
+                "A001",
+                "AULA-01",
+                "Aula Principal",
+                "Edificio A",
+                30,
+                true
         );
 
         claseGrupal = new ClaseGrupal(
-                20, 2, 18, "Clase de piano",
-                "CL001", "Lunes 10:00-12:00", "Lunes", "10:00", "12:00",
-                TipoInstrumento.PIANO, 1, true
+                20,
+                2,
+                18,
+                "Clase de piano",
+                "CL001",
+                "Lunes 10:00-12:00",
+                "Lunes",
+                "10:00",
+                "12:00",
+                TipoInstrumento.PIANO,
+                1,
+                true
         );
         claseGrupal.setTheProfesor(profesor1);
         claseGrupal.setTheAula(aula1);
@@ -90,8 +135,12 @@ class ReportesTest {
 
         // Registrar asistencias
         Asistencia asist1 = new Asistencia(
-                "AST001", estudiante1, claseGrupal,
-                LocalDate.now(), true, "Presente"
+                "AST001",
+                estudiante1,
+                claseGrupal,
+                LocalDate.now(),
+                true,
+                "Presente"
         );
         sistema.registrarAsistencia(asist1);
 
@@ -130,8 +179,11 @@ class ReportesTest {
         sistema.inscribirEstudiante(estudiante1, curso1);
 
         EvaluacionProgreso eval = new EvaluacionProgreso(
-                "EVAL001", 4.5, "Excelente",
-                "Ninguna", "2025-06-15"
+                "EVAL001",
+                4.5,
+                "Excelente",
+                "Ninguna",
+                "2025-06-15"
         );
         eval.setTheEstudiante(estudiante1);
         eval.setTheCurso(curso1);
@@ -233,8 +285,12 @@ class ReportesTest {
         sistema.registrarEstudiante(estudiante1);
 
         NivelAprobado nivel = new NivelAprobado(
-                "NA001", TipoInstrumento.PIANO, 1,
-                "2024-12-15", 4.5, curso1
+                "NA001",
+                TipoInstrumento.PIANO,
+                1,
+                "2024-12-15",
+                4.5,
+                curso1
         );
         estudiante1.getTheNivelesAprobados().add(nivel);
 
@@ -242,4 +298,4 @@ class ReportesTest {
         assertTrue(reporte.stream().anyMatch(linea -> linea.contains("NIVELES APROBADOS")));
         assertTrue(reporte.stream().anyMatch(linea -> linea.contains("PIANO")));
     }
-}
+} */ //

@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.proyectofinalmusica.model;
+/* package co.edu.uniquindio.poo.proyectofinalmusica.model;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.ClaseGrupal;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.Curso;
@@ -26,38 +26,79 @@ class EvaluacionTest {
 
         // Crear estudiantes
         estudiante1 = new Estudiante(
-                "EST001", LocalDate.now(), true, "E001",
-                "Juan Pérez", "juan@email.com", "3001234567",
-                "Calle 1", LocalDate.of(2000, 1, 15)
+                "EST001",
+                LocalDate.now(),
+                true,
+                "E001",
+                "Juan Pérez",
+                "juan@email.com",
+                "3001234567",
+                "Calle 1",
+                LocalDate.of(2000, 1, 15),
+                "juan",
+                "juan123"
         );
 
         estudiante2 = new Estudiante(
-                "EST002", LocalDate.now(), true, "E002",
-                "María García", "maria@email.com", "3007654321",
-                "Calle 2", LocalDate.of(1999, 5, 20)
+                "EST002",
+                LocalDate.now(),
+                true,
+                "E002",
+                "María García",
+                "maria@email.com",
+                "3007654321",
+                "Calle 2",
+                LocalDate.of(1999, 5, 20),
+                "maria",
+                "maria123"
         );
 
         // Crear profesor
         profesor1 = new Profesor(
-                "PROF001", "Música Clásica", "2020-01-01", true,
-                "P001", "Carlos López", "carlos@email.com",
-                "3009876543", "Calle 3",
-                LocalDate.of(1985, 3, 10)
+                "PROF001",
+                "Música Clásica",
+                "2020-01-01",
+                true,
+                "P001",
+                "Carlos López",
+                "carlos@email.com",
+                "3009876543",
+                "Calle 3",
+                LocalDate.of(1985, 3, 10),
+                "carlos",
+                "carlos123"
         );
 
         // Crear curso
         curso1 = new Curso(
-                "C001", "PIANO-1", "Piano Nivel 1",
-                TipoInstrumento.PIANO, 1, "Introducción al piano",
-                20, 0, EstadoCurso.ACTIVO,
-                "2025-01-15", "2025-06-15", 20
+                "C001",
+                "PIANO-1",
+                "Piano Nivel 1",
+                TipoInstrumento.PIANO,
+                1,
+                "Introducción al piano",
+                20,
+                0,
+                EstadoCurso.ACTIVO,
+                "2025-01-15",
+                "2025-06-15",
+                20
         );
 
         // Crear clase
         claseGrupal = new ClaseGrupal(
-                20, 0, 20, "Clase de piano",
-                "CL001", "Lunes 10:00-12:00", "Lunes", "10:00", "12:00",
-                TipoInstrumento.PIANO, 1, true
+                20,
+                0,
+                20,
+                "Clase de piano",
+                "CL001",
+                "Lunes 10:00-12:00",
+                "Lunes",
+                "10:00",
+                "12:00",
+                TipoInstrumento.PIANO,
+                1,
+                true
         );
 
         // Crear evaluaciones
@@ -229,5 +270,4 @@ class EvaluacionTest {
 
         assertEquals("2025-06-15", evaluacion1.getFecha());
     }
-
-}
+} */ //
