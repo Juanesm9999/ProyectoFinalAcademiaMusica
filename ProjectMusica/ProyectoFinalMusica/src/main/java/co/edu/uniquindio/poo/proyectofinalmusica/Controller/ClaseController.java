@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.proyectofinalmusica.controller;
+package co.edu.uniquindio.poo.proyectofinalmusica.Controller;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.model.*;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.*;
