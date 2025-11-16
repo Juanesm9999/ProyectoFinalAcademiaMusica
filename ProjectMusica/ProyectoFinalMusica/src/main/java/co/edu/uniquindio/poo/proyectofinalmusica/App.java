@@ -150,7 +150,11 @@ public class App extends Application {
                         .setApp(this, profesor != null ? profesor : (Profesor) usuarioActual));
     }
 
-    
+    public void openEstudianteDashboard(Estudiante estudiante) {
+        loadView("/co/edu/uniquindio/poo/proyectofinalmusica/estudianteDashboardView.fxml",
+                controller -> ((co.edu.uniquindio.poo.proyectofinalmusica.ViewController.EstudianteDashboardViewController) controller)
+                        .setApp(this, estudiante != null ? estudiante : (Estudiante) usuarioActual));
+    }
 
     // Gestión - Administrador
     public void openEstudianteView() {
