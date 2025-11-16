@@ -1,7 +1,7 @@
 package co.edu.uniquindio.poo.proyectofinalmusica.ViewController;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.App;
-import co.edu.uniquindio.poo.proyectofinalmusica.controller.AdministradorController;
+import co.edu.uniquindio.poo.proyectofinalmusica.Controller.AdministradorController;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.TipoInstrumento;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;

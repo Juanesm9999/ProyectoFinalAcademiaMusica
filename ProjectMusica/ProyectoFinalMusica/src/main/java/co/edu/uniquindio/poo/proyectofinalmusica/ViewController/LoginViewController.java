@@ -1,7 +1,7 @@
 package co.edu.uniquindio.poo.proyectofinalmusica.ViewController;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.App;
-import co.edu.uniquindio.poo.proyectofinalmusica.controller.LoginController;
+import co.edu.uniquindio.poo.proyectofinalmusica.Controller.LoginController;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

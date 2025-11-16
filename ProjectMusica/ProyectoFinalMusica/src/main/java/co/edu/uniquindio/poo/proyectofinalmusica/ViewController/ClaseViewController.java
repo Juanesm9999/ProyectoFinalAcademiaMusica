@@ -1,7 +1,7 @@
 package co.edu.uniquindio.poo.proyectofinalmusica.ViewController;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.App;
-import co.edu.uniquindio.poo.proyectofinalmusica.controller.ClaseController;
+import co.edu.uniquindio.poo.proyectofinalmusica.Controller.ClaseController;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.*;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.*;
 import javafx.beans.property.SimpleStringProperty;
