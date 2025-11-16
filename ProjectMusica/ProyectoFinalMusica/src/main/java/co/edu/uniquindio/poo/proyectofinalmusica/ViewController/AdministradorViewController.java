@@ -107,8 +107,13 @@ public class AdministradorViewController {
 
     @FXML
     void onRegresarMenu() {
-        app.openViewPrincipal();
+        if (app != null) {
+            app.openAdministradorDashboard(null); //
+        } else {
+            System.err.println("Error: La aplicación no ha sido inicializada correctamente");
+        }
     }
+
 
     @FXML
     void onAgregar() {
@@ -132,11 +137,12 @@ public class AdministradorViewController {
 
     @FXML
     void initialize() {
+
     }
 
     public void setApp(App app) {
         this.app = app;
-        administradorController = new AdministradorController(app.sistemaAcademia);
+        administradorController = new AdministradorController(app.sistema);
         initView();
     }
 
@@ -188,7 +194,7 @@ public class AdministradorViewController {
 
     private void agregarAdministrador() {
         Administrador administrador = buildAdministrador();
-        if (administrador != null && administradorController.crearAdministrador(administrador)) {
+        if (administrador != null && administradorController.agregarAdministrador(administrador)) {
             listAdministradores.add(administrador);
             limpiarCamposAdministrador();
         }
