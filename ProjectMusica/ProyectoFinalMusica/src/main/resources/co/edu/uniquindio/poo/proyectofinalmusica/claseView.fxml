@@ -112,6 +112,9 @@
                 style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;" prefWidth="100"/>
         <Button fx:id="btnLimpiar" text="Limpiar" onAction="#onLimpiar"
                 style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold;" prefWidth="100"/>
+        <Button fx:id="btnEliminar" text="Eliminar" onAction="#onEliminar"
+                style="-fx-background-color: #c41919; -fx-text-fill: white; -fx-font-weight: bold;" prefWidth="100"/>
+
     </HBox>
 
     <Separator/>

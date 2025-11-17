@@ -45,6 +45,7 @@ public class ClaseViewController {
 
     @FXML private Button btnAgregar;
     @FXML private Button btnActualizar;
+    @FXML private Button btnEliminar;
     @FXML private Button btnLimpiar;
     @FXML private Button btnRegresar;
 
@@ -184,6 +185,26 @@ public class ClaseViewController {
         if (selectedClase != null && validarCampos()) {
             // Implementar lógica de actualización
             mostrarAlerta("Info", "Funcionalidad de actualización en desarrollo", Alert.AlertType.INFORMATION);
+        } else {
+            mostrarAlerta("Advertencia", "Seleccione una clase de la tabla", Alert.AlertType.WARNING);
+        }
+    }
+
+    @FXML
+    void onEliminar() {
+        if (selectedClase != null) {
+            Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmacion.setTitle("Confirmar eliminación");
+            confirmacion.setHeaderText("¿Está seguro de eliminar esta aula?");
+            confirmacion.setContentText(selectedClase.getId());
+
+            if (confirmacion.showAndWait().get() == ButtonType.OK) {
+                if (claseController.eliminarClase(selectedClase.getId())) {
+                    listClases.remove(selectedClase);
+                    limpiarSeleccion();
+                    mostrarAlerta("Éxito", "Clase eliminada correctamente", Alert.AlertType.INFORMATION);
+                }
+            }
         } else {
             mostrarAlerta("Advertencia", "Seleccione una clase de la tabla", Alert.AlertType.WARNING);
         }

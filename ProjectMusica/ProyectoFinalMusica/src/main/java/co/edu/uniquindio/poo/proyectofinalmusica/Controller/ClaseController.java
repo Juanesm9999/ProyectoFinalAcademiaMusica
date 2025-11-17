@@ -147,4 +147,14 @@ public class ClaseController {
         }
         return 0;
     }
+
+    public boolean eliminarClase(String id) {
+        for (Clase clase : sistemaAcademia.getListClases()) {
+            if (clase.getId().equals(id)) {
+                sistemaAcademia.getListClases().remove(clase);
+                return true;
+            }
+        }
+        return false;
+    }
 }
