@@ -56,8 +56,14 @@
                     <Label text="Hora Fin:" GridPane.columnIndex="2" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
                     <TextField fx:id="txtHoraFin" GridPane.columnIndex="3" GridPane.rowIndex="3" promptText="10:00"/>
 
-                    <Label text="Estado:" GridPane.columnIndex="0" GridPane.rowIndex="4" style="-fx-font-weight: bold;"/>
-                    <CheckBox fx:id="chkActiva" text="Activa" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    <Label text="Curso:" GridPane.columnIndex="0" GridPane.rowIndex="4" style="-fx-font-weight: bold;"/>
+                    <ComboBox fx:id="cmbCurso" GridPane.columnIndex="1" GridPane.rowIndex="4" prefWidth="200"/>
+                    
+                    <Label text="Aula:" GridPane.columnIndex="2" GridPane.rowIndex="4" style="-fx-font-weight: bold;"/>
+                    <ComboBox fx:id="cmbAula" GridPane.columnIndex="3" GridPane.rowIndex="4" prefWidth="200"/>
+                    
+                    <Label text="Estado:" GridPane.columnIndex="0" GridPane.rowIndex="5" style="-fx-font-weight: bold;"/>
+                    <CheckBox fx:id="chkActiva" text="Activa" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
                 </GridPane>
             </VBox>
 
@@ -126,14 +132,15 @@
 
         <TableView fx:id="tblClases" VBox.vgrow="ALWAYS">
             <columns>
-                <TableColumn fx:id="tbcId" text="ID" prefWidth="80"/>
-                <TableColumn fx:id="tbcTipo" text="Tipo" prefWidth="90"/>
-                <TableColumn fx:id="tbcInstrumento" text="Instrumento" prefWidth="110"/>
-                <TableColumn fx:id="tbcNivel" text="Nivel" prefWidth="70"/>
-                <TableColumn fx:id="tbcDia" text="Día" prefWidth="100"/>
-                <TableColumn fx:id="tbcHorario" text="Horario" prefWidth="120"/>
-                <TableColumn fx:id="tbcAula" text="Aula" prefWidth="100"/>
-                <TableColumn fx:id="tbcEstado" text="Estado" prefWidth="90"/>
+                <TableColumn fx:id="tbcId" text="ID" prefWidth="70"/>
+                <TableColumn fx:id="tbcTipo" text="Tipo" prefWidth="80"/>
+                <TableColumn fx:id="tbcInstrumento" text="Instrumento" prefWidth="100"/>
+                <TableColumn fx:id="tbcCurso" text="Curso" prefWidth="150"/>
+                <TableColumn fx:id="tbcNivel" text="Nivel" prefWidth="60"/>
+                <TableColumn fx:id="tbcDia" text="Día" prefWidth="90"/>
+                <TableColumn fx:id="tbcHorario" text="Horario" prefWidth="110"/>
+                <TableColumn fx:id="tbcAula" text="Aula" prefWidth="90"/>
+                <TableColumn fx:id="tbcEstado" text="Estado" prefWidth="80"/>
             </columns>
         </TableView>
     </VBox>

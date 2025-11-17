@@ -80,9 +80,11 @@ public class CursoViewController {
         tbcEstado.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getEstado() != null ? 
                         cellData.getValue().getEstado().toString() : "N/A"));
-        tbcCapacidad.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getCapacidadActual() + "/" +
-                        cellData.getValue().getCapacidadMaxima()));
+        tbcCapacidad.setCellValueFactory(cellData -> {
+            int actual = cellData.getValue().getCapacidadActual();
+            int maxima = cellData.getValue().getCapacidadMaxima();
+            return new SimpleStringProperty(actual + "/" + maxima);
+        });
         tbcFechaInicio.setCellValueFactory(cellData -> {
             String fecha = cellData.getValue().getFechaInicio();
             return new SimpleStringProperty(fecha != null && !fecha.isEmpty() ? fecha : "No definida");

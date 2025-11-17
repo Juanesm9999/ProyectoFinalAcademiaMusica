@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class ProfesorViewController {
     private App app;
@@ -38,6 +39,7 @@ public class ProfesorViewController {
     @FXML private TableColumn<Profesor, String> tbcEmail;
     @FXML private TableColumn<Profesor, String> tbcTelefono;
     @FXML private TableColumn<Profesor, String> tbcEspecialidad;
+    @FXML private TableColumn<Profesor, String> tbcInstrumentos;
     @FXML private TableColumn<Profesor, String> tbcFechaContratacion;
     @FXML private TableColumn<Profesor, String> tbcEstado;
 
@@ -83,6 +85,18 @@ public class ProfesorViewController {
         tbcEspecialidad.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getEspecialidad() != null ? 
                         cellData.getValue().getEspecialidad() : "N/A"));
+        tbcInstrumentos.setCellValueFactory(cellData -> {
+            List<TipoInstrumento> instrumentos = cellData.getValue().getTheInstrumentosImpartidos();
+            if (instrumentos == null || instrumentos.isEmpty()) {
+                return new SimpleStringProperty("Sin asignar");
+            }
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < instrumentos.size(); i++) {
+                if (i > 0) sb.append(", ");
+                sb.append(instrumentos.get(i).toString());
+            }
+            return new SimpleStringProperty(sb.toString());
+        });
         tbcFechaContratacion.setCellValueFactory(cellData -> {
             String fecha = cellData.getValue().getFechaContratacion();
             return new SimpleStringProperty(fecha != null && !fecha.isEmpty() ? fecha : "N/A");

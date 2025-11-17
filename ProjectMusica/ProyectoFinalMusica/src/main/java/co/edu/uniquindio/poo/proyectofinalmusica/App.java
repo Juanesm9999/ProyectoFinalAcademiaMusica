@@ -256,9 +256,15 @@ public class App extends Application {
         Profesor profesor1 = new Profesor("P001", "Guitarra", "2020-02-15", true, "1010", "Carlos Pérez",
                 "carlos@academia.com", "3105551111", "Calle 10 #15-30", LocalDate.of(1985, 6, 20),
                 "cperez", "1234");
+        profesor1.getTheInstrumentosImpartidos().add(TipoInstrumento.GUITARRA);
+        profesor1.getTheInstrumentosImpartidos().add(TipoInstrumento.VIOLIN);
+        
         Profesor profesor2 = new Profesor("P002", "Piano", "2021-01-10", true, "1011", "Laura Gómez",
                 "laura@academia.com", "3144442222", "Carrera 5 #20-45", LocalDate.of(1990, 9, 12),
                 "lgomez", "abcd");
+        profesor2.getTheInstrumentosImpartidos().add(TipoInstrumento.PIANO);
+        profesor2.getTheInstrumentosImpartidos().add(TipoInstrumento.TECLADO);
+        
         listProfesores.add(profesor1);
         listProfesores.add(profesor2);
 

@@ -106,13 +106,14 @@
 
         <TableView fx:id="tblProfesores" VBox.vgrow="ALWAYS">
             <columns>
-                <TableColumn fx:id="tbcCodigo" text="Código" prefWidth="90"/>
-                <TableColumn fx:id="tbcNombre" text="Nombre" prefWidth="170"/>
-                <TableColumn fx:id="tbcEmail" text="Email" prefWidth="160"/>
-                <TableColumn fx:id="tbcTelefono" text="Teléfono" prefWidth="120"/>
-                <TableColumn fx:id="tbcEspecialidad" text="Especialidad" prefWidth="130"/>
-                <TableColumn fx:id="tbcFechaContratacion" text="Fecha Contratación" prefWidth="140"/>
-                <TableColumn fx:id="tbcEstado" text="Estado" prefWidth="90"/>
+                <TableColumn fx:id="tbcCodigo" text="Código" prefWidth="80"/>
+                <TableColumn fx:id="tbcNombre" text="Nombre" prefWidth="150"/>
+                <TableColumn fx:id="tbcEmail" text="Email" prefWidth="150"/>
+                <TableColumn fx:id="tbcTelefono" text="Teléfono" prefWidth="110"/>
+                <TableColumn fx:id="tbcEspecialidad" text="Especialidad" prefWidth="120"/>
+                <TableColumn fx:id="tbcInstrumentos" text="Instrumentos" prefWidth="150"/>
+                <TableColumn fx:id="tbcFechaContratacion" text="Fecha Contratación" prefWidth="130"/>
+                <TableColumn fx:id="tbcEstado" text="Estado" prefWidth="80"/>
             </columns>
         </TableView>
     </VBox>

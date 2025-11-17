@@ -1,7 +1,9 @@
 package co.edu.uniquindio.poo.proyectofinalmusica.ViewController;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.App;
+import co.edu.uniquindio.poo.proyectofinalmusica.Controller.AulaController;
 import co.edu.uniquindio.poo.proyectofinalmusica.Controller.ClaseController;
+import co.edu.uniquindio.poo.proyectofinalmusica.Controller.CursoController;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.*;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.*;
 import javafx.beans.property.SimpleStringProperty;
@@ -24,6 +26,8 @@ public class ClaseViewController {
     @FXML private ComboBox<TipoInstrumento> cmbInstrumento;
     @FXML private Spinner<Integer> spnNivel;
     @FXML private ComboBox<String> cmbTipoClase;
+    @FXML private ComboBox<Curso> cmbCurso;
+    @FXML private ComboBox<Aula> cmbAula;
     @FXML private CheckBox chkActiva;
 
     // Campos específicos para clase grupal
@@ -39,6 +43,7 @@ public class ClaseViewController {
     @FXML private TableColumn<Clase, String> tbcId;
     @FXML private TableColumn<Clase, String> tbcTipo;
     @FXML private TableColumn<Clase, String> tbcInstrumento;
+    @FXML private TableColumn<Clase, String> tbcCurso;
     @FXML private TableColumn<Clase, String> tbcNivel;
     @FXML private TableColumn<Clase, String> tbcDia;
     @FXML private TableColumn<Clase, String> tbcHorario;
@@ -71,10 +76,47 @@ public class ClaseViewController {
             actualizarCamposSegunTipo(newVal);
         });
     }
+    
+    private void cargarCombos() {
+        // Cargar cursos
+        if (cmbCurso != null) {
+            CursoController cursoController = new CursoController(app.getSistemaAcademia());
+            cmbCurso.setItems(FXCollections.observableArrayList(cursoController.obtenerListaCursos()));
+            cmbCurso.setCellFactory(param -> new ListCell<Curso>() {
+                @Override
+                protected void updateItem(Curso item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                    } else {
+                        setText(item.getCodigo() + " - " + item.getNombre());
+                    }
+                }
+            });
+        }
+        
+        // Cargar aulas
+        if (cmbAula != null) {
+            AulaController aulaController = new AulaController(app.getSistemaAcademia());
+            cmbAula.setItems(FXCollections.observableArrayList(aulaController.obtenerListaAulas()));
+            cmbAula.setCellFactory(param -> new ListCell<Aula>() {
+                @Override
+                protected void updateItem(Aula item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                    } else {
+                        setText(item.getCodigo() + " - " + item.getNombre());
+                    }
+                }
+            });
+        }
+    }
 
     public void setApp(App app) {
         this.app = app;
         claseController = new ClaseController(app.getSistemaAcademia());
+        cargarCombos();
         initView();
     }
 
@@ -93,6 +135,10 @@ public class ClaseViewController {
         tbcInstrumento.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getInstrumento() != null ? 
                         cellData.getValue().getInstrumento().toString() : "N/A"));
+        tbcCurso.setCellValueFactory(cellData -> {
+            Curso curso = buscarCursoDeClase(cellData.getValue());
+            return new SimpleStringProperty(curso != null ? curso.getCodigo() + " - " + curso.getNombre() : "Sin asignar");
+        });
         tbcNivel.setCellValueFactory(cellData ->
                 new SimpleStringProperty(String.valueOf(cellData.getValue().getNivel())));
         tbcDia.setCellValueFactory(cellData ->
@@ -108,6 +154,15 @@ public class ClaseViewController {
                         cellData.getValue().getTheAula().getCodigo() : "Sin asignar"));
         tbcEstado.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().isActiva() ? "Activa" : "Inactiva"));
+    }
+    
+    private Curso buscarCursoDeClase(Clase clase) {
+        for (Curso curso : app.getSistemaAcademia().getListCursos()) {
+            if (clase instanceof ClaseGrupal && curso.getTheClases().contains(clase)) {
+                return curso;
+            }
+        }
+        return null;
     }
 
     private void obtenerClases() {
@@ -132,6 +187,17 @@ public class ClaseViewController {
             cmbInstrumento.setValue(clase.getInstrumento());
             spnNivel.getValueFactory().setValue(clase.getNivel());
             chkActiva.setSelected(clase.isActiva());
+            
+            // Asignar aula
+            if (clase.getTheAula() != null && cmbAula != null) {
+                cmbAula.setValue(clase.getTheAula());
+            }
+            
+            // Asignar curso
+            Curso curso = buscarCursoDeClase(clase);
+            if (curso != null && cmbCurso != null) {
+                cmbCurso.setValue(curso);
+            }
 
             if (clase instanceof ClaseGrupal) {
                 cmbTipoClase.setValue("Grupal");
@@ -233,7 +299,7 @@ public class ClaseViewController {
     private ClaseGrupal buildClaseGrupal() {
         int capacidad = Integer.parseInt(txtCapacidadMaxima.getText());
 
-        return new ClaseGrupal(
+        ClaseGrupal claseGrupal = new ClaseGrupal(
                 capacidad,
                 0, // capacidad actual
                 capacidad, // cupos disponibles
@@ -247,10 +313,22 @@ public class ClaseViewController {
                 spnNivel.getValue(),
                 chkActiva.isSelected()
         );
+        
+        // Asignar aula si está seleccionada
+        if (cmbAula.getValue() != null) {
+            claseGrupal.setTheAula(cmbAula.getValue());
+        }
+        
+        // Asignar curso si está seleccionado
+        if (cmbCurso.getValue() != null) {
+            cmbCurso.getValue().getTheClases().add(claseGrupal);
+        }
+        
+        return claseGrupal;
     }
 
     private ClaseIndividual buildClaseIndividual() {
-        return new ClaseIndividual(
+        ClaseIndividual claseIndividual = new ClaseIndividual(
                 txtTemaEspecifico.getText(),
                 txtObjetivos.getText(),
                 txtObservaciones.getText(),
@@ -263,6 +341,13 @@ public class ClaseViewController {
                 spnNivel.getValue(),
                 chkActiva.isSelected()
         );
+        
+        // Asignar aula si está seleccionada
+        if (cmbAula.getValue() != null) {
+            claseIndividual.setTheAula(cmbAula.getValue());
+        }
+        
+        return claseIndividual;
     }
 
     private boolean validarCampos() {
@@ -303,6 +388,8 @@ public class ClaseViewController {
         cmbInstrumento.setValue(null);
         spnNivel.getValueFactory().setValue(1);
         cmbTipoClase.setValue(null);
+        if (cmbCurso != null) cmbCurso.setValue(null);
+        if (cmbAula != null) cmbAula.setValue(null);
         chkActiva.setSelected(true);
         txtCapacidadMaxima.clear();
         txtDescripcion.clear();
