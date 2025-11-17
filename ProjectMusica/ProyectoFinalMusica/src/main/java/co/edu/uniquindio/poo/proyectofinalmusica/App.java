@@ -238,7 +238,7 @@ public class App extends Application {
     //                         MAIN
 
     public static void main(String[] args) {
-        SistemaAcademia sistema = new SistemaAcademia("Academia Musica UQ", "001");
+        launch(args);
     }
 
     private void cargarDatosDemo() {
