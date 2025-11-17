@@ -231,7 +231,11 @@ public class ProfesorDashboardViewController {
 
         // Seleccionar clase
         ComboBox<Clase> cmbClase = new ComboBox<>(FXCollections.observableArrayList(clasesActivas));
-        ListCell<Clase> cellFactory = new ListCell<Clase>() {
+        cmbClase.setPromptText("Seleccione una clase");
+        cmbClase.setPrefWidth(400);
+        cmbClase.setEditable(false);
+        
+        ListCell<Clase> buttonCell = new ListCell<Clase>() {
             @Override
             protected void updateItem(Clase item, boolean empty) {
                 super.updateItem(item, empty);
@@ -244,8 +248,21 @@ public class ProfesorDashboardViewController {
                 }
             }
         };
-        cmbClase.setCellFactory(param -> cellFactory);
-        cmbClase.setButtonCell(cellFactory);
+        
+        cmbClase.setCellFactory(param -> new ListCell<Clase>() {
+            @Override
+            protected void updateItem(Clase item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    String tipo = item instanceof ClaseGrupal ? "Grupal" : "Individual";
+                    setText(item.getInstrumento() + " Nivel " + item.getNivel() + " - " + tipo + 
+                            " (" + item.getDiaSemana() + " " + item.getHoraInicio() + ")");
+                }
+            }
+        });
+        cmbClase.setButtonCell(buttonCell);
 
         // Tabla de estudiantes
         TableView<Estudiante> tablaEstudiantes = new TableView<>();
@@ -408,7 +425,11 @@ public class ProfesorDashboardViewController {
 
         // Seleccionar clase
         ComboBox<Clase> cmbClase = new ComboBox<>(FXCollections.observableArrayList(clasesActivas));
-        ListCell<Clase> cellFactoryEvaluacion = new ListCell<Clase>() {
+        cmbClase.setPromptText("Seleccione una clase");
+        cmbClase.setPrefWidth(400);
+        cmbClase.setEditable(false);
+        
+        ListCell<Clase> buttonCellEvaluacion = new ListCell<Clase>() {
             @Override
             protected void updateItem(Clase item, boolean empty) {
                 super.updateItem(item, empty);
@@ -420,8 +441,20 @@ public class ProfesorDashboardViewController {
                 }
             }
         };
-        cmbClase.setCellFactory(param -> cellFactoryEvaluacion);
-        cmbClase.setButtonCell(cellFactoryEvaluacion);
+        
+        cmbClase.setCellFactory(param -> new ListCell<Clase>() {
+            @Override
+            protected void updateItem(Clase item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    String tipo = item instanceof ClaseGrupal ? "Grupal" : "Individual";
+                    setText(item.getInstrumento() + " Nivel " + item.getNivel() + " - " + tipo);
+                }
+            }
+        });
+        cmbClase.setButtonCell(buttonCellEvaluacion);
 
         // Tabla de estudiantes
         TableView<Estudiante> tablaEstudiantes = new TableView<>();
