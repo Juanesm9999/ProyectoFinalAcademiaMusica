@@ -4,6 +4,7 @@ import co.edu.uniquindio.poo.proyectofinalmusica.App;
 import co.edu.uniquindio.poo.proyectofinalmusica.Controller.AulaController;
 import co.edu.uniquindio.poo.proyectofinalmusica.Controller.ClaseController;
 import co.edu.uniquindio.poo.proyectofinalmusica.Controller.CursoController;
+import co.edu.uniquindio.poo.proyectofinalmusica.Controller.ProfesorController;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.*;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.*;
 import javafx.beans.property.SimpleStringProperty;
@@ -28,6 +29,7 @@ public class ClaseViewController {
     @FXML private ComboBox<String> cmbTipoClase;
     @FXML private ComboBox<Curso> cmbCurso;
     @FXML private ComboBox<Aula> cmbAula;
+    @FXML private ComboBox<Profesor> cmbProfesor;
     @FXML private CheckBox chkActiva;
 
     // Campos específicos para clase grupal
@@ -48,6 +50,7 @@ public class ClaseViewController {
     @FXML private TableColumn<Clase, String> tbcDia;
     @FXML private TableColumn<Clase, String> tbcHorario;
     @FXML private TableColumn<Clase, String> tbcAula;
+    @FXML private TableColumn<Clase, String> tbcProfesor;
     @FXML private TableColumn<Clase, String> tbcEstado;
 
     @FXML private Button btnAgregar;
@@ -111,6 +114,23 @@ public class ClaseViewController {
                 }
             });
         }
+        
+        // Cargar profesores
+        if (cmbProfesor != null) {
+            ProfesorController profesorController = new ProfesorController(app.getSistemaAcademia());
+            cmbProfesor.setItems(FXCollections.observableArrayList(profesorController.obtenerListaProfesores()));
+            cmbProfesor.setCellFactory(param -> new ListCell<Profesor>() {
+                @Override
+                protected void updateItem(Profesor item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                    } else {
+                        setText(item.getCodigo() + " - " + item.getNombre());
+                    }
+                }
+            });
+        }
     }
 
     public void setApp(App app) {
@@ -152,6 +172,9 @@ public class ClaseViewController {
         tbcAula.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getTheAula() != null ? 
                         cellData.getValue().getTheAula().getCodigo() : "Sin asignar"));
+        tbcProfesor.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getTheProfesor() != null ? 
+                        cellData.getValue().getTheProfesor().getCodigo() + " - " + cellData.getValue().getTheProfesor().getNombre() : "Sin asignar"));
         tbcEstado.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().isActiva() ? "Activa" : "Inactiva"));
     }
@@ -197,6 +220,13 @@ public class ClaseViewController {
             Curso curso = buscarCursoDeClase(clase);
             if (curso != null && cmbCurso != null) {
                 cmbCurso.setValue(curso);
+            }
+            
+            // Asignar profesor
+            if (clase.getTheProfesor() != null && cmbProfesor != null) {
+                cmbProfesor.setValue(clase.getTheProfesor());
+            } else if (cmbProfesor != null) {
+                cmbProfesor.setValue(null);
             }
 
             if (clase instanceof ClaseGrupal) {
@@ -351,6 +381,20 @@ public class ClaseViewController {
                 cmbCurso.getValue().getTheClases().add(original);
             }
             
+            // Actualizar profesor si cambió
+            Profesor profesorAnterior = original.getTheProfesor();
+            if (profesorAnterior != null && (cmbProfesor.getValue() == null || !profesorAnterior.getId().equals(cmbProfesor.getValue().getId()))) {
+                profesorAnterior.getTheClasesAsignadas().remove(original);
+            }
+            if (cmbProfesor.getValue() != null) {
+                original.setTheProfesor(cmbProfesor.getValue());
+                if (!cmbProfesor.getValue().getTheClasesAsignadas().contains(original)) {
+                    cmbProfesor.getValue().getTheClasesAsignadas().add(original);
+                }
+            } else {
+                original.setTheProfesor(null);
+            }
+            
             exito = true;
             
         } else if ("Individual".equals(tipoClase) && selectedClase instanceof ClaseIndividual) {
@@ -375,6 +419,20 @@ public class ClaseViewController {
                 original.setTheAula(cmbAula.getValue());
             } else {
                 original.setTheAula(null);
+            }
+            
+            // Actualizar profesor si cambió
+            Profesor profesorAnterior = original.getTheProfesor();
+            if (profesorAnterior != null && (cmbProfesor.getValue() == null || !profesorAnterior.getId().equals(cmbProfesor.getValue().getId()))) {
+                profesorAnterior.getTheClasesAsignadas().remove(original);
+            }
+            if (cmbProfesor.getValue() != null) {
+                original.setTheProfesor(cmbProfesor.getValue());
+                if (!cmbProfesor.getValue().getTheClasesAsignadas().contains(original)) {
+                    cmbProfesor.getValue().getTheClasesAsignadas().add(original);
+                }
+            } else {
+                original.setTheProfesor(null);
             }
             
             exito = true;
@@ -452,6 +510,12 @@ public class ClaseViewController {
             cmbCurso.getValue().getTheClases().add(claseGrupal);
         }
         
+        // Asignar profesor si está seleccionado
+        if (cmbProfesor.getValue() != null) {
+            claseGrupal.setTheProfesor(cmbProfesor.getValue());
+            cmbProfesor.getValue().getTheClasesAsignadas().add(claseGrupal);
+        }
+        
         return claseGrupal;
     }
 
@@ -473,6 +537,12 @@ public class ClaseViewController {
         // Asignar aula si está seleccionada
         if (cmbAula.getValue() != null) {
             claseIndividual.setTheAula(cmbAula.getValue());
+        }
+        
+        // Asignar profesor si está seleccionado
+        if (cmbProfesor.getValue() != null) {
+            claseIndividual.setTheProfesor(cmbProfesor.getValue());
+            cmbProfesor.getValue().getTheClasesAsignadas().add(claseIndividual);
         }
         
         return claseIndividual;
@@ -518,6 +588,7 @@ public class ClaseViewController {
         cmbTipoClase.setValue(null);
         if (cmbCurso != null) cmbCurso.setValue(null);
         if (cmbAula != null) cmbAula.setValue(null);
+        if (cmbProfesor != null) cmbProfesor.setValue(null);
         chkActiva.setSelected(true);
         txtCapacidadMaxima.clear();
         txtDescripcion.clear();

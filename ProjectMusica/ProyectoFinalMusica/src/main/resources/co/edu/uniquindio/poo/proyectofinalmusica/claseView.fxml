@@ -62,8 +62,11 @@
                     <Label text="Aula:" GridPane.columnIndex="2" GridPane.rowIndex="4" style="-fx-font-weight: bold;"/>
                     <ComboBox fx:id="cmbAula" GridPane.columnIndex="3" GridPane.rowIndex="4" prefWidth="200"/>
                     
-                    <Label text="Estado:" GridPane.columnIndex="0" GridPane.rowIndex="5" style="-fx-font-weight: bold;"/>
-                    <CheckBox fx:id="chkActiva" text="Activa" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    <Label text="Profesor:" GridPane.columnIndex="0" GridPane.rowIndex="5" style="-fx-font-weight: bold;"/>
+                    <ComboBox fx:id="cmbProfesor" GridPane.columnIndex="1" GridPane.rowIndex="5" prefWidth="200"/>
+                    
+                    <Label text="Estado:" GridPane.columnIndex="2" GridPane.rowIndex="5" style="-fx-font-weight: bold;"/>
+                    <CheckBox fx:id="chkActiva" text="Activa" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
                 </GridPane>
             </VBox>
 
@@ -140,6 +143,7 @@
                 <TableColumn fx:id="tbcDia" text="Día" prefWidth="90"/>
                 <TableColumn fx:id="tbcHorario" text="Horario" prefWidth="110"/>
                 <TableColumn fx:id="tbcAula" text="Aula" prefWidth="90"/>
+                <TableColumn fx:id="tbcProfesor" text="Profesor" prefWidth="150"/>
                 <TableColumn fx:id="tbcEstado" text="Estado" prefWidth="80"/>
             </columns>
         </TableView>
