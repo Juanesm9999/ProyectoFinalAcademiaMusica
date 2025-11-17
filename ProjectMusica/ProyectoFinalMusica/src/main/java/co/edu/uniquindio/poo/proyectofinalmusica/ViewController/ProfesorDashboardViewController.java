@@ -231,7 +231,7 @@ public class ProfesorDashboardViewController {
 
         // Seleccionar clase
         ComboBox<Clase> cmbClase = new ComboBox<>(FXCollections.observableArrayList(clasesActivas));
-        cmbClase.setCellFactory(param -> new ListCell<Clase>() {
+        ListCell<Clase> cellFactory = new ListCell<Clase>() {
             @Override
             protected void updateItem(Clase item, boolean empty) {
                 super.updateItem(item, empty);
@@ -243,7 +243,9 @@ public class ProfesorDashboardViewController {
                             " (" + item.getDiaSemana() + " " + item.getHoraInicio() + ")");
                 }
             }
-        });
+        };
+        cmbClase.setCellFactory(param -> cellFactory);
+        cmbClase.setButtonCell(cellFactory);
 
         // Tabla de estudiantes
         TableView<Estudiante> tablaEstudiantes = new TableView<>();
@@ -268,14 +270,24 @@ public class ProfesorDashboardViewController {
             if (newVal != null) {
                 ObservableList<Estudiante> estudiantes = FXCollections.observableArrayList();
                 if (newVal instanceof ClaseGrupal) {
-                    estudiantes.addAll(((ClaseGrupal) newVal).getTheEstudiantesInscritos());
+                    ClaseGrupal claseGrupal = (ClaseGrupal) newVal;
+                    List<Estudiante> estudiantesInscritos = claseGrupal.getTheEstudiantesInscritos();
+                    if (estudiantesInscritos != null && !estudiantesInscritos.isEmpty()) {
+                        estudiantes.addAll(estudiantesInscritos);
+                    }
                 } else if (newVal instanceof ClaseIndividual) {
-                    Estudiante est = ((ClaseIndividual) newVal).getTheEstudiante();
+                    ClaseIndividual claseIndividual = (ClaseIndividual) newVal;
+                    Estudiante est = claseIndividual.getTheEstudiante();
                     if (est != null) {
                         estudiantes.add(est);
                     }
                 }
                 tablaEstudiantes.setItems(estudiantes);
+                if (estudiantes.isEmpty()) {
+                    mostrarAlerta("Información", "Esta clase no tiene estudiantes inscritos", Alert.AlertType.INFORMATION);
+                }
+            } else {
+                tablaEstudiantes.setItems(FXCollections.observableArrayList());
             }
         });
 
@@ -396,7 +408,7 @@ public class ProfesorDashboardViewController {
 
         // Seleccionar clase
         ComboBox<Clase> cmbClase = new ComboBox<>(FXCollections.observableArrayList(clasesActivas));
-        cmbClase.setCellFactory(param -> new ListCell<Clase>() {
+        ListCell<Clase> cellFactoryEvaluacion = new ListCell<Clase>() {
             @Override
             protected void updateItem(Clase item, boolean empty) {
                 super.updateItem(item, empty);
@@ -407,7 +419,9 @@ public class ProfesorDashboardViewController {
                     setText(item.getInstrumento() + " Nivel " + item.getNivel() + " - " + tipo);
                 }
             }
-        });
+        };
+        cmbClase.setCellFactory(param -> cellFactoryEvaluacion);
+        cmbClase.setButtonCell(cellFactoryEvaluacion);
 
         // Tabla de estudiantes
         TableView<Estudiante> tablaEstudiantes = new TableView<>();
@@ -428,14 +442,24 @@ public class ProfesorDashboardViewController {
             if (newVal != null) {
                 ObservableList<Estudiante> estudiantes = FXCollections.observableArrayList();
                 if (newVal instanceof ClaseGrupal) {
-                    estudiantes.addAll(((ClaseGrupal) newVal).getTheEstudiantesInscritos());
+                    ClaseGrupal claseGrupal = (ClaseGrupal) newVal;
+                    List<Estudiante> estudiantesInscritos = claseGrupal.getTheEstudiantesInscritos();
+                    if (estudiantesInscritos != null && !estudiantesInscritos.isEmpty()) {
+                        estudiantes.addAll(estudiantesInscritos);
+                    }
                 } else if (newVal instanceof ClaseIndividual) {
-                    Estudiante est = ((ClaseIndividual) newVal).getTheEstudiante();
+                    ClaseIndividual claseIndividual = (ClaseIndividual) newVal;
+                    Estudiante est = claseIndividual.getTheEstudiante();
                     if (est != null) {
                         estudiantes.add(est);
                     }
                 }
                 tablaEstudiantes.setItems(estudiantes);
+                if (estudiantes.isEmpty()) {
+                    mostrarAlerta("Información", "Esta clase no tiene estudiantes inscritos", Alert.AlertType.INFORMATION);
+                }
+            } else {
+                tablaEstudiantes.setItems(FXCollections.observableArrayList());
             }
         });
 
