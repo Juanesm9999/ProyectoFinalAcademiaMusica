@@ -66,6 +66,10 @@
 
         <!-- Botones de Acción -->
         <HBox spacing="15" alignment="CENTER">
+            <Button fx:id="btnInscribirseCurso" text="📚 Inscribirse a Curso" onAction="#onInscribirseCurso"
+                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 14px;
+                           -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 12 25;"/>
+
             <Button fx:id="btnVerHorario" text="📅 Ver Horario" onAction="#onVerHorario"
                     style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px;
                            -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 12 25;"/>

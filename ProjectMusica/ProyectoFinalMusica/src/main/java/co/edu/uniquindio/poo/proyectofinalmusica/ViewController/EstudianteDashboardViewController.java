@@ -1,7 +1,9 @@
 package co.edu.uniquindio.poo.proyectofinalmusica.ViewController;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.App;
+import co.edu.uniquindio.poo.proyectofinalmusica.Controller.CursoController;
 import co.edu.uniquindio.poo.proyectofinalmusica.Controller.EstudianteController;
+import co.edu.uniquindio.poo.proyectofinalmusica.Controller.InscripcionController;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.Clase;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.Estudiante;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.*;
@@ -9,6 +11,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -30,20 +34,151 @@ public class EstudianteDashboardViewController {
     @FXML private Label lblPromedioGeneral;
     @FXML private ListView<String> lstInscripciones;
     @FXML private ListView<String> lstNivelesAprobados;
+    @FXML private Button btnInscribirseCurso;
     @FXML private Button btnVerHorario;
     @FXML private Button btnVerAsistencia;
     @FXML private Button btnVerEvaluaciones;
     @FXML private Button btnCerrarSesion;
 
+    private CursoController cursoController;
+    private InscripcionController inscripcionController;
+
     public void setApp(App app, Estudiante estudiante) {
         this.app = app;
         this.estudiante = estudiante;
         this.estudianteController = new EstudianteController(app.getSistemaAcademia());
+        this.cursoController = new CursoController(app.getSistemaAcademia());
+        this.inscripcionController = new InscripcionController(app.getSistemaAcademia());
 
         if (estudiante != null) {
             cargarInformacion();
         }
     }
+    @FXML
+    void onInscribirseCurso() {
+        if (estudiante == null) {
+            mostrarAlerta("Error", "No hay información del estudiante", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Crear ventana modal para mostrar cursos disponibles
+        Stage stageInscripcion = new Stage();
+        stageInscripcion.setTitle("Inscribirse a un Curso");
+        stageInscripcion.initModality(Modality.APPLICATION_MODAL);
+
+        // Obtener cursos disponibles (activos y con cupos)
+        List<Curso> cursosDisponibles = cursoController.obtenerCursosConCuposDisponibles();
+
+        // Filtrar cursos en los que el estudiante NO esté ya inscrito
+        List<Curso> cursosFiltrados = cursosDisponibles.stream()
+                .filter(curso -> !inscripcionController.verificarInscripcionExistente(estudiante.getId(), curso.getId()))
+                .collect(java.util.stream.Collectors.toList());
+
+        // Crear tabla de cursos
+        TableView<Curso> tablaCursos = new TableView<>();
+        tablaCursos.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        // Columnas de la tabla
+        TableColumn<Curso, String> colCodigo = new TableColumn<>("Código");
+        colCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCodigo()));
+        colCodigo.setPrefWidth(100);
+
+        TableColumn<Curso, String> colNombre = new TableColumn<>("Nombre");
+        colNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+        colNombre.setPrefWidth(200);
+
+        TableColumn<Curso, String> colInstrumento = new TableColumn<>("Instrumento");
+        colInstrumento.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getInstrumento().toString()));
+        colInstrumento.setPrefWidth(120);
+
+        TableColumn<Curso, String> colNivel = new TableColumn<>("Nivel");
+        colNivel.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getNivel())));
+        colNivel.setPrefWidth(80);
+
+        TableColumn<Curso, String> colCapacidad = new TableColumn<>("Cupos");
+        colCapacidad.setCellValueFactory(cellData -> {
+            Curso curso = cellData.getValue();
+            int cuposDisponibles = curso.getCapacidadMaxima() - curso.getCapacidadActual();
+            return new SimpleStringProperty(cuposDisponibles + " / " + curso.getCapacidadMaxima());
+        });
+        colCapacidad.setPrefWidth(100);
+
+        TableColumn<Curso, String> colDescripcion = new TableColumn<>("Descripción");
+        colDescripcion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescripcion()));
+        colDescripcion.setPrefWidth(250);
+
+        tablaCursos.getColumns().addAll(colCodigo, colNombre, colInstrumento, colNivel, colCapacidad, colDescripcion);
+        tablaCursos.setItems(FXCollections.observableArrayList(cursosFiltrados));
+
+        // Layout
+        VBox vbox = new VBox(15);
+        vbox.setPadding(new Insets(20));
+
+        Label titulo = new Label("📚 Cursos Disponibles");
+        titulo.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+
+        Label info = new Label("Selecciona un curso para inscribirte");
+        info.setStyle("-fx-font-size: 13px; -fx-text-fill: #666;");
+
+        Separator separator = new Separator();
+
+        // Botones
+        Button btnInscribir = new Button("Inscribirse");
+        btnInscribir.setStyle("-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 25; -fx-cursor: hand;");
+        btnInscribir.setOnAction(e -> {
+            Curso cursoSeleccionado = tablaCursos.getSelectionModel().getSelectedItem();
+            if (cursoSeleccionado == null) {
+                mostrarAlerta("Advertencia", "Por favor selecciona un curso", Alert.AlertType.WARNING);
+                return;
+            }
+
+            // Verificar nuevamente que no esté inscrito
+            if (inscripcionController.verificarInscripcionExistente(estudiante.getId(), cursoSeleccionado.getId())) {
+                mostrarAlerta("Error", "Ya estás inscrito en este curso", Alert.AlertType.ERROR);
+                return;
+            }
+
+            // Intentar inscribir
+            boolean exito = inscripcionController.inscribirEstudiante(estudiante, cursoSeleccionado);
+            if (exito) {
+                mostrarAlerta("Éxito", "Te has inscrito exitosamente en: " + cursoSeleccionado.getNombre(), Alert.AlertType.INFORMATION);
+                cargarInformacion(); // Actualizar información del dashboard
+                stageInscripcion.close();
+            } else {
+                mostrarAlerta("Error", "No se pudo realizar la inscripción. Verifica que cumplas con los prerrequisitos y que haya cupos disponibles.", Alert.AlertType.ERROR);
+            }
+        });
+
+        Button btnCancelar = new Button("Cancelar");
+        btnCancelar.setStyle("-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 25; -fx-cursor: hand;");
+        btnCancelar.setOnAction(e -> stageInscripcion.close());
+
+        HBox botonera = new HBox(15);
+        botonera.setAlignment(Pos.CENTER_RIGHT);
+        botonera.getChildren().addAll(btnInscribir, btnCancelar);
+
+        if (cursosFiltrados.isEmpty()) {
+            Label lblVacio = new Label("📋 No hay cursos disponibles para inscribirte en este momento.\n\n" +
+                    "Todos los cursos activos están llenos o ya estás inscrito en ellos.");
+            lblVacio.setStyle("-fx-font-size: 15px; -fx-text-alignment: center; -fx-text-fill: #666;");
+            lblVacio.setWrapText(true);
+
+            VBox contenidoVacio = new VBox(20);
+            contenidoVacio.setAlignment(Pos.CENTER);
+            contenidoVacio.setPrefHeight(300);
+            contenidoVacio.getChildren().addAll(lblVacio, btnCancelar);
+
+            vbox.getChildren().addAll(titulo, info, separator, contenidoVacio);
+        } else {
+            vbox.getChildren().addAll(titulo, info, separator, tablaCursos, botonera);
+            VBox.setVgrow(tablaCursos, javafx.scene.layout.Priority.ALWAYS);
+        }
+
+        Scene scene = new Scene(vbox, 900, 600);
+        stageInscripcion.setScene(scene);
+        stageInscripcion.show();
+    }
+
     @FXML
     void onCerrarSesion() {
         app.openLoginView();
