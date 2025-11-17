@@ -325,22 +325,39 @@ public class ProfesorDashboardViewController {
                 return;
             }
 
-            // Registrar asistencia usando el método de la clase
-            claseSeleccionada.registrarAsistencia(estudianteSeleccionado, chkPresente.isSelected());
-            
-            // Agregar observaciones si hay
-            List<Asistencia> historial = estudianteSeleccionado.getTheHistorialAsistencia();
-            if (!historial.isEmpty() && !txtObservaciones.getText().isEmpty()) {
-                historial.get(historial.size() - 1).setObservaciones(txtObservaciones.getText());
-            }
+            try {
+                // Obtener el tamaño del historial antes de registrar
+                int tamanioAntes = estudianteSeleccionado.getTheHistorialAsistencia().size();
+                
+                // Registrar asistencia usando el método de la clase
+                claseSeleccionada.registrarAsistencia(estudianteSeleccionado, chkPresente.isSelected());
+                
+                // Obtener la asistencia recién creada
+                List<Asistencia> historial = estudianteSeleccionado.getTheHistorialAsistencia();
+                if (historial.size() > tamanioAntes) {
+                    Asistencia nuevaAsistencia = historial.get(historial.size() - 1);
+                    
+                    // Agregar observaciones si hay
+                    if (!txtObservaciones.getText().isEmpty()) {
+                        nuevaAsistencia.setObservaciones(txtObservaciones.getText());
+                    }
 
-            // Registrar en el sistema
-            if (!historial.isEmpty()) {
-                app.getSistemaAcademia().registrarAsistencia(historial.get(historial.size() - 1));
+                    // Registrar en el sistema
+                    boolean exito = app.getSistemaAcademia().registrarAsistencia(nuevaAsistencia);
+                    
+                    if (exito) {
+                        mostrarAlerta("Éxito", "Asistencia registrada correctamente", Alert.AlertType.INFORMATION);
+                        txtObservaciones.clear();
+                        chkPresente.setSelected(true);
+                    } else {
+                        mostrarAlerta("Error", "No se pudo registrar la asistencia. Puede que ya exista una asistencia con el mismo ID para esta fecha.", Alert.AlertType.ERROR);
+                    }
+                } else {
+                    mostrarAlerta("Error", "No se pudo crear la asistencia. Verifique que el estudiante esté inscrito en la clase.", Alert.AlertType.ERROR);
+                }
+            } catch (Exception ex) {
+                mostrarAlerta("Error", "Error al registrar asistencia: " + ex.getMessage(), Alert.AlertType.ERROR);
             }
-
-            mostrarAlerta("Éxito", "Asistencia registrada correctamente", Alert.AlertType.INFORMATION);
-            txtObservaciones.clear();
         });
 
         Button btnCerrar = new Button("Cerrar");
@@ -478,25 +495,52 @@ public class ProfesorDashboardViewController {
                 return;
             }
 
-            // Evaluar usando el método de la clase
-            claseSeleccionada.evaluarProgreso(estudianteSeleccionado, 
-                    spnCalificacion.getValue(), txtComentarios.getText());
+            try {
+                // Obtener el tamaño de las evaluaciones antes de evaluar
+                int tamanioAntes = estudianteSeleccionado.getTheEvaluaciones().size();
+                
+                // Evaluar usando el método de la clase
+                claseSeleccionada.evaluarProgreso(estudianteSeleccionado, 
+                        spnCalificacion.getValue(), txtComentarios.getText());
 
-            // Agregar áreas a mejorar si hay
-            List<EvaluacionProgreso> evaluaciones = estudianteSeleccionado.getTheEvaluaciones();
-            if (!evaluaciones.isEmpty() && !txtAreasMejorar.getText().isEmpty()) {
-                evaluaciones.get(evaluaciones.size() - 1).setAreasAMejorar(txtAreasMejorar.getText());
+                // Obtener la evaluación recién creada
+                List<EvaluacionProgreso> evaluaciones = estudianteSeleccionado.getTheEvaluaciones();
+                if (evaluaciones.size() > tamanioAntes) {
+                    EvaluacionProgreso nuevaEvaluacion = evaluaciones.get(evaluaciones.size() - 1);
+                    
+                    // Agregar áreas a mejorar si hay
+                    if (!txtAreasMejorar.getText().isEmpty()) {
+                        nuevaEvaluacion.setAreasAMejorar(txtAreasMejorar.getText());
+                    }
+                    
+                    // Asignar el curso si es una clase grupal
+                    if (claseSeleccionada instanceof ClaseGrupal) {
+                        // Buscar el curso asociado a esta clase
+                        for (Curso curso : app.getSistemaAcademia().getListCursos()) {
+                            if (curso.getTheClases().contains(claseSeleccionada)) {
+                                nuevaEvaluacion.setTheCurso(curso);
+                                break;
+                            }
+                        }
+                    }
+
+                    // Registrar en el sistema
+                    boolean exito = app.getSistemaAcademia().registrarEvaluacion(nuevaEvaluacion);
+                    
+                    if (exito) {
+                        mostrarAlerta("Éxito", "Evaluación registrada correctamente", Alert.AlertType.INFORMATION);
+                        txtComentarios.clear();
+                        txtAreasMejorar.clear();
+                        spnCalificacion.getValueFactory().setValue(3.0);
+                    } else {
+                        mostrarAlerta("Error", "No se pudo registrar la evaluación. Puede que ya exista una evaluación con el mismo ID para esta fecha.", Alert.AlertType.ERROR);
+                    }
+                } else {
+                    mostrarAlerta("Error", "No se pudo crear la evaluación. Verifique que el estudiante esté inscrito en la clase.", Alert.AlertType.ERROR);
+                }
+            } catch (Exception ex) {
+                mostrarAlerta("Error", "Error al registrar evaluación: " + ex.getMessage(), Alert.AlertType.ERROR);
             }
-
-            // Registrar en el sistema
-            if (!evaluaciones.isEmpty()) {
-                app.getSistemaAcademia().registrarEvaluacion(evaluaciones.get(evaluaciones.size() - 1));
-            }
-
-            mostrarAlerta("Éxito", "Evaluación registrada correctamente", Alert.AlertType.INFORMATION);
-            txtComentarios.clear();
-            txtAreasMejorar.clear();
-            spnCalificacion.getValueFactory().setValue(3.0);
         });
 
         Button btnCerrar = new Button("Cerrar");
