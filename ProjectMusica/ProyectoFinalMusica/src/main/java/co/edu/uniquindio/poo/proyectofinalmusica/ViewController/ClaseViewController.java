@@ -229,30 +229,52 @@ public class ClaseViewController {
 
     @FXML
     void onAgregar() {
-        if (validarCampos()) {
-            String tipoClase = cmbTipoClase.getValue();
-            boolean exito = false;
+        if (!validarCampos()) {
+            return;
+        }
 
-            if ("Grupal".equals(tipoClase)) {
-                ClaseGrupal claseGrupal = buildClaseGrupal();
-                exito = claseController.crearClaseGrupal(claseGrupal);
-                if (exito) {
-                    listClases.add(claseGrupal);
-                }
-            } else {
-                ClaseIndividual claseIndividual = buildClaseIndividual();
-                exito = claseController.crearClaseIndividual(claseIndividual);
-                if (exito) {
-                    listClases.add(claseIndividual);
-                }
+        // Verificar conflicto de aula, día y horario
+        if (cmbAula.getValue() != null) {
+            boolean hayConflicto = claseController.verificarConflictoAulaHorario(
+                    cmbAula.getValue(),
+                    cmbDiaSemana.getValue(),
+                    txtHoraInicio.getText(),
+                    txtHoraFin.getText()
+            );
+
+            if (hayConflicto) {
+                mostrarAlerta("Error", 
+                        "Ya existe una clase activa en el mismo aula, día y horario.\n" +
+                        "Aula: " + cmbAula.getValue().getCodigo() + "\n" +
+                        "Día: " + cmbDiaSemana.getValue() + "\n" +
+                        "Horario: " + txtHoraInicio.getText() + " - " + txtHoraFin.getText(),
+                        Alert.AlertType.ERROR);
+                return;
             }
+        }
 
+        String tipoClase = cmbTipoClase.getValue();
+        boolean exito = false;
+
+        if ("Grupal".equals(tipoClase)) {
+            ClaseGrupal claseGrupal = buildClaseGrupal();
+            exito = claseController.crearClaseGrupal(claseGrupal);
             if (exito) {
-                limpiarCampos();
-                mostrarAlerta("Éxito", "Clase creada correctamente", Alert.AlertType.INFORMATION);
-            } else {
-                mostrarAlerta("Error", "No se pudo crear la clase. Verifique conflictos de horario", Alert.AlertType.ERROR);
+                listClases.add(claseGrupal);
             }
+        } else {
+            ClaseIndividual claseIndividual = buildClaseIndividual();
+            exito = claseController.crearClaseIndividual(claseIndividual);
+            if (exito) {
+                listClases.add(claseIndividual);
+            }
+        }
+
+        if (exito) {
+            limpiarCampos();
+            mostrarAlerta("Éxito", "Clase creada correctamente", Alert.AlertType.INFORMATION);
+        } else {
+            mostrarAlerta("Error", "No se pudo crear la clase. Verifique que el ID no esté duplicado", Alert.AlertType.ERROR);
         }
     }
 
@@ -265,6 +287,27 @@ public class ClaseViewController {
 
         if (!validarCampos()) {
             return;
+        }
+
+        // Verificar conflicto de aula, día y horario (excluyendo la clase actual)
+        if (cmbAula.getValue() != null) {
+            boolean hayConflicto = claseController.verificarConflictoAulaHorario(
+                    cmbAula.getValue(),
+                    cmbDiaSemana.getValue(),
+                    txtHoraInicio.getText(),
+                    txtHoraFin.getText(),
+                    selectedClase.getId() // Excluir la clase actual
+            );
+
+            if (hayConflicto) {
+                mostrarAlerta("Error", 
+                        "Ya existe otra clase activa en el mismo aula, día y horario.\n" +
+                        "Aula: " + cmbAula.getValue().getCodigo() + "\n" +
+                        "Día: " + cmbDiaSemana.getValue() + "\n" +
+                        "Horario: " + txtHoraInicio.getText() + " - " + txtHoraFin.getText(),
+                        Alert.AlertType.ERROR);
+                return;
+            }
         }
 
         String tipoClase = cmbTipoClase.getValue();

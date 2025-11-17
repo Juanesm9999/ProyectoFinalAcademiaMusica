@@ -157,4 +157,62 @@ public class ClaseController {
         }
         return false;
     }
+
+    // Verificar conflicto de horario, día y aula
+    public boolean verificarConflictoAulaHorario(Aula aula, String diaSemana, String horaInicio, String horaFin) {
+        return verificarConflictoAulaHorario(aula, diaSemana, horaInicio, horaFin, null);
+    }
+
+    // Verificar conflicto de horario, día y aula (excluyendo una clase específica - útil para actualizaciones)
+    public boolean verificarConflictoAulaHorario(Aula aula, String diaSemana, String horaInicio, String horaFin, String excluirClaseId) {
+        if (aula == null) {
+            return false; // Si no hay aula asignada, no hay conflicto
+        }
+
+        for (Clase clase : sistemaAcademia.getListClases()) {
+            // Excluir la clase actual si se está actualizando
+            if (excluirClaseId != null && clase.getId().equals(excluirClaseId)) {
+                continue;
+            }
+
+            if (clase.isActiva() && 
+                clase.getTheAula() != null && 
+                clase.getTheAula().getId().equals(aula.getId()) &&
+                clase.getDiaSemana() != null &&
+                clase.getDiaSemana().equals(diaSemana) &&
+                clase.getHoraInicio() != null &&
+                clase.getHoraFin() != null) {
+                
+                // Verificar si hay solapamiento de horarios
+                if (haySolapamientoHorario(clase.getHoraInicio(), clase.getHoraFin(), horaInicio, horaFin)) {
+                    return true; // Hay conflicto
+                }
+            }
+        }
+        return false; // No hay conflicto
+    }
+
+    private boolean haySolapamientoHorario(String inicio1, String fin1, String inicio2, String fin2) {
+        try {
+            // Convertir horas a minutos para comparar
+            int minutosInicio1 = convertirHoraAMinutos(inicio1);
+            int minutosFin1 = convertirHoraAMinutos(fin1);
+            int minutosInicio2 = convertirHoraAMinutos(inicio2);
+            int minutosFin2 = convertirHoraAMinutos(fin2);
+
+            // Verificar solapamiento: si hay intersección entre los rangos
+            return (minutosInicio1 < minutosFin2 && minutosInicio2 < minutosFin1);
+        } catch (Exception e) {
+            // Si hay error al parsear, comparar como strings
+            return inicio1.equals(inicio2) && fin1.equals(fin2);
+        }
+    }
+
+    private int convertirHoraAMinutos(String hora) {
+        // Formato esperado: "HH:mm" o "H:mm"
+        String[] partes = hora.split(":");
+        int horas = Integer.parseInt(partes[0]);
+        int minutos = partes.length > 1 ? Integer.parseInt(partes[1]) : 0;
+        return horas * 60 + minutos;
+    }
 }
