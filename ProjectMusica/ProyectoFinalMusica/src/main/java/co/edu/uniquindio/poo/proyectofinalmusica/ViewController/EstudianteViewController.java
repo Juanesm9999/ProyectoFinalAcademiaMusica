@@ -33,7 +33,9 @@ public class EstudianteViewController {
     @FXML private TableColumn<Estudiante, String> tbcId;
     @FXML private TableColumn<Estudiante, String> tbcNombre;
     @FXML private TableColumn<Estudiante, String> tbcEmail;
+    @FXML private TableColumn<Estudiante, String> tbcTelefono;
     @FXML private TableColumn<Estudiante, String> tbcMatricula;
+    @FXML private TableColumn<Estudiante, String> tbcFechaIngreso;
     @FXML private TableColumn<Estudiante, String> tbcEstado;
 
     @FXML private Button btnAgregar;
@@ -66,9 +68,16 @@ public class EstudianteViewController {
         tbcNombre.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getNombre()));
         tbcEmail.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getEmail()));
+                new SimpleStringProperty(cellData.getValue().getEmail() != null ? 
+                        cellData.getValue().getEmail() : "N/A"));
+        tbcTelefono.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getTelefono() != null ? 
+                        cellData.getValue().getTelefono() : "N/A"));
         tbcMatricula.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getMatricula()));
+        tbcFechaIngreso.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getFechaIngreso() != null ? 
+                        cellData.getValue().getFechaIngreso().toString() : "N/A"));
         tbcEstado.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getActivo() ? "Activo" : "Inactivo"));
     }

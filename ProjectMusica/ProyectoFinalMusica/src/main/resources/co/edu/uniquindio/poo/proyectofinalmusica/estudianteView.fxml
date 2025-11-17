@@ -90,11 +90,13 @@
 
       <TableView fx:id="tblEstudiantes" VBox.vgrow="ALWAYS">
          <columns>
-            <TableColumn fx:id="tbcId" text="ID" prefWidth="100"/>
-            <TableColumn fx:id="tbcNombre" text="Nombre" prefWidth="200"/>
-            <TableColumn fx:id="tbcEmail" text="Email" prefWidth="180"/>
-            <TableColumn fx:id="tbcMatricula" text="Matrícula" prefWidth="120"/>
-            <TableColumn fx:id="tbcEstado" text="Estado" prefWidth="100"/>
+            <TableColumn fx:id="tbcId" text="ID" prefWidth="80"/>
+            <TableColumn fx:id="tbcNombre" text="Nombre" prefWidth="180"/>
+            <TableColumn fx:id="tbcEmail" text="Email" prefWidth="160"/>
+            <TableColumn fx:id="tbcTelefono" text="Teléfono" prefWidth="120"/>
+            <TableColumn fx:id="tbcMatricula" text="Matrícula" prefWidth="110"/>
+            <TableColumn fx:id="tbcFechaIngreso" text="Fecha Ingreso" prefWidth="120"/>
+            <TableColumn fx:id="tbcEstado" text="Estado" prefWidth="90"/>
          </columns>
       </TableView>
    </VBox>

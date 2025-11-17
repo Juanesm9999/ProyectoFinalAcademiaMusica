@@ -389,7 +389,7 @@ public class EstudianteDashboardViewController {
                 String estado = a.isPresente() ? "PRESENTE" : "AUSENTE";
 
                 asistencia.append(icono).append(" ").append(estado).append("\n");
-                asistencia.append("   📅 Fecha: ").append(a.getFecha()).append("\n");
+                asistencia.append("   📅 Fecha: ").append(a.getFecha() != null ? a.getFecha().toString() : "N/A").append("\n");
 
                 if (a.getTheClase() != null) {
                     asistencia.append("   📚 Clase: ").append(a.getTheClase().getInstrumento())

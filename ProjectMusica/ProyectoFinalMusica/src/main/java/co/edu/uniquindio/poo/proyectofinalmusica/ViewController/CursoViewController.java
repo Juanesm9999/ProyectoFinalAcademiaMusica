@@ -35,6 +35,9 @@ public class CursoViewController {
     @FXML private TableColumn<Curso, String> tbcNivel;
     @FXML private TableColumn<Curso, String> tbcEstado;
     @FXML private TableColumn<Curso, String> tbcCapacidad;
+    @FXML private TableColumn<Curso, String> tbcFechaInicio;
+    @FXML private TableColumn<Curso, String> tbcFechaFin;
+    @FXML private TableColumn<Curso, String> tbcDuracion;
 
     @FXML private Button btnAgregar;
     @FXML private Button btnActualizar;
@@ -70,14 +73,26 @@ public class CursoViewController {
         tbcNombre.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getNombre()));
         tbcInstrumento.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getInstrumento().toString()));
+                new SimpleStringProperty(cellData.getValue().getInstrumento() != null ? 
+                        cellData.getValue().getInstrumento().toString() : "N/A"));
         tbcNivel.setCellValueFactory(cellData ->
                 new SimpleStringProperty(String.valueOf(cellData.getValue().getNivel())));
         tbcEstado.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getEstado().toString()));
+                new SimpleStringProperty(cellData.getValue().getEstado() != null ? 
+                        cellData.getValue().getEstado().toString() : "N/A"));
         tbcCapacidad.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getCapacidadActual() + "/" +
                         cellData.getValue().getCapacidadMaxima()));
+        tbcFechaInicio.setCellValueFactory(cellData -> {
+            String fecha = cellData.getValue().getFechaInicio();
+            return new SimpleStringProperty(fecha != null && !fecha.isEmpty() ? fecha : "No definida");
+        });
+        tbcFechaFin.setCellValueFactory(cellData -> {
+            String fecha = cellData.getValue().getFechaFin();
+            return new SimpleStringProperty(fecha != null && !fecha.isEmpty() ? fecha : "No definida");
+        });
+        tbcDuracion.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getDuracionSemanas() + " semanas"));
     }
 
     private void obtenerCursos() {

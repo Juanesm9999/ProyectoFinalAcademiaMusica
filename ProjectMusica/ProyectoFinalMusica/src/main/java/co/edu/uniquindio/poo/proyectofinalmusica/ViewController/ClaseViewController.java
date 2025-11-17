@@ -40,7 +40,9 @@ public class ClaseViewController {
     @FXML private TableColumn<Clase, String> tbcTipo;
     @FXML private TableColumn<Clase, String> tbcInstrumento;
     @FXML private TableColumn<Clase, String> tbcNivel;
+    @FXML private TableColumn<Clase, String> tbcDia;
     @FXML private TableColumn<Clase, String> tbcHorario;
+    @FXML private TableColumn<Clase, String> tbcAula;
     @FXML private TableColumn<Clase, String> tbcEstado;
 
     @FXML private Button btnAgregar;
@@ -89,13 +91,21 @@ public class ClaseViewController {
         tbcTipo.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue() instanceof ClaseGrupal ? "Grupal" : "Individual"));
         tbcInstrumento.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getInstrumento().toString()));
+                new SimpleStringProperty(cellData.getValue().getInstrumento() != null ? 
+                        cellData.getValue().getInstrumento().toString() : "N/A"));
         tbcNivel.setCellValueFactory(cellData ->
                 new SimpleStringProperty(String.valueOf(cellData.getValue().getNivel())));
+        tbcDia.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getDiaSemana() != null ? 
+                        cellData.getValue().getDiaSemana() : "N/A"));
         tbcHorario.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getDiaSemana() + " " +
-                        cellData.getValue().getHoraInicio() + "-" +
-                        cellData.getValue().getHoraFin()));
+                new SimpleStringProperty(
+                        (cellData.getValue().getHoraInicio() != null ? cellData.getValue().getHoraInicio() : "") + 
+                        " - " + 
+                        (cellData.getValue().getHoraFin() != null ? cellData.getValue().getHoraFin() : "")));
+        tbcAula.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getTheAula() != null ? 
+                        cellData.getValue().getTheAula().getCodigo() : "Sin asignar"));
         tbcEstado.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().isActiva() ? "Activa" : "Inactiva"));
     }

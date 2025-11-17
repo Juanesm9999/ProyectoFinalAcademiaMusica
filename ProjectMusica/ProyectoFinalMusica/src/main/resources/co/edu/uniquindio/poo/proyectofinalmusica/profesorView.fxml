@@ -106,11 +106,13 @@
 
         <TableView fx:id="tblProfesores" VBox.vgrow="ALWAYS">
             <columns>
-                <TableColumn fx:id="tbcCodigo" text="Código" prefWidth="100"/>
-                <TableColumn fx:id="tbcNombre" text="Nombre" prefWidth="200"/>
-                <TableColumn fx:id="tbcEmail" text="Email" prefWidth="180"/>
-                <TableColumn fx:id="tbcEspecialidad" text="Especialidad" prefWidth="150"/>
-                <TableColumn fx:id="tbcEstado" text="Estado" prefWidth="100"/>
+                <TableColumn fx:id="tbcCodigo" text="Código" prefWidth="90"/>
+                <TableColumn fx:id="tbcNombre" text="Nombre" prefWidth="170"/>
+                <TableColumn fx:id="tbcEmail" text="Email" prefWidth="160"/>
+                <TableColumn fx:id="tbcTelefono" text="Teléfono" prefWidth="120"/>
+                <TableColumn fx:id="tbcEspecialidad" text="Especialidad" prefWidth="130"/>
+                <TableColumn fx:id="tbcFechaContratacion" text="Fecha Contratación" prefWidth="140"/>
+                <TableColumn fx:id="tbcEstado" text="Estado" prefWidth="90"/>
             </columns>
         </TableView>
     </VBox>
