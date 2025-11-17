@@ -4,13 +4,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="co.edu.uniquindio.poo.proyectofinalmusica.ViewController.EstudianteViewController"
-      spacing="15" style="-fx-background-color: #f5f5f5;">
-
-   <padding>
-      <Insets top="20" right="20" bottom="20" left="20"/>
-   </padding>
+<ScrollPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="co.edu.uniquindio.poo.proyectofinalmusica.ViewController.EstudianteViewController"
+            fitToWidth="true" fitToHeight="true" style="-fx-background-color: #f5f5f5;">
+   <VBox spacing="15" style="-fx-background-color: #f5f5f5;">
+      <padding>
+         <Insets top="20" right="20" bottom="20" left="20"/>
+      </padding>
 
    <!-- Título -->
    <HBox alignment="CENTER">
@@ -107,4 +107,5 @@
               style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-weight: bold;"
               prefWidth="100"/>
    </HBox>
-</VBox>
+   </VBox>
+</ScrollPane>

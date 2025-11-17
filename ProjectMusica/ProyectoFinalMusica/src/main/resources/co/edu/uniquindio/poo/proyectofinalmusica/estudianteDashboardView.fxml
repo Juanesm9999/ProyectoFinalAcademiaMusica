@@ -4,16 +4,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="co.edu.uniquindio.poo.proyectofinalmusica.ViewController.EstudianteDashboardViewController"
-      alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);">
+<ScrollPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="co.edu.uniquindio.poo.proyectofinalmusica.ViewController.EstudianteDashboardViewController"
+            fitToWidth="true" fitToHeight="true" style="-fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);">
+    <VBox alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);">
+        <padding>
+            <Insets top="30" right="30" bottom="30" left="30"/>
+        </padding>
 
-    <padding>
-        <Insets top="30" right="30" bottom="30" left="30"/>
-    </padding>
-
-    <VBox alignment="CENTER" spacing="25" maxWidth="900"
-          style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 25, 0, 0, 5);">
+        <VBox alignment="CENTER" spacing="25" maxWidth="900"
+              style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 25, 0, 0, 5);">
 
         <padding>
             <Insets top="30" right="40" bottom="30" left="40"/>
@@ -90,5 +90,6 @@
                 style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-size: 14px;
                        -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 12 30;"
                 prefWidth="200"/>
+        </VBox>
     </VBox>
-</VBox>
+</ScrollPane>

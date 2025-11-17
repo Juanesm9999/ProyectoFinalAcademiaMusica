@@ -4,17 +4,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="co.edu.uniquindio.poo.proyectofinalmusica.ViewController.AdministradorDashboardViewController"
-      alignment="CENTER" spacing="30" style="-fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);">
+<ScrollPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="co.edu.uniquindio.poo.proyectofinalmusica.ViewController.AdministradorDashboardViewController"
+            fitToWidth="true" fitToHeight="true" style="-fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);">
+    <VBox alignment="CENTER" spacing="30" style="-fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);">
+        <padding>
+            <Insets top="40" right="40" bottom="40" left="40"/>
+        </padding>
 
-    <padding>
-        <Insets top="40" right="40" bottom="40" left="40"/>
-    </padding>
-
-    <!-- Panel Principal -->
-    <VBox alignment="CENTER" spacing="30" maxWidth="800"
-          style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 25, 0, 0, 5);">
+        <!-- Panel Principal -->
+        <VBox alignment="CENTER" spacing="30" maxWidth="800"
+              style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 25, 0, 0, 5);">
 
         <padding>
             <Insets top="40" right="60" bottom="40" left="60"/>
@@ -114,14 +114,18 @@
                 <Label text="Control del equipo directivo"
                        style="-fx-text-fill: white; -fx-font-size: 12px;"/>
             </VBox>
+
+            <!-- Cerrar Sesión -->
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3"
+                  style="-fx-background-color: #e74c3c; -fx-background-radius: 15; -fx-padding: 25; -fx-cursor: hand;"
+                  onMouseClicked="#onCerrarSesion">
+                <Label text="🚪" style="-fx-font-size: 40px;"/>
+                <Label text="Cerrar Sesión"
+                       style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="Volver al inicio de sesión"
+                       style="-fx-text-fill: white; -fx-font-size: 12px;"/>
+            </VBox>
         </GridPane>
-
-        <Separator prefWidth="700"/>
-
-        <!-- Botón Cerrar Sesión -->
-        <Button fx:id="btnCerrarSesion" text="Cerrar Sesión" onAction="#onCerrarSesion"
-                style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-size: 14px;
-                       -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 12 30;"
-                prefWidth="200"/>
+        </VBox>
     </VBox>
-</VBox>
+</ScrollPane>
