@@ -24,6 +24,7 @@ public class Curso implements IReportable {
     private int duracionSemanas;
     private List<ClaseGrupal> theClases; // 1 a muchos
     private List<Estudiante> theEstudiantes;// 1 a muchos
+    private List<Inscripcion> listInscripciones;
 
     public Curso(String id, String codigo, String nombre, TipoInstrumento instrumento, int nivel, String descripcion, int capacidadMaxima, int capacidadActual, EstadoCurso estado, String fechaInicio, String fechaFin, int duracionSemanas) {
         this.id = id;
@@ -39,6 +40,7 @@ public class Curso implements IReportable {
         this.duracionSemanas = duracionSemanas;
         this.theClases = new ArrayList<>();
         this.theEstudiantes = new ArrayList<>();
+        this.listInscripciones = new ArrayList<>();
 
     }
 
@@ -164,6 +166,14 @@ public class Curso implements IReportable {
 
     public void setDuracionSemanas(int duracionSemanas) {
         this.duracionSemanas = duracionSemanas;
+    }
+
+    public List<Inscripcion> getListInscripciones() {
+        return listInscripciones;
+    }
+
+    public void setListInscripciones(List<Inscripcion> listInscripciones) {
+        this.listInscripciones = listInscripciones;
     }
 
     @Override

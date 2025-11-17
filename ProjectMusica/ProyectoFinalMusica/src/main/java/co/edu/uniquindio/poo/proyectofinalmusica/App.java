@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Aplicación Principal de la Academia de Música
@@ -127,6 +128,8 @@ public class App extends Application {
         System.out.println("  - Admin: admin/admin123");
         System.out.println("  - Profesor: maria/maria123");
         System.out.println("  - Estudiante: ana/ana123");
+
+        cargarDatosDemo();
     }
 
     // ==================== NAVEGACIÓN ENTRE VISTAS ====================
@@ -187,6 +190,11 @@ public class App extends Application {
                 controller -> ((co.edu.uniquindio.poo.proyectofinalmusica.ViewController.ReportesViewController) controller).setApp(this));
     }
 
+    public void openAdministradorView() {
+        loadView("/co/edu/uniquindio/poo/proyectofinalmusica/administradorView.fxml",
+                controller -> ((co.edu.uniquindio.poo.proyectofinalmusica.ViewController.AdministradorViewController) controller).setApp(this));
+    }
+
     // Método auxiliar genérico para cargar vistas
     private void loadView(String fxmlPath, java.util.function.Consumer<Object> controllerSetup) {
         try {
@@ -227,11 +235,173 @@ public class App extends Application {
         openLoginView();
     }
 
-    // ==================== MAIN ====================
+    //                         MAIN
 
     public static void main(String[] args) {
-        launch(args);
+        SistemaAcademia sistema = new SistemaAcademia("Academia Musica UQ", "001");
     }
 
-    
+    private void cargarDatosDemo() {
+        List<Profesor> listProfesores = sistema.getListProfesores();
+        List<Estudiante> listEstudiantes = sistema.getListEstudiantes();
+        List<Aula> listAulas = sistema.getListAulas();
+        List<Horario> listHorarios = sistema.getListHorarios();
+        List<Curso> listCursos = sistema.getListCursos();
+        List<Clase> listClases = sistema.getListClases();
+        List<Inscripcion> listInscripciones = sistema.getListInscripciones();
+        List<EvaluacionProgreso> listEvaluaciones = sistema.getListEvaluaciones();
+        List<Asistencia> listAsistencias = sistema.getListAsistencias();
+
+        // PROFESORES
+        Profesor profesor1 = new Profesor("P001", "Guitarra", "2020-02-15", true, "1010", "Carlos Pérez",
+                "carlos@academia.com", "3105551111", "Calle 10 #15-30", LocalDate.of(1985, 6, 20),
+                "cperez", "1234");
+        Profesor profesor2 = new Profesor("P002", "Piano", "2021-01-10", true, "1011", "Laura Gómez",
+                "laura@academia.com", "3144442222", "Carrera 5 #20-45", LocalDate.of(1990, 9, 12),
+                "lgomez", "abcd");
+        listProfesores.add(profesor1);
+        listProfesores.add(profesor2);
+
+        // ESTUDIANTES
+        Estudiante est1 = new Estudiante("E001", LocalDate.of(2023, 1, 10), true, "2001", "Juan Martínez",
+                "juan@gmail.com", "3201112233", "Calle 8 #12-21", LocalDate.of(2005, 4, 10),
+                "jmartinez", "pass1");
+        Estudiante est2 = new Estudiante("E002", LocalDate.of(2022, 9, 5), true, "2002", "Sofía Ramírez",
+                "sofia@gmail.com", "3009997777", "Barrio El Prado", LocalDate.of(2004, 11, 5),
+                "sramirez", "pass2");
+        listEstudiantes.add(est1);
+        listEstudiantes.add(est2);
+
+        // AULAS
+        Aula aula1 = new Aula("A1", "AU-101", "Aula de Piano", "Bloque A - Piso 1", 12, true);
+        Aula aula2 = new Aula("A2", "AU-202", "Aula de Guitarra", "Bloque B - Piso 2", 18, true);
+        Aula aula3 = new Aula("A3", "AU-303", "Sala de Canto", "Bloque C - Piso 3", 15, false);
+        listAulas.add(aula1);
+        listAulas.add(aula2);
+        listAulas.add(aula3);
+
+        // HORARIOS
+        Horario h1 = new Horario("H01", "Lunes", "14:00", "16:00", aula1);
+        Horario h2 = new Horario("H02", "Martes", "10:00", "12:00", aula2);
+        Horario h3 = new Horario("H03", "Miércoles", "08:00", "10:00", aula1);
+        listHorarios.add(h1);
+        listHorarios.add(h2);
+        listHorarios.add(h3);
+
+        // CURSOS
+        Curso cursoGuitarra1 = new Curso("C01", "GTR-101", "Guitarra Básica", TipoInstrumento.GUITARRA, 1,
+                "Curso de iniciación a la guitarra", 12, 0, EstadoCurso.ACTIVO, "2025-02-01", "2025-05-01", 12);
+        Curso cursoPiano1 = new Curso("C02", "PNO-101", "Piano Básico", TipoInstrumento.PIANO, 1,
+                "Curso básico de piano", 10, 0, EstadoCurso.ACTIVO, "2025-02-05", "2025-04-30", 12);
+        listCursos.add(cursoGuitarra1);
+        listCursos.add(cursoPiano1);
+
+        // CLASES
+        ClaseGrupal claseGrupalGuitarra = new ClaseGrupal(12, 0, 12, "Clase grupal de guitarra", "CL01",
+                "Horario tarde", "Lunes", "14:00", "16:00", TipoInstrumento.GUITARRA, 1, true);
+        claseGrupalGuitarra.setTheAula(aula1);
+        claseGrupalGuitarra.setTheProfesor(profesor1);
+
+        ClaseGrupal claseGrupalPiano = new ClaseGrupal(10, 0, 10, "Clase grupal de piano", "CL02",
+                "Horario mañana", "Martes", "10:00", "12:00", TipoInstrumento.PIANO, 1, true);
+        claseGrupalPiano.setTheAula(aula2);
+        claseGrupalPiano.setTheProfesor(profesor2);
+
+        ClaseIndividual claseInd1 = new ClaseIndividual("Postura", "Entender técnica correcta",
+                "Traer guitarra propia", "CI01", "Horario especial", "Miércoles", "08:00", "10:00",
+                TipoInstrumento.GUITARRA, 1, true);
+        claseInd1.setTheAula(aula2);
+        claseInd1.setTheProfesor(profesor1);
+
+        listClases.add(claseGrupalGuitarra);
+        listClases.add(claseGrupalPiano);
+        listClases.add(claseInd1);
+
+        cursoGuitarra1.getTheClases().add(claseGrupalGuitarra);
+        cursoPiano1.getTheClases().add(claseGrupalPiano);
+
+        // Horarios detallados
+        h1.setClase(claseGrupalGuitarra);
+        h1.setCurso(cursoGuitarra1);
+        h1.setProfesor(profesor1);
+        h1.setTipoInstrumento(TipoInstrumento.GUITARRA);
+        claseGrupalGuitarra.setTheHorario(h1);
+
+        h2.setClase(claseGrupalPiano);
+        h2.setCurso(cursoPiano1);
+        h2.setProfesor(profesor2);
+        h2.setTipoInstrumento(TipoInstrumento.PIANO);
+        claseGrupalPiano.setTheHorario(h2);
+
+        h3.setClase(claseInd1);
+        h3.setProfesor(profesor1);
+        h3.setTipoInstrumento(TipoInstrumento.GUITARRA);
+        claseInd1.setTheHorario(h3);
+
+        // INSCRIPCIONES
+        Inscripcion ins1 = new Inscripcion("I001", "2025-02-01", EstadoInscripcion.ACTIVA, true, false, 0);
+        ins1.setTheEstudiante(est1);
+        ins1.setTheCurso(cursoGuitarra1);
+        est1.getTheInscripciones().add(ins1);
+        cursoGuitarra1.getListInscripciones().add(ins1);
+        listInscripciones.add(ins1);
+
+        Inscripcion ins2 = new Inscripcion("I002", "2025-02-03", EstadoInscripcion.ACTIVA, true, false, 0);
+        ins2.setTheEstudiante(est2);
+        ins2.setTheCurso(cursoPiano1);
+        est2.getTheInscripciones().add(ins2);
+        cursoPiano1.getListInscripciones().add(ins2);
+        listInscripciones.add(ins2);
+
+        // NIVELES APROBADOS
+        NivelAprobado nivelAprobadoEst1 = new NivelAprobado("NA001", TipoInstrumento.GUITARRA, 0,
+                "2024-12-10", 4.5, cursoGuitarra1);
+        est1.getTheNivelesAprobados().add(nivelAprobadoEst1);
+
+        // EVALUACIONES
+        EvaluacionProgreso ev1 = new EvaluacionProgreso("EV1", 4.5, "Buen avance, domina técnica básica",
+                "Trabajar postura y control de ritmo", "2024-10-20");
+        ev1.setTheEstudiante(est1);
+        ev1.setTheCurso(cursoGuitarra1);
+        ev1.setTheClase(claseGrupalGuitarra);
+        ev1.setTheEvaluador(profesor1);
+
+        EvaluacionProgreso ev2 = new EvaluacionProgreso("EV2", 3.8, "Proceso estable",
+                "Mejorar lectura musical", "2024-10-25");
+        ev2.setTheEstudiante(est2);
+        ev2.setTheCurso(cursoPiano1);
+        ev2.setTheClase(claseGrupalPiano);
+        ev2.setTheEvaluador(profesor2);
+
+        listEvaluaciones.add(ev1);
+        listEvaluaciones.add(ev2);
+
+        // ASISTENCIAS
+        Asistencia a1 = new Asistencia("AS1", est1, claseGrupalGuitarra, LocalDate.of(2024, 10, 12),
+                true, "Participó activamente");
+        Asistencia a2 = new Asistencia("AS2", est1, claseGrupalPiano, LocalDate.of(2024, 10, 19),
+                false, "No asistió");
+        Asistencia a3 = new Asistencia("AS3", est2, claseGrupalPiano, LocalDate.of(2024, 10, 15),
+                true, "Llegó temprano");
+
+        listAsistencias.add(a1);
+        listAsistencias.add(a2);
+        listAsistencias.add(a3);
+
+        // DISPONIBILIDAD PROFESORES
+        BloqueDisponibilidad b1 = new BloqueDisponibilidad("BD1", "LUNES", "08:00", "10:00", true, profesor1);
+        BloqueDisponibilidad b2 = new BloqueDisponibilidad("BD2", "MIERCOLES", "14:00", "16:00", true, profesor1);
+        BloqueDisponibilidad b3 = new BloqueDisponibilidad("BD3", "VIERNES", "09:00", "11:00", true, profesor2);
+        profesor1.getTheDisponibilidad().add(b1);
+        profesor1.getTheDisponibilidad().add(b2);
+        profesor2.getTheDisponibilidad().add(b3);
+
+        // ASIGNAR CLASES A PROFESORES
+        profesor1.getTheClasesAsignadas().add(claseGrupalGuitarra);
+        profesor1.getTheClasesAsignadas().add(claseInd1);
+        profesor2.getTheClasesAsignadas().add(claseGrupalPiano);
+
+        System.out.println("✓ Datos demo adicionales cargados para pruebas");
+    }
+
 }

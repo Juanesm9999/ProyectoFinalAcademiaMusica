@@ -15,6 +15,7 @@ public class Horario {
     private Clase clase;
     private Curso curso;
     private TipoInstrumento tipoInstrumento;
+
     public Horario(String id, String diaSemana, String horaInicio, String horaFin, Aula aula) {
         this.id = id;
         this.diaSemana = diaSemana;

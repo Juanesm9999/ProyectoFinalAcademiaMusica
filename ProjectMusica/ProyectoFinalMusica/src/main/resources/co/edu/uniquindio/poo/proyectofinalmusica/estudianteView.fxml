@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="co.edu.uniquindio.poo.proyectofinalmusica.viewController.EstudianteViewController"
+      fx:controller="co.edu.uniquindio.poo.proyectofinalmusica.ViewController.EstudianteViewController"
       spacing="15" style="-fx-background-color: #f5f5f5;">
 
    <padding>

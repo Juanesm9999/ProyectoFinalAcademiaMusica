@@ -3,6 +3,7 @@ package co.edu.uniquindio.poo.proyectofinalmusica.model;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class SistemaAcademia {
     private List<Inscripcion> listInscripciones;
     private List<Asistencia> listAsistencias;
     private List<EvaluacionProgreso> listEvaluaciones;
+    private List<Horario> listHorarios;
 
     public SistemaAcademia(String nombre, String nit){
         this.nombre = nombre;
@@ -31,6 +33,7 @@ public class SistemaAcademia {
         this.listInscripciones = new ArrayList<>();
         this.listAsistencias = new ArrayList<>();
         this.listEvaluaciones = new ArrayList<>();
+        this.listHorarios = new ArrayList<>();
 
     }
 
@@ -339,32 +342,6 @@ public class SistemaAcademia {
 
     }
 
-    /* public boolean cancelarInscripcion(Estudiante estudiante) throws InscripcionException {
-        // Verificar que el estudiante no sea nulo
-        if (estudiante == null) {
-            throw new InscripcionException("El estudiante no puede ser nulo");
-        }
-
-        // Verificar que el estudiante esté inscrito
-        if (!estudiantesInscritos.contains(estudiante)) {
-            throw new InscripcionException("El estudiante no está inscrito en este curso");
-        }
-
-        // Verificar si el curso ya comenzó o tiene asistencias registradas
-        if (tieneAsistenciasRegistradas(estudiante)) {
-            throw new InscripcionException(
-                "No se puede cancelar la inscripción. " +
-                "El curso ya tiene asistencias registradas"
-            );
-        }
-
-        // Remover al estudiante
-        estudiantesInscritos.remove(estudiante);
-        estudiante.removerCurso(this); // Mantener la relación bidireccional
-
-        return true;
-    }
-     */
 
     //-------------------------------------------- CLASE GRUPAL -------------------------------------------------------
 
@@ -784,6 +761,13 @@ public class SistemaAcademia {
         this.listEvaluaciones = listEvaluaciones;
     }
 
+    public List<Horario> getListHorarios() {
+        return listHorarios;
+    }
+
+    public void setListHorarios(List<Horario> listHorarios) {
+        this.listHorarios = listHorarios;
+    }
     //------------------------------------------- CRUD ADMINISTRADOR -----------------------------------------------------
 
     public boolean agregarAdministrador(Administrador administrador) {
@@ -896,7 +880,4 @@ public class SistemaAcademia {
     }
 
 
-
 }
-
-

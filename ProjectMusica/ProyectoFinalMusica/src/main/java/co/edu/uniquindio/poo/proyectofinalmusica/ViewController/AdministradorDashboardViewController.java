@@ -54,6 +54,11 @@ public class AdministradorDashboardViewController {
     }
 
     @FXML
+    void onGestionAdministradores() {
+        app.openAdministradorView();
+    }
+
+    @FXML
     void onReportes() {
         app.openReportesView();
     }

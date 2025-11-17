@@ -103,6 +103,17 @@
                 <Label text="Generar informes y estadísticas"
                        style="-fx-text-fill: white; -fx-font-size: 12px;"/>
             </VBox>
+
+            <!-- Gestión de Administradores -->
+            <VBox alignment="CENTER" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                  style="-fx-background-color: #34495e; -fx-background-radius: 15; -fx-padding: 25; -fx-cursor: hand;"
+                  onMouseClicked="#onGestionAdministradores">
+                <Label text="🧑‍💼" style="-fx-font-size: 40px;"/>
+                <Label text="Gestión de Administradores"
+                       style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="Control del equipo directivo"
+                       style="-fx-text-fill: white; -fx-font-size: 12px;"/>
+            </VBox>
         </GridPane>
 
         <Separator prefWidth="700"/>
