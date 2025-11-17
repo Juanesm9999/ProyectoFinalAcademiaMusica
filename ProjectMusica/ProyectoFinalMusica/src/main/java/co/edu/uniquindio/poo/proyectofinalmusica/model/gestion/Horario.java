@@ -1,6 +1,8 @@
 package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.model.Clase;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.Profesor;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.TipoInstrumento;
 
 public class Horario {
     private String id;
@@ -8,8 +10,11 @@ public class Horario {
     private String diaSemana;
     private String horaInicio;
     private String horaFin;
-    private Aula theAula; // muchos a 1
-
+    private Aula theAula;
+    private Profesor profesor;
+    private Clase clase;
+    private Curso curso;
+    private TipoInstrumento tipoInstrumento;
     public Horario(String id, String diaSemana, String horaInicio, String horaFin, Aula aula) {
         this.id = id;
         this.diaSemana = diaSemana;
@@ -64,6 +69,38 @@ public class Horario {
 
     public void setTheAula(Aula theAula) {
         this.theAula = theAula;
+    }
+
+    public Profesor getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
+    }
+
+    public Clase getClase() {
+        return clase;
+    }
+
+    public void setClase(Clase clase) {
+        this.clase = clase;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
+    public TipoInstrumento getTipoInstrumento() {
+        return tipoInstrumento;
+    }
+
+    public void setTipoInstrumento(TipoInstrumento tipoInstrumento) {
+        this.tipoInstrumento = tipoInstrumento;
     }
 }
 

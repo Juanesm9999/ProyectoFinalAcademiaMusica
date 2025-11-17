@@ -554,17 +554,146 @@ public class SistemaAcademia {
     //-------------------------------------------- REPORTES -------------------------------------------------------
 
 
+
     public List<String> generarReporteAsistencia(Curso curso) {
+        List<String> reporte = new ArrayList<>();
+        reporte.add("=== REPORTE DE ASISTENCIA ===");
+        reporte.add("Curso: " + curso.getNombre());
+        reporte.add("Código: " + curso.getCodigo());
+        reporte.add("");
 
+        for (Inscripcion inscripcion : listInscripciones) {
+            if (inscripcion.getTheCurso().getId().equals(curso.getId())) {
+                Estudiante estudiante = inscripcion.getTheEstudiante();
+                reporte.add("Estudiante: " + estudiante.getNombre());
 
-        return null;}
-    public List<String> generarReporteProgreso(TipoInstrumento instrumento, int nivel) {
-        return null;
+                int presentes = 0;
+                int ausentes = 0;
+
+                for (Asistencia asistencia : estudiante.getTheHistorialAsistencia()) {
+                    if (asistencia.isPresente()) {
+                        presentes++;
+                    } else {
+                        ausentes++;
+                    }
+                }
+
+                reporte.add("  Asistencias: " + presentes);
+                reporte.add("  Ausencias: " + ausentes);
+                reporte.add("");
+            }
+        }
+
+        return reporte;
     }
-    public List<String> generarReporteOcupacionAulas() {return null;}
-    public List<String> generarReporteCargaDocente() {return null;}
-    public List<String> generarReporteEstudiante(Estudiante estudiante) {return null;}
 
+    public List<String> generarReporteProgreso(TipoInstrumento instrumento, int nivel) {
+        List<String> reporte = new ArrayList<>();
+        reporte.add("=== REPORTE DE PROGRESO ===");
+        reporte.add("Instrumento: " + instrumento);
+        reporte.add("Nivel: " + nivel);
+        reporte.add("");
+
+        for (Curso curso : listCursos) {
+            if (curso.getInstrumento() == instrumento && curso.getNivel() == nivel) {
+                reporte.add("Curso: " + curso.getNombre());
+
+                for (EvaluacionProgreso eval : listEvaluaciones) {
+                    if (eval.getTheCurso() != null && eval.getTheCurso().getId().equals(curso.getId())) {
+                        reporte.add("  Estudiante: " + eval.getTheEstudiante().getNombre());
+                        reporte.add("  Calificación: " + eval.getCalificacion());
+                        reporte.add("  Comentarios: " + eval.getComentarios());
+                        reporte.add("");
+                    }
+                }
+            }
+        }
+
+        return reporte;
+    }
+
+    public List<String> generarReporteOcupacionAulas() {
+        List<String> reporte = new ArrayList<>();
+        reporte.add("=== REPORTE DE OCUPACIÓN DE AULAS ===");
+        reporte.add("");
+
+        for (Aula aula : listAulas) {
+            reporte.add("Aula: " + aula.getNombre());
+            reporte.add("Código: " + aula.getCodigo());
+            reporte.add("Capacidad: " + aula.getCapacidad());
+
+            int clasesAsignadas = 0;
+            for (Clase clase : listClases) {
+                if (clase.getTheAula() != null && clase.getTheAula().getId().equals(aula.getId())) {
+                    clasesAsignadas++;
+                    reporte.add("  - " + clase.getHorario() + " - " + clase.getInstrumento());
+                }
+            }
+
+            reporte.add("Total clases: " + clasesAsignadas);
+            reporte.add("");
+        }
+
+        return reporte;
+    }
+
+    public List<String> generarReporteCargaDocente() {
+        List<String> reporte = new ArrayList<>();
+        reporte.add("=== REPORTE DE CARGA DOCENTE ===");
+        reporte.add("");
+
+        for (Profesor profesor : listProfesores) {
+            reporte.add("Profesor: " + profesor.getNombre());
+            reporte.add("Código: " + profesor.getCodigo());
+            reporte.add("Especialidad: " + profesor.getEspecialidad());
+
+            int clasesAsignadas = 0;
+            for (Clase clase : listClases) {
+                if (clase.getTheProfesor() != null && clase.getTheProfesor().getId().equals(profesor.getId())) {
+                    clasesAsignadas++;
+                    reporte.add("  - " + clase.getHorario() + " - " + clase.getInstrumento());
+                }
+            }
+
+            reporte.add("Total clases: " + clasesAsignadas);
+            reporte.add("");
+        }
+
+        return reporte;
+    }
+
+    public List<String> generarReporteEstudiante(Estudiante estudiante) {
+        List<String> reporte = new ArrayList<>();
+        reporte.add("=== REPORTE DEL ESTUDIANTE ===");
+        reporte.add("");
+        reporte.add("Nombre: " + estudiante.getNombre());
+        reporte.add("Matrícula: " + estudiante.getMatricula());
+        reporte.add("Email: " + estudiante.getEmail());
+        reporte.add("");
+
+        reporte.add("CURSOS INSCRITOS:");
+        for (Inscripcion inscripcion : estudiante.getTheInscripciones()) {
+            if (inscripcion.isActiva()) {
+                reporte.add("  - " + inscripcion.getTheCurso().getNombre());
+            }
+        }
+        reporte.add("");
+
+        reporte.add("NIVELES APROBADOS:");
+        for (NivelAprobado nivel : estudiante.getTheNivelesAprobados()) {
+            reporte.add("  - " + nivel.getInstrumento() + " Nivel " + nivel.getNivel() +
+                    " - Calificación: " + nivel.getCalificacion());
+        }
+        reporte.add("");
+
+        reporte.add("EVALUACIONES:");
+        for (EvaluacionProgreso eval : estudiante.getTheEvaluaciones()) {
+            reporte.add("  - Calificación: " + eval.getCalificacion());
+            reporte.add("    Comentarios: " + eval.getComentarios());
+        }
+
+        return reporte;
+    }
 
     //--------------------------------------- GETTERS Y SETTERS -----------------------------------------------
     public String getNombre() {
