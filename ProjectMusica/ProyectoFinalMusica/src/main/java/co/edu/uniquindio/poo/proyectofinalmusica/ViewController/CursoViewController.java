@@ -181,6 +181,10 @@ public class CursoViewController {
             mostrarAlerta("Advertencia", "Seleccione un curso de la tabla", Alert.AlertType.WARNING);
         }
     }
+    @FXML
+    public void onOpenCurso() {
+        app.openCursoView();
+    }
 
     @FXML
     void onLimpiar() {

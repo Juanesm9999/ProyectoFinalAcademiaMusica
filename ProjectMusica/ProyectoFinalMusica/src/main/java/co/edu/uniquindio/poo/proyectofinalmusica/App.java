@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.proyectofinalmusica;
 
+import co.edu.uniquindio.poo.proyectofinalmusica.ViewController.CursoViewController;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.*;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.*;
 import javafx.application.Application;
@@ -205,7 +206,7 @@ public class App extends Application {
             if (controller != null && controllerSetup != null) {
                 controllerSetup.accept(controller);
             }
-
+            
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.centerOnScreen();
@@ -263,7 +264,7 @@ public class App extends Application {
                 "laura@academia.com", "3144442222", "Carrera 5 #20-45", LocalDate.of(1990, 9, 12),
                 "lgomez", "abcd");
         profesor2.getTheInstrumentosImpartidos().add(TipoInstrumento.PIANO);
-        profesor2.getTheInstrumentosImpartidos().add(TipoInstrumento.TECLADO);
+        profesor2.getTheInstrumentosImpartidos().add(TipoInstrumento.SAXOFON);
         
         listProfesores.add(profesor1);
         listProfesores.add(profesor2);

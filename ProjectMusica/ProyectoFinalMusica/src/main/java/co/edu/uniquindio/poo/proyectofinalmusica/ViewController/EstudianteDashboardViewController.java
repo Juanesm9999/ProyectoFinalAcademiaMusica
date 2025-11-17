@@ -220,6 +220,10 @@ public class EstudianteDashboardViewController {
 
     // Reemplaza el método onVerHorario() en EstudianteDashboardViewController.java
 
+    // Reemplaza el método onVerHorario() en EstudianteDashboardViewController.java
+
+    // Reemplaza el método onVerHorario() en EstudianteDashboardViewController.java
+
     @FXML
     void onVerHorario() {
         if (estudiante == null) {

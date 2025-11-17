@@ -21,7 +21,7 @@
     <ScrollPane fitToWidth="true" style="-fx-background: transparent;">
         <VBox spacing="15">
             <!-- Datos Generales -->
-            <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 8;">
+            <VBox spacing="10" style="-fx-background-color: #404040; -fx-padding: 15; -fx-background-radius: 8;">
                 <Label text="Datos Generales" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
 
                 <GridPane hgap="10" vgap="10">
@@ -68,7 +68,7 @@
             </VBox>
 
             <!-- Campos Específicos para Clase Grupal -->
-            <VBox spacing="10" style="-fx-background-color: #e8f5e9; -fx-padding: 15; -fx-background-radius: 8;">
+            <VBox spacing="10" style="-fx-background-color: #48fd00; -fx-padding: 15; -fx-background-radius: 8;">
                 <Label text="Clase Grupal" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
 
                 <GridPane hgap="10" vgap="10">
@@ -88,7 +88,7 @@
             </VBox>
 
             <!-- Campos Específicos para Clase Individual -->
-            <VBox spacing="10" style="-fx-background-color: #fff3e0; -fx-padding: 15; -fx-background-radius: 8;">
+            <VBox spacing="10" style="-fx-background-color: #7a00fd; -fx-padding: 15; -fx-background-radius: 8;">
                 <Label text="Clase Individual" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
 
                 <GridPane hgap="10" vgap="10">
@@ -113,7 +113,7 @@
 
     <HBox spacing="10" alignment="CENTER">
         <Button fx:id="btnAgregar" text="Agregar" onAction="#onAgregar"
-                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" prefWidth="100"/>
+                style="-fx-background-color: #27ae60; -fx-text-fill: #fdfdfd; -fx-font-weight: bold;" prefWidth="100"/>
         <Button fx:id="btnActualizar" text="Actualizar" onAction="#onActualizar"
                 style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;" prefWidth="100"/>
         <Button fx:id="btnLimpiar" text="Limpiar" onAction="#onLimpiar"
