@@ -359,7 +359,8 @@ public class SistemaAcademia {
     public boolean modificarClaseGrupal(String id, ClaseGrupal actualizado) {
         boolean centinela = false;
         for (Clase claseGrupal : listClases) {
-            if (claseGrupal.getId().equals(id)) {
+            if (claseGrupal.getId().equals(id) && claseGrupal instanceof ClaseGrupal) {
+                ClaseGrupal grupal = (ClaseGrupal) claseGrupal;
                 claseGrupal.setId(actualizado.getId());
                 claseGrupal.setHorario(actualizado.getHorario());
                 claseGrupal.setDiaSemana(actualizado.getDiaSemana());
@@ -368,6 +369,11 @@ public class SistemaAcademia {
                 claseGrupal.setInstrumento(actualizado.getInstrumento());
                 claseGrupal.setNivel(actualizado.getNivel());
                 claseGrupal.setActiva(actualizado.isActiva());
+                claseGrupal.setTheAula(actualizado.getTheAula());
+                claseGrupal.setTheProfesor(actualizado.getTheProfesor());
+                // Actualizar campos específicos de ClaseGrupal
+                grupal.setCapacidadMaxima(actualizado.getCapacidadMaxima());
+                grupal.setDescripcion(actualizado.getDescripcion());
                 centinela = true;
                 break;
             }
@@ -404,7 +410,8 @@ public class SistemaAcademia {
     public boolean modificarClaseIndividual(String id, ClaseIndividual actualizado) {
         boolean centinela = false;
         for (Clase claseIndividual : listClases) {
-            if (claseIndividual.getId().equals(id)) {
+            if (claseIndividual.getId().equals(id) && claseIndividual instanceof ClaseIndividual) {
+                ClaseIndividual individual = (ClaseIndividual) claseIndividual;
                 claseIndividual.setId(actualizado.getId());
                 claseIndividual.setHorario(actualizado.getHorario());
                 claseIndividual.setDiaSemana(actualizado.getDiaSemana());
@@ -413,6 +420,12 @@ public class SistemaAcademia {
                 claseIndividual.setInstrumento(actualizado.getInstrumento());
                 claseIndividual.setNivel(actualizado.getNivel());
                 claseIndividual.setActiva(actualizado.isActiva());
+                claseIndividual.setTheAula(actualizado.getTheAula());
+                claseIndividual.setTheProfesor(actualizado.getTheProfesor());
+                // Actualizar campos específicos de ClaseIndividual
+                individual.setTemaEspecifico(actualizado.getTemaEspecifico());
+                individual.setObjetivos(actualizado.getObjetivos());
+                individual.setObservaciones(actualizado.getObservaciones());
                 centinela = true;
                 break;
             }

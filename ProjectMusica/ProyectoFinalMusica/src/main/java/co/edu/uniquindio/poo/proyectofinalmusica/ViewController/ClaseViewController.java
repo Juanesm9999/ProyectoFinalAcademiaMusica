@@ -258,11 +258,96 @@ public class ClaseViewController {
 
     @FXML
     void onActualizar() {
-        if (selectedClase != null && validarCampos()) {
-            // Implementar lógica de actualización
-            mostrarAlerta("Info", "Funcionalidad de actualización en desarrollo", Alert.AlertType.INFORMATION);
-        } else {
+        if (selectedClase == null) {
             mostrarAlerta("Advertencia", "Seleccione una clase de la tabla", Alert.AlertType.WARNING);
+            return;
+        }
+
+        if (!validarCampos()) {
+            return;
+        }
+
+        String tipoClase = cmbTipoClase.getValue();
+        boolean exito = false;
+
+        if ("Grupal".equals(tipoClase) && selectedClase instanceof ClaseGrupal) {
+            ClaseGrupal original = (ClaseGrupal) selectedClase;
+            
+            // Actualizar campos básicos directamente
+            original.setHorario(txtHorario.getText());
+            original.setDiaSemana(cmbDiaSemana.getValue());
+            original.setHoraInicio(txtHoraInicio.getText());
+            original.setHoraFin(txtHoraFin.getText());
+            original.setInstrumento(cmbInstrumento.getValue());
+            original.setNivel(spnNivel.getValue());
+            original.setActiva(chkActiva.isSelected());
+            
+            // Actualizar campos específicos de ClaseGrupal
+            if (!txtCapacidadMaxima.getText().isEmpty()) {
+                int nuevaCapacidad = Integer.parseInt(txtCapacidadMaxima.getText());
+                int diferencia = nuevaCapacidad - original.getCapacidadMaxima();
+                original.setCapacidadMaxima(nuevaCapacidad);
+                // Ajustar cupos disponibles
+                original.setCuposDisponibles(original.getCuposDisponibles() + diferencia);
+            }
+            original.setDescripcion(txtDescripcion.getText());
+            
+            // Actualizar aula
+            if (cmbAula.getValue() != null) {
+                original.setTheAula(cmbAula.getValue());
+            } else {
+                original.setTheAula(null);
+            }
+            
+            // Actualizar curso si cambió
+            Curso cursoAnterior = buscarCursoDeClase(original);
+            if (cursoAnterior != null && (cmbCurso.getValue() == null || cmbCurso.getValue() != cursoAnterior)) {
+                cursoAnterior.getTheClases().remove(original);
+            }
+            if (cmbCurso.getValue() != null && !cmbCurso.getValue().getTheClases().contains(original)) {
+                cmbCurso.getValue().getTheClases().add(original);
+            }
+            
+            exito = true;
+            
+        } else if ("Individual".equals(tipoClase) && selectedClase instanceof ClaseIndividual) {
+            ClaseIndividual original = (ClaseIndividual) selectedClase;
+            
+            // Actualizar campos básicos directamente
+            original.setHorario(txtHorario.getText());
+            original.setDiaSemana(cmbDiaSemana.getValue());
+            original.setHoraInicio(txtHoraInicio.getText());
+            original.setHoraFin(txtHoraFin.getText());
+            original.setInstrumento(cmbInstrumento.getValue());
+            original.setNivel(spnNivel.getValue());
+            original.setActiva(chkActiva.isSelected());
+            
+            // Actualizar campos específicos de ClaseIndividual
+            original.setTemaEspecifico(txtTemaEspecifico.getText());
+            original.setObjetivos(txtObjetivos.getText());
+            original.setObservaciones(txtObservaciones.getText());
+            
+            // Actualizar aula
+            if (cmbAula.getValue() != null) {
+                original.setTheAula(cmbAula.getValue());
+            } else {
+                original.setTheAula(null);
+            }
+            
+            exito = true;
+            
+        } else {
+            mostrarAlerta("Error", "El tipo de clase seleccionado no coincide con la clase original", Alert.AlertType.ERROR);
+            return;
+        }
+
+        if (exito) {
+            // Actualizar en la lista observable y refrescar tabla
+            tblClases.refresh();
+            limpiarSeleccion();
+            mostrarAlerta("Éxito", "Clase actualizada correctamente", Alert.AlertType.INFORMATION);
+        } else {
+            mostrarAlerta("Error", "No se pudo actualizar la clase", Alert.AlertType.ERROR);
         }
     }
 
