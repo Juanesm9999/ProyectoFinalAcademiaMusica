@@ -288,9 +288,22 @@ public class ProfesorDashboardViewController {
                 ObservableList<Estudiante> estudiantes = FXCollections.observableArrayList();
                 if (newVal instanceof ClaseGrupal) {
                     ClaseGrupal claseGrupal = (ClaseGrupal) newVal;
+                    
+                    // Primero intentar obtener estudiantes directamente de la clase
                     List<Estudiante> estudiantesInscritos = claseGrupal.getTheEstudiantesInscritos();
                     if (estudiantesInscritos != null && !estudiantesInscritos.isEmpty()) {
                         estudiantes.addAll(estudiantesInscritos);
+                    } else {
+                        // Si no hay estudiantes directamente en la clase, buscar en el curso asociado
+                        for (Curso curso : app.getSistemaAcademia().getListCursos()) {
+                            if (curso.getTheClases().contains(claseGrupal)) {
+                                List<Estudiante> estudiantesDelCurso = curso.getTheEstudiantes();
+                                if (estudiantesDelCurso != null && !estudiantesDelCurso.isEmpty()) {
+                                    estudiantes.addAll(estudiantesDelCurso);
+                                }
+                                break;
+                            }
+                        }
                     }
                 } else if (newVal instanceof ClaseIndividual) {
                     ClaseIndividual claseIndividual = (ClaseIndividual) newVal;
@@ -476,9 +489,22 @@ public class ProfesorDashboardViewController {
                 ObservableList<Estudiante> estudiantes = FXCollections.observableArrayList();
                 if (newVal instanceof ClaseGrupal) {
                     ClaseGrupal claseGrupal = (ClaseGrupal) newVal;
+                    
+                    // Primero intentar obtener estudiantes directamente de la clase
                     List<Estudiante> estudiantesInscritos = claseGrupal.getTheEstudiantesInscritos();
                     if (estudiantesInscritos != null && !estudiantesInscritos.isEmpty()) {
                         estudiantes.addAll(estudiantesInscritos);
+                    } else {
+                        // Si no hay estudiantes directamente en la clase, buscar en el curso asociado
+                        for (Curso curso : app.getSistemaAcademia().getListCursos()) {
+                            if (curso.getTheClases().contains(claseGrupal)) {
+                                List<Estudiante> estudiantesDelCurso = curso.getTheEstudiantes();
+                                if (estudiantesDelCurso != null && !estudiantesDelCurso.isEmpty()) {
+                                    estudiantes.addAll(estudiantesDelCurso);
+                                }
+                                break;
+                            }
+                        }
                     }
                 } else if (newVal instanceof ClaseIndividual) {
                     ClaseIndividual claseIndividual = (ClaseIndividual) newVal;
