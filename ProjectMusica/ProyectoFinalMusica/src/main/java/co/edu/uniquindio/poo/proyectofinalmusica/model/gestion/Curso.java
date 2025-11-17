@@ -1,9 +1,6 @@
 package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
 
-import co.edu.uniquindio.poo.proyectofinalmusica.model.EstadoCurso;
-import co.edu.uniquindio.poo.proyectofinalmusica.model.Estudiante;
-import co.edu.uniquindio.poo.proyectofinalmusica.model.IReportable;
-import co.edu.uniquindio.poo.proyectofinalmusica.model.TipoInstrumento;
+import co.edu.uniquindio.poo.proyectofinalmusica.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +19,7 @@ public class Curso implements IReportable {
     private String fechaInicio;
     private String fechaFin;
     private int duracionSemanas;
-    private List<ClaseGrupal> theClases; // 1 a muchos
+    private List<Clase> theClases; // 1 a muchos
     private List<Estudiante> theEstudiantes;// 1 a muchos
     private List<Inscripcion> listInscripciones;
 
@@ -41,6 +38,7 @@ public class Curso implements IReportable {
         this.theClases = new ArrayList<>();
         this.theEstudiantes = new ArrayList<>();
         this.listInscripciones = new ArrayList<>();
+        this.estado = estado;
 
     }
 
@@ -140,11 +138,11 @@ public class Curso implements IReportable {
         this.thePrerrequisitos = thePrerrequisitos;
     }
 
-    public List<ClaseGrupal> getTheClases() {
+    public List<Clase> getTheClases() {
         return theClases;
     }
 
-    public void setTheClases(List<ClaseGrupal> theClases) {
+    public void setTheClases(List<Clase> theClases) {
         this.theClases = theClases;
     }
 

@@ -106,7 +106,7 @@ public class CursoController {
         return false;
     }
 
-    public List<ClaseGrupal> obtenerClasesDeCurso(String cursoId) {
+    public List<Clase> obtenerClasesDeCurso(String cursoId) {
         Curso curso = buscarCurso(cursoId);
         if (curso != null) {
             return curso.getTheClases();
