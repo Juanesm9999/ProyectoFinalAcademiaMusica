@@ -69,12 +69,12 @@ public class EstudianteDashboardViewController {
         // Obtener cursos disponibles (activos y con cupos)
         List<Curso> cursosDisponibles = cursoController.obtenerCursosConCuposDisponibles();
 
-        // Filtrar cursos en los que el estudiante NO esté ya inscrito
+        // Filtrar cursos
         List<Curso> cursosFiltrados = cursosDisponibles.stream()
                 .filter(curso -> !inscripcionController.verificarInscripcionExistente(estudiante.getId(), curso.getId()))
                 .collect(java.util.stream.Collectors.toList());
 
-        // Crear tabla de cursos
+
         TableView<Curso> tablaCursos = new TableView<>();
         tablaCursos.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -110,7 +110,7 @@ public class EstudianteDashboardViewController {
         tablaCursos.getColumns().addAll(colCodigo, colNombre, colInstrumento, colNivel, colCapacidad, colDescripcion);
         tablaCursos.setItems(FXCollections.observableArrayList(cursosFiltrados));
 
-        // Layout
+
         VBox vbox = new VBox(15);
         vbox.setPadding(new Insets(20));
 
@@ -132,13 +132,13 @@ public class EstudianteDashboardViewController {
                 return;
             }
 
-            // Verificar nuevamente que no esté inscrito
+
             if (inscripcionController.verificarInscripcionExistente(estudiante.getId(), cursoSeleccionado.getId())) {
                 mostrarAlerta("Error", "Ya estás inscrito en este curso", Alert.AlertType.ERROR);
                 return;
             }
 
-            // Intentar inscribir
+
             boolean exito = inscripcionController.inscribirEstudiante(estudiante, cursoSeleccionado);
             if (exito) {
                 mostrarAlerta("Éxito", "Te has inscrito exitosamente en: " + cursoSeleccionado.getNombre(), Alert.AlertType.INFORMATION);
@@ -218,11 +218,6 @@ public class EstudianteDashboardViewController {
         lblPromedioGeneral.setText("Promedio General: " + String.format("%.2f", promedio));
     }
 
-    // Reemplaza el método onVerHorario() en EstudianteDashboardViewController.java
-
-    // Reemplaza el método onVerHorario() en EstudianteDashboardViewController.java
-
-    // Reemplaza el método onVerHorario() en EstudianteDashboardViewController.java
 
     @FXML
     void onVerHorario() {
@@ -231,16 +226,16 @@ public class EstudianteDashboardViewController {
             return;
         }
 
-        // Crear nueva ventana
+
         Stage stageHorario = new Stage();
         stageHorario.setTitle("Mi Horario de Clases");
         stageHorario.initModality(Modality.APPLICATION_MODAL);
 
-        // Crear tabla
+
         TableView<Horario> tableHorario = new TableView<>();
         tableHorario.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        // Definir columnas
+
         TableColumn<Horario, String> colDia = new TableColumn<>("Día");
         colDia.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDiaSemana()));
         colDia.setPrefWidth(100);
@@ -275,10 +270,10 @@ public class EstudianteDashboardViewController {
         ));
         colAula.setPrefWidth(100);
 
-        // Agregar columnas a la tabla
+
         tableHorario.getColumns().addAll(colDia, colHorario, colCurso, colInstrumento, colProfesor, colAula);
 
-        // Llenar datos - Crear objetos Horario desde las clases del estudiante
+
         ObservableList<Horario> horarios = FXCollections.observableArrayList();
 
         for (Inscripcion inscripcion : estudiante.getTheInscripciones()) {
@@ -311,15 +306,15 @@ public class EstudianteDashboardViewController {
 
         tableHorario.setItems(horarios);
 
-        // Layout de la ventana
+
         VBox vbox = new VBox(15);
         vbox.setPadding(new javafx.geometry.Insets(20));
 
-        // Título
+
         Label titulo = new Label("📅 Mi Horario de Clases");
         titulo.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 
-        // Información del estudiante
+
         Label info = new Label("Estudiante: " + estudiante.getNombre() + " | Matrícula: " + estudiante.getMatricula());
         info.setStyle("-fx-font-size: 13px; -fx-text-fill: #666;");
 
@@ -339,6 +334,7 @@ public class EstudianteDashboardViewController {
 
             vbox.getChildren().addAll(titulo, info, separator, contenidoVacio);
         } else {
+
             // Botón cerrar
             Button btnCerrar = new Button("Cerrar");
             btnCerrar.setStyle("-fx-background-color: #6c757d; -fx-text-fill: white; -fx-padding: 8 20; -fx-cursor: hand;");
@@ -352,7 +348,7 @@ public class EstudianteDashboardViewController {
             VBox.setVgrow(tableHorario, javafx.scene.layout.Priority.ALWAYS);
         }
 
-        // Crear escena y mostrar
+
         Scene scene = new Scene(vbox, 920, 600);
         stageHorario.setScene(scene);
         stageHorario.show();
@@ -428,7 +424,7 @@ public class EstudianteDashboardViewController {
             }
         }
 
-        // Mostrar en ventana
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Historial de Asistencia");
         alert.setHeaderText(null);
@@ -474,7 +470,7 @@ public class EstudianteDashboardViewController {
             evaluaciones.append("───────────────────────────────────────\n\n");
 
             for (co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.EvaluacionProgreso eval : historialEval) {
-                // Determinar estado de la calificación
+                // estado de la calificación
                 String estado;
                 String icono;
                 if (eval.getCalificacion() >= 3.0) {
@@ -543,7 +539,7 @@ public class EstudianteDashboardViewController {
             evaluaciones.append("📈 Clasificación: ").append(clasificacion).append("\n");
         }
 
-        // Mostrar en ventana
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Historial de Evaluaciones");
         alert.setHeaderText(null);

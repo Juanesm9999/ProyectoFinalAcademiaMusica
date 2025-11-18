@@ -1,4 +1,4 @@
-/* package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
+ package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.model.EstadoCurso;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.SistemaAcademia;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CursoTest {
+public class CursoTest {
 
     private SistemaAcademia sistema;
     private Curso curso1;
@@ -84,4 +84,4 @@ class CursoTest {
         assertEquals(2, sistema.getListCursos().size());
     }
 
-} */ //
+}

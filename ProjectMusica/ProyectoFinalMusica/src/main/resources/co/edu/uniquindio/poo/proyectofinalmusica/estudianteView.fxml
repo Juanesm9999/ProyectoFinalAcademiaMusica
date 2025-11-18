@@ -12,14 +12,14 @@
          <Insets top="20" right="20" bottom="20" left="20"/>
       </padding>
 
-   <!-- Título -->
+
    <HBox alignment="CENTER">
       <Label text="Gestión de Estudiantes" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
    </HBox>
 
    <Separator/>
 
-   <!-- Formulario -->
+
    <GridPane hgap="10" vgap="10">
       <columnConstraints>
          <ColumnConstraints minWidth="120" prefWidth="120"/>
@@ -62,7 +62,7 @@
       <CheckBox fx:id="chkActivo" text="Activo" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
    </GridPane>
 
-   <!-- Botones de acción -->
+
    <HBox spacing="10" alignment="CENTER">
       <Button fx:id="btnAgregar" text="Agregar" onAction="#onAgregar"
               style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"
@@ -80,7 +80,7 @@
 
    <Separator/>
 
-   <!-- Tabla de estudiantes -->
+
    <VBox VBox.vgrow="ALWAYS">
       <Label text="Lista de Estudiantes" style="-fx-font-size: 16px; -fx-font-weight: bold;">
          <padding>
@@ -101,7 +101,7 @@
       </TableView>
    </VBox>
 
-   <!-- Botón regresar -->
+
    <HBox alignment="CENTER_RIGHT">
       <Button fx:id="btnRegresar" text="Regresar" onAction="#onRegresar"
               style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-weight: bold;"

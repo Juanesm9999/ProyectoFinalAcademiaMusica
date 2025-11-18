@@ -20,7 +20,7 @@
 
     <ScrollPane fitToWidth="true" style="-fx-background: transparent;">
         <VBox spacing="15">
-            <!-- Datos Generales -->
+
             <VBox spacing="10" style="-fx-background-color: #404040; -fx-padding: 15; -fx-background-radius: 8;">
                 <Label text="Datos Generales" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
 
@@ -70,7 +70,7 @@
                 </GridPane>
             </VBox>
 
-            <!-- Campos Específicos para Clase Grupal -->
+
             <VBox spacing="10" style="-fx-background-color: #48fd00; -fx-padding: 15; -fx-background-radius: 8;">
                 <Label text="Clase Grupal" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
 
@@ -90,7 +90,7 @@
                 </GridPane>
             </VBox>
 
-            <!-- Campos Específicos para Clase Individual -->
+
             <VBox spacing="10" style="-fx-background-color: #7a00fd; -fx-padding: 15; -fx-background-radius: 8;">
                 <Label text="Clase Individual" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
 

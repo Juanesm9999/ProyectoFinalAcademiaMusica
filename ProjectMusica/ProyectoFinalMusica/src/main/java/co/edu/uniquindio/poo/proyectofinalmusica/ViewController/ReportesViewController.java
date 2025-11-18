@@ -36,7 +36,6 @@ public class ReportesViewController {
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 1);
         spnNivel.setValueFactory(valueFactory);
 
-        // Listener para mostrar/ocultar campos según el tipo de reporte
         cmbTipoReporte.valueProperty().addListener((obs, oldVal, newVal) -> {
             actualizarCamposSegunReporte(newVal);
         });
@@ -48,13 +47,11 @@ public class ReportesViewController {
     }
 
     private void actualizarCamposSegunReporte(String tipoReporte) {
-        // Deshabilitar todos los campos
         txtCursoId.setDisable(true);
         txtEstudianteId.setDisable(true);
         cmbInstrumento.setDisable(true);
         spnNivel.setDisable(true);
 
-        // Habilitar campos según el tipo de reporte
         if ("Asistencia por Curso".equals(tipoReporte)) {
             txtCursoId.setDisable(false);
         } else if ("Progreso por Instrumento/Nivel".equals(tipoReporte)) {

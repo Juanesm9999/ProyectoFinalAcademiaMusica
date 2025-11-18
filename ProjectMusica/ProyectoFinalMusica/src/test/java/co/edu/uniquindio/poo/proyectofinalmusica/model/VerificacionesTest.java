@@ -1,4 +1,4 @@
-/* package co.edu.uniquindio.poo.proyectofinalmusica.model;
+package co.edu.uniquindio.poo.proyectofinalmusica.model;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.Aula;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.ClaseGrupal;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class VerificacionesTest {
+public class VerificacionesTest {
 
     private SistemaAcademia sistema;
     private Estudiante estudiante1;
@@ -182,4 +182,4 @@ class VerificacionesTest {
 
         assertTrue(sistema.verificarConflictoAula(aula1, "Martes 14:00-16:00"));
     }
-} */ //
+}

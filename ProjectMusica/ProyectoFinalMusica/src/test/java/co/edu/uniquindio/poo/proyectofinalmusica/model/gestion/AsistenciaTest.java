@@ -1,4 +1,4 @@
-/* package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
+package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.model.Estudiante;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.Profesor;
@@ -246,4 +246,3 @@ public class AsistenciaTest {
         assertEquals(claseGrupal, asistencia1.getTheClase());
     }
 }
-*/ //

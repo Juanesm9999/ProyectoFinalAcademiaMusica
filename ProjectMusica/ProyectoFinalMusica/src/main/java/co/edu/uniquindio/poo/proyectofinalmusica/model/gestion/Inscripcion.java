@@ -5,8 +5,8 @@ import co.edu.uniquindio.poo.proyectofinalmusica.model.Estudiante;
 
 public class Inscripcion {
     private String id;
-    private Estudiante theEstudiante; // muchos a 1
-    private Curso theCurso; // muchos a 1
+    private Estudiante theEstudiante;
+    private Curso theCurso;
     private String fechaInscripcion;
     private EstadoInscripcion estado;
     private boolean activa;

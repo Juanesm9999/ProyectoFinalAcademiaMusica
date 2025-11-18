@@ -4,11 +4,9 @@ import co.edu.uniquindio.poo.proyectofinalmusica.model.Clase;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.Estudiante;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.TipoInstrumento;
 import java.time.LocalDate;
-import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.Asistencia;
-import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.EvaluacionProgreso;
 
 public class ClaseIndividual extends Clase {
-    private Estudiante theEstudiante; // 1 a 1
+    private Estudiante theEstudiante;
     private String temaEspecifico;
     private String objetivos;
     private String observaciones;
@@ -54,15 +52,15 @@ public class ClaseIndividual extends Clase {
 
     @Override
     public void registrarAsistencia(Estudiante estudiante, boolean presente) {
-        // Verificar que el estudiante sea el asignado a esta clase individual
+
         if (theEstudiante != null && theEstudiante.equals(estudiante)) {
             LocalDate fechaActual = LocalDate.now();
             
-            // Generar ID único para la asistencia
+
             String idAsistencia = "AST-" + this.id + "-" + estudiante.getId() + "-" + 
                                   fechaActual.toString().replace("-", "");
             
-            // Crear nueva asistencia
+
             Asistencia asistencia = new Asistencia(
                 idAsistencia,
                 estudiante,
@@ -72,38 +70,38 @@ public class ClaseIndividual extends Clase {
                 presente ? "Presente" : "Ausente"
             );
             
-            // Agregar al historial de asistencia del estudiante
+
             estudiante.getTheHistorialAsistencia().add(asistencia);
         }
     }
 
     @Override
     public void evaluarProgreso(Estudiante estudiante, double calificacion, String comentarios) {
-        // Verificar que el estudiante sea el asignado a esta clase individual
+
         if (theEstudiante != null && theEstudiante.equals(estudiante)) {
             LocalDate fechaActual = LocalDate.now();
             
-            // Generar ID único para la evaluación
+
             String idEvaluacion = "EVAL-" + this.id + "-" + estudiante.getId() + "-" + 
                                   fechaActual.toString().replace("-", "");
             
-            // Crear nueva evaluación de progreso
+
             EvaluacionProgreso evaluacion = new EvaluacionProgreso(
                 idEvaluacion,
                 calificacion,
                 comentarios,
-                "", // areasAMejorar inicialmente vacío
-                fechaActual.toString() // Convierte LocalDate a String en formato ISO (yyyy-MM-dd)
+                "",
+                fechaActual.toString()
             );
             
-            // Configurar relaciones
+
             evaluacion.setTheEstudiante(estudiante);
             evaluacion.setTheClase(this);
             if (theProfesor != null) {
                 evaluacion.setTheEvaluador(theProfesor);
             }
             
-            // Agregar a las evaluaciones del estudiante
+
             estudiante.getTheEvaluaciones().add(evaluacion);
         }
     }

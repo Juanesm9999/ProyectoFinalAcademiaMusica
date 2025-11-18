@@ -19,7 +19,7 @@
             <Insets top="30" right="40" bottom="30" left="40"/>
         </padding>
 
-        <!-- Header -->
+
         <VBox alignment="CENTER" spacing="8">
             <Label text="🎓" style="-fx-font-size: 50px;"/>
             <Label fx:id="lblBienvenida" text="Bienvenido, Estudiante"
@@ -32,7 +32,7 @@
 
         <Separator prefWidth="800"/>
 
-        <!-- Estadísticas -->
+
         <HBox spacing="30" alignment="CENTER">
             <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #3498db; -fx-padding: 20; -fx-background-radius: 10;">
                 <Label fx:id="lblNumeroInscripciones" text="Inscripciones activas: 0"
@@ -45,16 +45,16 @@
             </VBox>
         </HBox>
 
-        <!-- Información -->
+
         <HBox spacing="20" alignment="CENTER">
-            <!-- Inscripciones Activas -->
+
             <VBox spacing="10" prefWidth="380">
                 <Label text="Mis Cursos Inscritos" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
                 <ListView fx:id="lstInscripciones" prefHeight="200"
                           style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #ddd;"/>
             </VBox>
 
-            <!-- Niveles Aprobados -->
+
             <VBox spacing="10" prefWidth="380">
                 <Label text="Niveles Aprobados" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
                 <ListView fx:id="lstNivelesAprobados" prefHeight="200"
@@ -64,7 +64,7 @@
 
         <Separator prefWidth="800"/>
 
-        <!-- Botones de Acción -->
+
         <HBox spacing="15" alignment="CENTER">
             <Button fx:id="btnInscribirseCurso" text="📚 Inscribirse a Curso" onAction="#onInscribirseCurso"
                     style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 14px;
@@ -85,7 +85,7 @@
 
         <Separator prefWidth="800"/>
 
-        <!-- Cerrar Sesión -->
+
         <Button fx:id="btnCerrarSesion" text="Cerrar Sesión" onAction="#onCerrarSesion"
                 style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-size: 14px;
                        -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 12 30;"

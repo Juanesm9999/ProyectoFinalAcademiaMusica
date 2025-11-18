@@ -12,9 +12,9 @@ public abstract class Clase {
     protected TipoInstrumento instrumento;
     protected int nivel;
     protected boolean activa;
-    protected Profesor theProfesor; // muchos a 1
-    protected Aula theAula; // muchos a 1
-    protected Horario theHorario; // 1 a 1
+    protected Profesor theProfesor;
+    protected Aula theAula;
+    protected Horario theHorario;
 
     public Clase(String id, String horario, String diaSemana, String horaInicio,
                  String horaFin, TipoInstrumento instrumento, int nivel, boolean activa) {
@@ -117,7 +117,7 @@ public abstract class Clase {
         this.theHorario = theHorario;
     }
 
-    // Métodos abstractos que deben implementar las clases hijas
+
     public abstract void registrarAsistencia(Estudiante estudiante, boolean presente);
 
 

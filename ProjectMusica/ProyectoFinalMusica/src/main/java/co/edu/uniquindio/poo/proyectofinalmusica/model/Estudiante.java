@@ -13,10 +13,10 @@ public class Estudiante extends Persona implements IReportable {
     private String matricula;
     private LocalDate fechaIngreso;
     private boolean activo;
-    private List<Inscripcion> theInscripciones; // 1 a muchos
-    private List<NivelAprobado> theNivelesAprobados; // 1 a muchos
-    private List<Asistencia> theHistorialAsistencia; // 1 a muchos
-    private List<EvaluacionProgreso> theEvaluaciones; // 1 a muchos
+    private List<Inscripcion> theInscripciones;
+    private List<NivelAprobado> theNivelesAprobados;
+    private List<Asistencia> theHistorialAsistencia;
+    private List<EvaluacionProgreso> theEvaluaciones;
 
     public Estudiante(String matricula, LocalDate fechaIngreso , boolean activo, String  id, String nombre, String email, String telefono, String direccion,  LocalDate fechaNacimiento,String usuario,String contrasenia) {
         super(id, nombre,email,telefono,direccion, fechaNacimiento,usuario,contrasenia);

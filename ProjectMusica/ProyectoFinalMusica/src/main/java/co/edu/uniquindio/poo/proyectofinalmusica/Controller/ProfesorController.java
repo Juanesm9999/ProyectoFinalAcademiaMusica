@@ -13,7 +13,7 @@ public class ProfesorController {
         this.sistemaAcademia = sistemaAcademia;
     }
 
-    // CRUD básico
+
     public boolean agregarProfesor(Profesor profesor) {
         return sistemaAcademia.agregarProfesor(profesor);
     }
@@ -48,7 +48,7 @@ public class ProfesorController {
         return sistemaAcademia.getListProfesores();
     }
 
-    // Filtros
+
     public List<Profesor> obtenerProfesoresActivos() {
         return sistemaAcademia.getListProfesores().stream()
                 .filter(Profesor::isActivo)
@@ -67,7 +67,7 @@ public class ProfesorController {
                 .collect(Collectors.toList());
     }
 
-    // Gestión de instrumentos
+
     public boolean agregarInstrumentoAProfesor(String profesorId, TipoInstrumento instrumento) {
         Profesor profesor = buscarProfesor(profesorId);
         if (profesor != null && !profesor.getTheInstrumentosImpartidos().contains(instrumento)) {
@@ -93,7 +93,7 @@ public class ProfesorController {
         return null;
     }
 
-    // Gestión de disponibilidad
+
     public boolean agregarBloqueDisponibilidad(String profesorId, BloqueDisponibilidad bloque) {
         Profesor profesor = buscarProfesor(profesorId);
         if (profesor != null) {
@@ -141,7 +141,7 @@ public class ProfesorController {
         return false;
     }
 
-    // Gestión de clases asignadas
+
     public boolean asignarClaseAProfesor(String profesorId, Clase clase) {
         Profesor profesor = buscarProfesor(profesorId);
         if (profesor != null && !sistemaAcademia.verificarConflictoHorario(profesor, clase.getHorario())) {
@@ -178,7 +178,7 @@ public class ProfesorController {
         return null;
     }
 
-    // Estadísticas
+
     public int contarClasesProfesor(String profesorId) {
         Profesor profesor = buscarProfesor(profesorId);
         return profesor != null ? profesor.getTheClasesAsignadas().size() : 0;
@@ -220,7 +220,7 @@ public class ProfesorController {
         return 0;
     }
 
-    // Reportes específicos
+
     public String generarHorarioProfesor(String profesorId) {
         Profesor profesor = buscarProfesor(profesorId);
         if (profesor == null) return "Profesor no encontrado";

@@ -1,4 +1,4 @@
-/* package co.edu.uniquindio.poo.proyectofinalmusica.model;
+package co.edu.uniquindio.poo.proyectofinalmusica.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProfesorTest {
+public class ProfesorTest {
     private SistemaAcademia sistema;
     private Profesor profesor1;
     private Profesor profesor2;
@@ -103,4 +103,4 @@ class ProfesorTest {
     public void testVerificarProfesorNoExiste() {
         assertFalse(sistema.verificarProfesor("P999"));
     }
-} */ //
+}

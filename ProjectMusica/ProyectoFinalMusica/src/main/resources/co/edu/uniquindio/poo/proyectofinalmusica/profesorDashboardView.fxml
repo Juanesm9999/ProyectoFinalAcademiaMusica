@@ -19,7 +19,7 @@
             <Insets top="30" right="40" bottom="30" left="40"/>
         </padding>
 
-        <!-- Header -->
+
         <VBox alignment="CENTER" spacing="8">
             <Label text="👨‍🏫" style="-fx-font-size: 50px;"/>
             <Label fx:id="lblBienvenida" text="Bienvenido, Profesor"
@@ -32,22 +32,22 @@
 
         <Separator prefWidth="800"/>
 
-        <!-- Estadística -->
+
         <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #9b59b6; -fx-padding: 20; -fx-background-radius: 10;">
             <Label fx:id="lblNumeroClases" text="Clases asignadas: 0"
                    style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
         </VBox>
 
-        <!-- Información -->
+
         <HBox spacing="20" alignment="CENTER">
-            <!-- Instrumentos que imparte -->
+
             <VBox spacing="10" prefWidth="380">
                 <Label text="Instrumentos que Imparto" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
                 <ListView fx:id="lstInstrumentos" prefHeight="200"
                           style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #ddd;"/>
             </VBox>
 
-            <!-- Clases Asignadas -->
+
             <VBox spacing="10" prefWidth="380">
                 <Label text="Mis Clases Asignadas" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
                 <ListView fx:id="lstClasesAsignadas" prefHeight="200"
@@ -57,7 +57,7 @@
 
         <Separator prefWidth="800"/>
 
-        <!-- Botones de Acción -->
+
         <HBox spacing="15" alignment="CENTER">
             <Button fx:id="btnGestionarDisponibilidad" text="📅 Gestionar Disponibilidad" onAction="#onGestionarDisponibilidad"
                     style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px;
@@ -74,7 +74,7 @@
 
         <Separator prefWidth="800"/>
 
-        <!-- Cerrar Sesión -->
+
         <Button fx:id="btnCerrarSesion" text="Cerrar Sesión" onAction="#onCerrarSesion"
                 style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-size: 14px;
                        -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 12 30;"

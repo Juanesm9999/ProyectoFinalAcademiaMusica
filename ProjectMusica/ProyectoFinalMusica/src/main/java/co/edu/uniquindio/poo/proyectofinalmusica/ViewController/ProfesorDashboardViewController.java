@@ -50,13 +50,13 @@ public class ProfesorDashboardViewController {
         lblCodigo.setText("Código: " + profesor.getCodigo());
         lblEspecialidad.setText("Especialidad: " + profesor.getEspecialidad());
 
-        // Cargar instrumentos
+
         lstInstrumentos.getItems().clear();
         for (TipoInstrumento inst : profesor.getTheInstrumentosImpartidos()) {
             lstInstrumentos.getItems().add("🎵 " + inst.toString());
         }
 
-        // Cargar clases asignadas
+
         int numeroClases = profesorController.contarClasesProfesor(profesor.getId());
         lblNumeroClases.setText("Clases asignadas: " + numeroClases);
 
@@ -83,11 +83,11 @@ public class ProfesorDashboardViewController {
         stageDisponibilidad.setTitle("Gestionar Disponibilidad");
         stageDisponibilidad.initModality(Modality.APPLICATION_MODAL);
 
-        // Obtener bloques de disponibilidad
+
         List<BloqueDisponibilidad> bloques = profesor.getTheDisponibilidad();
         ObservableList<BloqueDisponibilidad> listaBloques = FXCollections.observableArrayList(bloques);
 
-        // Tabla de disponibilidad
+
         TableView<BloqueDisponibilidad> tablaDisponibilidad = new TableView<>();
         tablaDisponibilidad.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -111,7 +111,7 @@ public class ProfesorDashboardViewController {
         tablaDisponibilidad.getColumns().addAll(colDia, colHoraInicio, colHoraFin, colDisponible);
         tablaDisponibilidad.setItems(listaBloques);
 
-        // Formulario para agregar bloque
+
         ComboBox<String> cmbDia = new ComboBox<>(FXCollections.observableArrayList(
                 "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO"));
         TextField txtHoraInicio = new TextField();
@@ -121,7 +121,7 @@ public class ProfesorDashboardViewController {
         CheckBox chkDisponible = new CheckBox("Disponible");
         chkDisponible.setSelected(true);
 
-        // Layout
+
         VBox vbox = new VBox(15);
         vbox.setPadding(new Insets(20));
 
@@ -264,7 +264,7 @@ public class ProfesorDashboardViewController {
         });
         cmbClase.setButtonCell(buttonCell);
 
-        // Tabla de estudiantes
+
         TableView<Estudiante> tablaEstudiantes = new TableView<>();
         tablaEstudiantes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -321,14 +321,14 @@ public class ProfesorDashboardViewController {
             }
         });
 
-        // Checkbox para presente/ausente
+
         CheckBox chkPresente = new CheckBox("Presente");
         chkPresente.setSelected(true);
         TextArea txtObservaciones = new TextArea();
         txtObservaciones.setPromptText("Observaciones (opcional)");
         txtObservaciones.setPrefRowCount(3);
 
-        // Layout
+
         VBox vbox = new VBox(15);
         vbox.setPadding(new Insets(20));
 
@@ -368,23 +368,23 @@ public class ProfesorDashboardViewController {
             }
 
             try {
-                // Obtener el tamaño del historial antes de registrar
+
                 int tamanioAntes = estudianteSeleccionado.getTheHistorialAsistencia().size();
                 
-                // Registrar asistencia usando el método de la clase
+
                 claseSeleccionada.registrarAsistencia(estudianteSeleccionado, chkPresente.isSelected());
                 
-                // Obtener la asistencia recién creada
+
                 List<Asistencia> historial = estudianteSeleccionado.getTheHistorialAsistencia();
                 if (historial.size() > tamanioAntes) {
                     Asistencia nuevaAsistencia = historial.get(historial.size() - 1);
                     
-                    // Agregar observaciones si hay
+
                     if (!txtObservaciones.getText().isEmpty()) {
                         nuevaAsistencia.setObservaciones(txtObservaciones.getText());
                     }
 
-                    // Registrar en el sistema
+
                     boolean exito = app.getSistemaAcademia().registrarAsistencia(nuevaAsistencia);
                     
                     if (exito) {
@@ -436,7 +436,7 @@ public class ProfesorDashboardViewController {
         stageEvaluacion.setTitle("Evaluar Estudiantes");
         stageEvaluacion.initModality(Modality.APPLICATION_MODAL);
 
-        // Seleccionar clase
+
         ComboBox<Clase> cmbClase = new ComboBox<>(FXCollections.observableArrayList(clasesActivas));
         cmbClase.setPromptText("Seleccione una clase");
         cmbClase.setPrefWidth(400);
@@ -469,7 +469,7 @@ public class ProfesorDashboardViewController {
         });
         cmbClase.setButtonCell(buttonCellEvaluacion);
 
-        // Tabla de estudiantes
+
         TableView<Estudiante> tablaEstudiantes = new TableView<>();
         tablaEstudiantes.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -483,19 +483,19 @@ public class ProfesorDashboardViewController {
 
         tablaEstudiantes.getColumns().addAll(colNombre, colMatricula);
 
-        // Actualizar estudiantes cuando se selecciona una clase
+
         cmbClase.valueProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 ObservableList<Estudiante> estudiantes = FXCollections.observableArrayList();
                 if (newVal instanceof ClaseGrupal) {
                     ClaseGrupal claseGrupal = (ClaseGrupal) newVal;
                     
-                    // Primero intentar obtener estudiantes directamente de la clase
+
                     List<Estudiante> estudiantesInscritos = claseGrupal.getTheEstudiantesInscritos();
                     if (estudiantesInscritos != null && !estudiantesInscritos.isEmpty()) {
                         estudiantes.addAll(estudiantesInscritos);
                     } else {
-                        // Si no hay estudiantes directamente en la clase, buscar en el curso asociado
+
                         for (Curso curso : app.getSistemaAcademia().getListCursos()) {
                             if (curso.getTheClases().contains(claseGrupal)) {
                                 List<Estudiante> estudiantesDelCurso = curso.getTheEstudiantes();
@@ -522,7 +522,7 @@ public class ProfesorDashboardViewController {
             }
         });
 
-        // Formulario de evaluación
+
         Spinner<Double> spnCalificacion = new Spinner<>(0.0, 5.0, 3.0, 0.1);
         spnCalificacion.setEditable(true);
         TextArea txtComentarios = new TextArea();
@@ -532,7 +532,7 @@ public class ProfesorDashboardViewController {
         txtAreasMejorar.setPromptText("Áreas a mejorar");
         txtAreasMejorar.setPrefRowCount(2);
 
-        // Layout
+
         VBox vbox = new VBox(15);
         vbox.setPadding(new Insets(20));
 
@@ -579,26 +579,26 @@ public class ProfesorDashboardViewController {
             }
 
             try {
-                // Obtener el tamaño de las evaluaciones antes de evaluar
+
                 int tamanioAntes = estudianteSeleccionado.getTheEvaluaciones().size();
                 
-                // Evaluar usando el método de la clase
+
                 claseSeleccionada.evaluarProgreso(estudianteSeleccionado, 
                         spnCalificacion.getValue(), txtComentarios.getText());
 
-                // Obtener la evaluación recién creada
+
                 List<EvaluacionProgreso> evaluaciones = estudianteSeleccionado.getTheEvaluaciones();
                 if (evaluaciones.size() > tamanioAntes) {
                     EvaluacionProgreso nuevaEvaluacion = evaluaciones.get(evaluaciones.size() - 1);
                     
-                    // Agregar áreas a mejorar si hay
+
                     if (!txtAreasMejorar.getText().isEmpty()) {
                         nuevaEvaluacion.setAreasAMejorar(txtAreasMejorar.getText());
                     }
                     
-                    // Asignar el curso si es una clase grupal
+
                     if (claseSeleccionada instanceof ClaseGrupal) {
-                        // Buscar el curso asociado a esta clase
+
                         for (Curso curso : app.getSistemaAcademia().getListCursos()) {
                             if (curso.getTheClases().contains(claseSeleccionada)) {
                                 nuevaEvaluacion.setTheCurso(curso);
@@ -607,7 +607,7 @@ public class ProfesorDashboardViewController {
                         }
                     }
 
-                    // Registrar en el sistema
+
                     boolean exito = app.getSistemaAcademia().registrarEvaluacion(nuevaEvaluacion);
                     
                     if (exito) {

@@ -67,7 +67,7 @@
 
             <Separator/>
 
-            <!-- Gestión de Instrumentos -->
+
             <HBox spacing="20" alignment="CENTER">
                 <VBox spacing="10">
                     <Label text="Instrumentos Disponibles" style="-fx-font-weight: bold;"/>

@@ -6,9 +6,9 @@ import co.edu.uniquindio.poo.proyectofinalmusica.model.Profesor;
 
 public class EvaluacionProgreso {
     private String id;
-    private Estudiante theEstudiante; // muchos a 1
-    private Curso theCurso; // muchos a 1
-    private Clase theClase; // muchos a 1
+    private Estudiante theEstudiante;
+    private Curso theCurso;
+    private Clase theClase;
     private double calificacion;
     private String comentarios;
 

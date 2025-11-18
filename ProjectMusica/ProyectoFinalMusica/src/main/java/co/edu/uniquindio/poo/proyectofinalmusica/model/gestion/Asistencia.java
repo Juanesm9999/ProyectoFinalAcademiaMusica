@@ -7,8 +7,8 @@ import java.time.LocalDate;
 
 public class Asistencia {
     private String id;
-    private Estudiante theEstudiante; // muchos a 1
-    private Clase theClase; // muchos a 1
+    private Estudiante theEstudiante;
+    private Clase theClase;
     private LocalDate fecha;
     private boolean presente;
 

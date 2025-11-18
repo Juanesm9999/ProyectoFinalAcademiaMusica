@@ -52,7 +52,6 @@ public class SistemaAcademia {
     public boolean actualizarEstudiante(String id, Estudiante actualizado) {
         boolean centinela = false;
         for (Estudiante estudiante : listEstudiantes) {
-            //id, nombre,email,telefono,direccion, fechaNacimiento,String matricula,String fechaIngreso , boolean activo,
             if (estudiante.getId().equals(id)) {
                 estudiante.setId(actualizado.getId());
                 estudiante.setNombre(actualizado.getNombre());
@@ -87,7 +86,6 @@ public class SistemaAcademia {
         boolean centinela = false;
         for (Estudiante estudiante: listEstudiantes) {
             if (estudiante.getId().equals(id)) {
-                // CORREGIDO: debe eliminar de listPropietarios, NO de listMascotas
                 listEstudiantes.remove(estudiante);
                 centinela = true;
                 break;
@@ -112,7 +110,6 @@ public class SistemaAcademia {
     public boolean actualizaProfesor(String id, Profesor actualizado) {
         boolean centinela = false;
         for (Profesor profesor : listProfesores) {
-            //String codigo, String especialidad,String fechaContratacion,boolean activo, String  id, String nombre, String email, String telefono, String direccion,  String fechaNacimiento
             if (profesor.getId().equals(id)) {
                 profesor.setCodigo(actualizado.getCodigo());
                 profesor.setEspecialidad(actualizado.getEspecialidad());
@@ -136,7 +133,7 @@ public class SistemaAcademia {
         boolean centinela = false;
         for (Profesor profesor: listProfesores) {
             if (profesor.getId().equals(id)) {
-                // CORREGIDO: debe eliminar de listPropietarios, NO de listMascotas
+
                 listProfesores.remove(profesor);
                 centinela = true;
                 break;
@@ -169,7 +166,6 @@ public class SistemaAcademia {
         return centinela;
     }
         
-    //      id,codigo,nombre,instrumento,nivel,descripcion,capacidadMaxima,capacidadActual, estado,fechaInicio,fechaFin,duracionSemanas
     public boolean modificarCurso(String id, Curso actualizado) {
         boolean centinela = false;
         for (Curso curso : listCursos) {
@@ -228,25 +224,25 @@ public class SistemaAcademia {
             return false;
         }
 
-        // 2. Verificar que el curso esté activo
+
         if (curso.getEstado() != EstadoCurso.ACTIVO) {
             System.out.println("Error: El curso no está activo");
             return false;
         }
 
-        // 3. Verificar prerrequisitos
+
         if (!verificarPrerrequisitos(estudiante, curso)) {
             System.out.println("Error: El estudiante no cumple con los prerrequisitos");
             return false;
         }
 
-        // 4. Verificar cupos disponibles
+
         if (!verificarCuposDisponibles(curso)) {
             System.out.println("Error: No hay cupos disponibles en el curso");
             return false;
         }
 
-        // 5. Verificar que no esté ya inscrito
+
         for (Inscripcion insc : listInscripciones) {
             if (insc.getTheEstudiante().getId().equals(estudiante.getId()) &&
                     insc.getTheCurso().getId().equals(curso.getId()) &&
@@ -256,7 +252,7 @@ public class SistemaAcademia {
             }
         }
 
-        // 6. Crear la inscripción
+
         String idInscripcion = "INSCRIPCION-" + System.currentTimeMillis();
         Inscripcion nuevaInscripcion = new Inscripcion(
                 idInscripcion,
@@ -269,14 +265,14 @@ public class SistemaAcademia {
         nuevaInscripcion.setTheEstudiante(estudiante);
         nuevaInscripcion.setTheCurso(curso);
 
-        // 7. Agregar inscripción al sistema
+
         listInscripciones.add(nuevaInscripcion);
 
-        // 8. Agregar estudiante al curso
+
         curso.getTheEstudiantes().add(estudiante);
         curso.setCapacidadActual(curso.getCapacidadActual() + 1);
 
-        // 9. Agregar inscripción al estudiante
+
         estudiante.getTheInscripciones().add(nuevaInscripcion);
 
         System.out.println("Inscripción exitosa: " + estudiante.getNombre() + " en " + curso.getNombre());
@@ -284,52 +280,15 @@ public class SistemaAcademia {
 
     }
 
-    /*public boolean inscribirEstudiante(Estudiante estudiante) throws InscripcionException {
-        // Verificar que el estudiante no sea nulo
-        if (estudiante == null) {
-            throw new InscripcionException("El estudiante no puede ser nulo");
-        }
 
-        // Verificar que no esté ya inscrito
-        if (estudiantesInscritos.contains(estudiante)) {
-            throw new InscripcionException("El estudiante ya está inscrito en este curso");
-        }
-
-        // Verificar capacidad del grupo (Regla de negocio #1)
-        if (estudiantesInscritos.size() >= capacidadMaxima) {
-            throw new InscripcionException("El curso ha alcanzado su capacidad máxima");
-        }
-
-        // Verificar prerrequisitos (Regla de negocio #3)
-        if (!cumplePrerequisitos(estudiante)) {
-            throw new InscripcionException(
-                "El estudiante no cumple con los prerrequisitos. " +
-                "Debe aprobar el nivel " + nivelPrerequisito + " primero"
-            );
-        }
-
-        // Verificar conflicto de horarios para el estudiante
-        if (tieneConflictoHorario(estudiante)) {
-            throw new InscripcionException(
-                "El estudiante tiene un conflicto de horario con otro curso"
-            );
-        }
-
-        // Inscribir al estudiante
-        estudiantesInscritos.add(estudiante);
-        estudiante.agregarCurso(estudiante); // Mantener la relación bidireccional
-
-        return true;
-    }
-     */
     public boolean cancelarInscripcion(String inscripcionId) {
         for (Inscripcion inscripcion : listInscripciones) {
             if (inscripcion.getId().equals(inscripcionId)) {
-                // Cambiar estado
+
                 inscripcion.setActiva(false);
                 inscripcion.setEstado(EstadoInscripcion.CANCELADA);
 
-                // Liberar cupo en el curso
+
                 Curso curso = inscripcion.getTheCurso();
                 curso.setCapacidadActual(curso.getCapacidadActual() - 1);
 
@@ -355,7 +314,6 @@ public class SistemaAcademia {
         return centinela;
     }
 
-    //     id,horario,diaSemana,horaInicio,HoraFin,instrumento,nivel,activa,capacidadMaxima, capacidadActual, cuposDisponibles
     public boolean modificarClaseGrupal(String id, ClaseGrupal actualizado) {
         boolean centinela = false;
         for (Clase claseGrupal : listClases) {
@@ -371,7 +329,6 @@ public class SistemaAcademia {
                 claseGrupal.setActiva(actualizado.isActiva());
                 claseGrupal.setTheAula(actualizado.getTheAula());
                 claseGrupal.setTheProfesor(actualizado.getTheProfesor());
-                // Actualizar campos específicos de ClaseGrupal
                 grupal.setCapacidadMaxima(actualizado.getCapacidadMaxima());
                 grupal.setDescripcion(actualizado.getDescripcion());
                 centinela = true;
@@ -406,7 +363,6 @@ public class SistemaAcademia {
         return centinela;
     }
 
-    //     id,horario,diaSemana,horaInicio,HoraFin,instrumento,nivel,activa,capacidadMaxima, capacidadActual, cuposDisponibles
     public boolean modificarClaseIndividual(String id, ClaseIndividual actualizado) {
         boolean centinela = false;
         for (Clase claseIndividual : listClases) {
@@ -422,7 +378,6 @@ public class SistemaAcademia {
                 claseIndividual.setActiva(actualizado.isActiva());
                 claseIndividual.setTheAula(actualizado.getTheAula());
                 claseIndividual.setTheProfesor(actualizado.getTheProfesor());
-                // Actualizar campos específicos de ClaseIndividual
                 individual.setTemaEspecifico(actualizado.getTemaEspecifico());
                 individual.setObjetivos(actualizado.getObjetivos());
                 individual.setObservaciones(actualizado.getObservaciones());
@@ -508,16 +463,15 @@ public class SistemaAcademia {
 
 
     public boolean verificarConflictoAula(Aula aula, String horario) {
-        // Verificar si el aula está ocupada en ese horario
         for (Clase clase : listClases) {
             if (clase.getTheAula() != null &&
                     clase.getTheAula().getId().equals(aula.getId()) &&
                     clase.getHorario().equals(horario) &&
                     clase.isActiva()) {
-                return true; // HAY conflicto
+                return true;
             }
         }
-        return false; // NO hay conflicto
+        return false;
     }
 
     public boolean verificarPrerrequisitos(Estudiante estudiante, Curso curso) {
@@ -526,7 +480,7 @@ public class SistemaAcademia {
             return true;
         }
 
-// Verificar que tenga aprobado el nivel anterior del mismo instrumento
+
         for (NivelAprobado nivelAprobado : estudiante.getTheNivelesAprobados()) {
             if (nivelAprobado.getInstrumento() == curso.getInstrumento() &&
                     nivelAprobado.getNivel() >= (curso.getNivel() - 1)) {
@@ -891,14 +845,9 @@ public class SistemaAcademia {
 
         return false;
     }
-    // Agregar este método en SistemaAcademia.java para inicializar datos de prueba completos
-// CORREGIDO según los constructores reales de las clases
+
 
     public void inicializarDatosDePrueba() {
-        // ============================================
-        // 1. CREAR AULAS
-        // ============================================
-        // Constructor: (String id, String codigo, String nombre, String ubicacion, int capacidad, boolean disponible)
         Aula aula101 = new Aula("AU001", "A101", "Aula Principal", "Edificio A - Primer Piso", 20, true);
         Aula aula102 = new Aula("AU002", "A102", "Sala de Piano", "Edificio A - Primer Piso", 15, true);
         Aula aula103 = new Aula("AU003", "A103", "Sala de Guitarra", "Edificio A - Segundo Piso", 12, true);
@@ -906,25 +855,20 @@ public class SistemaAcademia {
         listAulas.add(aula102);
         listAulas.add(aula103);
 
-        // ============================================
-        // 2. CREAR PROFESORES
-        // ============================================
-        // Constructor: (String codigo, String especialidad, String fechaContratacion, boolean activo,
-        //               String id, String nombre, String email, String telefono, String direccion,
-        //               LocalDate fechaNacimiento, String usuario, String contrasenia)
+
         Profesor profCarlos = new Profesor(
-                "P001",                              // codigo
-                "Guitarra",                          // especialidad
-                "2020-01-15",                        // fechaContratacion
-                true,                                // activo
-                "PROF001",                           // id
-                "Carlos Pérez",                      // nombre
-                "carlos@academia.com",               // email
-                "3001234567",                        // telefono
-                "Calle 10 #20-30",                   // direccion
-                LocalDate.of(1985, 5, 20),          // fechaNacimiento
-                "carlos@academia.com",               // usuario
-                "1234"                               // contrasenia
+                "P001",
+                "Guitarra",
+                "2020-01-15",
+                true,
+                "PROF001",
+                "Carlos Pérez",
+                "carlos@academia.com",
+                "3001234567",
+                "Calle 10 #20-30",
+                LocalDate.of(1985, 5, 20),
+                "carlos@academia.com",
+                "1234"
         );
 
         Profesor profMaria = new Profesor(
@@ -945,24 +889,19 @@ public class SistemaAcademia {
         listProfesores.add(profCarlos);
         listProfesores.add(profMaria);
 
-        // ============================================
-        // 3. CREAR ESTUDIANTES
-        // ============================================
-        // Constructor: (String matricula, LocalDate fechaIngreso, boolean activo,
-        //               String id, String nombre, String email, String telefono, String direccion,
-        //               LocalDate fechaNacimiento, String usuario, String contrasenia)
+
         Estudiante est1 = new Estudiante(
-                "EST2024001",                        // matricula
-                LocalDate.of(2024, 1, 15),          // fechaIngreso
-                true,                                // activo
-                "E001",                              // id
-                "Ana López",                         // nombre
-                "ana@correo.com",                    // email
-                "3001234567",                        // telefono
-                "Calle 5 #10-20",                    // direccion
-                LocalDate.of(2000, 5, 15),          // fechaNacimiento
-                "ana@correo.com",                    // usuario
-                "1234"                               // contrasenia
+                "EST2024001",
+                LocalDate.of(2024, 1, 15),
+                true,
+                "E001",
+                "Ana López",
+                "ana@correo.com",
+                "3001234567",
+                "Calle 5 #10-20",
+                LocalDate.of(2000, 5, 15),
+                "ana@correo.com",
+                "1234"
         );
 
         Estudiante est2 = new Estudiante(
@@ -1012,87 +951,77 @@ public class SistemaAcademia {
         listEstudiantes.add(est3);
         listEstudiantes.add(est4);
 
-        // ============================================
-        // 4. CREAR CURSOS CON CLASES
-        // ============================================
 
-        // Constructor Curso: (String id, String codigo, String nombre, TipoInstrumento instrumento, int nivel,
-        //                     String descripcion, int capacidadMaxima, int capacidadActual, EstadoCurso estado,
-        //                     String fechaInicio, String fechaFin, int duracionSemanas)
         Curso cursoGuitarra1 = new Curso(
-                "C001",                              // id
-                "GIT-NV1-2024",                      // codigo
-                "Guitarra Básica",                   // nombre
-                TipoInstrumento.GUITARRA,            // instrumento
-                1,                                   // nivel
-                "Curso introductorio de guitarra",   // descripcion
-                15,                                  // capacidadMaxima
-                4,                                   // capacidadActual
-                EstadoCurso.ACTIVO,                  // estado
-                "2024-01-15",                        // fechaInicio
-                "2024-06-30",                        // fechaFin
-                24                                   // duracionSemanas
+                "C001",
+                "GIT-NV1-2024",
+                "Guitarra Básica",
+                TipoInstrumento.GUITARRA,
+                1,
+                "Curso introductorio de guitarra",
+                15,
+                4,
+                EstadoCurso.ACTIVO,
+                "2024-01-15",
+                "2024-06-30",
+                24
         );
 
-        // Constructor ClaseGrupal: (int capacidadMaxima, int capacidadActual, int cuposDisponibles, String descripcion,
-        //                          String id, String horario, String diaSemana, String horaInicio, String horaFin,
-        //                          TipoInstrumento instrumento, int nivel, boolean activa)
+
         ClaseGrupal claseGuitarraGrupal = new ClaseGrupal(
-                12,                                  // capacidadMaxima
-                3,                                   // capacidadActual
-                9,                                   // cuposDisponibles
-                "Clase grupal de guitarra básica",  // descripcion
-                "CL001",                             // id
-                "Lunes 14:00-16:00",                 // horario
-                "Lunes",                             // diaSemana
-                "14:00",                             // horaInicio
-                "16:00",                             // horaFin
-                TipoInstrumento.GUITARRA,            // instrumento
-                1,                                   // nivel
-                true                                 // activa
+                12,
+                3,
+                9,
+                "Clase grupal de guitarra básica",
+                "CL001",
+                "Lunes 14:00-16:00",
+                "Lunes",
+                "14:00",
+                "16:00",
+                TipoInstrumento.GUITARRA,
+                1,
+                true
         );
         claseGuitarraGrupal.setTheProfesor(profCarlos);
         claseGuitarraGrupal.setTheAula(aula103);
 
-        // IMPORTANTE: Agregar estudiantes a la clase grupal
+
         claseGuitarraGrupal.getTheEstudiantesInscritos().add(est1);
         claseGuitarraGrupal.getTheEstudiantesInscritos().add(est2);
         claseGuitarraGrupal.getTheEstudiantesInscritos().add(est3);
 
-        // Constructor ClaseIndividual: (String temaEspecifico, String objetivos, String observaciones,
-        //                               String id, String horario, String diaSemana, String horaInicio, String horaFin,
-        //                               TipoInstrumento instrumento, int nivel, boolean activa)
+
         ClaseIndividual claseGuitarraIndiv = new ClaseIndividual(
-                "Técnicas avanzadas de guitarra",   // temaEspecifico
-                "Mejorar técnica individual",        // objetivos
-                "Clase personalizada",               // observaciones
-                "CL002",                             // id
-                "Miércoles 08:00-09:00",             // horario
-                "Miércoles",                         // diaSemana
-                "08:00",                             // horaInicio
-                "09:00",                             // horaFin
-                TipoInstrumento.GUITARRA,            // instrumento
-                1,                                   // nivel
-                true                                 // activa
+                "Técnicas avanzadas de guitarra",
+                "Mejorar técnica individual",
+                "Clase personalizada",
+                "CL002",
+                "Miércoles 08:00-09:00",
+                "Miércoles",
+                "08:00",
+                "09:00",
+                TipoInstrumento.GUITARRA,
+                1,
+                true
         );
         claseGuitarraIndiv.setTheProfesor(profCarlos);
         claseGuitarraIndiv.setTheAula(aula103);
         claseGuitarraIndiv.setTheEstudiante(est4);
 
-        // Agregar clases al curso
+
         cursoGuitarra1.getTheClases().add(claseGuitarraGrupal);
         cursoGuitarra1.getTheClases().add(claseGuitarraIndiv);
 
-        // Agregar clases al profesor
+
         profCarlos.getTheClasesAsignadas().add(claseGuitarraGrupal);
         profCarlos.getTheClasesAsignadas().add(claseGuitarraIndiv);
 
-        // Agregar instrumentos al profesor
+
         profCarlos.getTheInstrumentosImpartidos().add(TipoInstrumento.GUITARRA);
 
         listCursos.add(cursoGuitarra1);
 
-        // CURSO 2: Piano Nivel 1
+
         Curso cursoPiano1 = new Curso(
                 "C002",
                 "PIA-NV1-2024",
@@ -1131,7 +1060,7 @@ public class SistemaAcademia {
 
         listCursos.add(cursoPiano1);
 
-        // CURSO 3: Guitarra Nivel 2 (con prerrequisito)
+
         Curso cursoGuitarra2 = new Curso(
                 "C003",
                 "GIT-NV2-2024",
@@ -1148,21 +1077,14 @@ public class SistemaAcademia {
         );
         listCursos.add(cursoGuitarra2);
 
-        // ============================================
-        // 5. CREAR INSCRIPCIONES
-        // ============================================
 
-        // Constructor: (String id, String fechaInscripcion, EstadoInscripcion estado,
-        //               boolean activa, boolean aprobada, double calificacionFinal)
-
-        // Ana López inscrita en Guitarra 1
         Inscripcion insc1 = new Inscripcion(
-                "I001",                              // id
-                "2024-01-15",                        // fechaInscripcion
-                EstadoInscripcion.ACTIVA,            // estado
-                true,                                // activa
-                false,                               // aprobada
-                0.0                                  // calificacionFinal
+                "I001",
+                "2024-01-15",
+                EstadoInscripcion.ACTIVA,
+                true,
+                false,
+                0.0
         );
         insc1.setTheEstudiante(est1);
         insc1.setTheCurso(cursoGuitarra1);
@@ -1171,7 +1093,6 @@ public class SistemaAcademia {
         cursoGuitarra1.getTheEstudiantes().add(est1);
         listInscripciones.add(insc1);
 
-        // Juan Martínez inscrito en Guitarra 1
         Inscripcion insc2 = new Inscripcion(
                 "I002",
                 "2024-01-15",
@@ -1187,7 +1108,6 @@ public class SistemaAcademia {
         cursoGuitarra1.getTheEstudiantes().add(est2);
         listInscripciones.add(insc2);
 
-        // Laura García inscrita en Guitarra 1
         Inscripcion insc3 = new Inscripcion(
                 "I003",
                 "2024-01-15",
@@ -1203,7 +1123,6 @@ public class SistemaAcademia {
         cursoGuitarra1.getTheEstudiantes().add(est3);
         listInscripciones.add(insc3);
 
-        // Pedro Rodríguez inscrito en Guitarra 1 (clase individual)
         Inscripcion insc4 = new Inscripcion(
                 "I004",
                 "2024-01-16",
@@ -1219,14 +1138,7 @@ public class SistemaAcademia {
         cursoGuitarra1.getTheEstudiantes().add(est4);
         listInscripciones.add(insc4);
 
-        // ============================================
-        // 6. CREAR ALGUNAS ASISTENCIAS DE EJEMPLO
-        // ============================================
 
-        // Constructor: (String id, Estudiante theEstudiante, Clase theClase,
-        //               LocalDate fecha, boolean presente, String observaciones)
-
-        // Asistencias para Ana (3 presentes, 1 ausente)
         Asistencia asist1 = new Asistencia(
                 "AS001",
                 est1,
@@ -1271,7 +1183,6 @@ public class SistemaAcademia {
         est1.getTheHistorialAsistencia().add(asist4);
         listAsistencias.add(asist4);
 
-        // Asistencias para Juan
         Asistencia asist5 = new Asistencia(
                 "AS005",
                 est2,
@@ -1294,14 +1205,7 @@ public class SistemaAcademia {
         est2.getTheHistorialAsistencia().add(asist6);
         listAsistencias.add(asist6);
 
-        // ============================================
-        // 7. CREAR EVALUACIONES DE PROGRESO
-        // ============================================
 
-        // Constructor: (String id, double calificacion, String comentarios,
-        //               String areasAMejorar, String fecha)
-
-        // Evaluación 1 para Ana
         EvaluacionProgreso eval1 = new EvaluacionProgreso(
                 "EV001",
                 4.5,
@@ -1316,7 +1220,7 @@ public class SistemaAcademia {
         est1.getTheEvaluaciones().add(eval1);
         listEvaluaciones.add(eval1);
 
-        // Evaluación 2 para Ana
+
         EvaluacionProgreso eval2 = new EvaluacionProgreso(
                 "EV002",
                 4.8,
@@ -1331,7 +1235,7 @@ public class SistemaAcademia {
         est1.getTheEvaluaciones().add(eval2);
         listEvaluaciones.add(eval2);
 
-        // Evaluación para Juan
+
         EvaluacionProgreso eval3 = new EvaluacionProgreso(
                 "EV003",
                 3.8,
@@ -1346,7 +1250,7 @@ public class SistemaAcademia {
         est2.getTheEvaluaciones().add(eval3);
         listEvaluaciones.add(eval3);
 
-        // Evaluación para Laura
+
         EvaluacionProgreso eval4 = new EvaluacionProgreso(
                 "EV004",
                 4.2,
@@ -1361,7 +1265,6 @@ public class SistemaAcademia {
         est3.getTheEvaluaciones().add(eval4);
         listEvaluaciones.add(eval4);
 
-        // Evaluación para Pedro (clase individual)
         EvaluacionProgreso eval5 = new EvaluacionProgreso(
                 "EV005",
                 4.0,
@@ -1376,11 +1279,7 @@ public class SistemaAcademia {
         est4.getTheEvaluaciones().add(eval5);
         listEvaluaciones.add(eval5);
 
-        // ============================================
-        // 8. CREAR NIVEL APROBADO PARA EST1
-        // ============================================
-        // Constructor: (String id, TipoInstrumento instrumento, int nivel,
-        //               String fechaAprobacion, double calificacion, Curso theCurso)
+
         NivelAprobado nivelAna = new NivelAprobado(
                 "NA001",
                 TipoInstrumento.GUITARRA,
@@ -1391,24 +1290,19 @@ public class SistemaAcademia {
         );
         est1.getTheNivelesAprobados().add(nivelAna);
 
-        // ============================================
-        // 9. CREAR ADMINISTRADOR
-        // ============================================
-        // Constructor: (String cargo, String departamento, String fechaIngreso,
-        //               String id, String nombre, String email, String telefono, String direccion,
-        //               LocalDate fechaNacimiento, String usuario, String contrasenia)
+
         Administrador admin = new Administrador(
-                "Director Académico",                // cargo
-                "Administración",                    // departamento
-                "2018-05-15",                        // fechaIngreso
-                "A001",                              // id
-                "Admin Principal",                   // nombre
-                "admin@academia.com",                // email
-                "3001112233",                        // telefono
-                "Dirección Academia",                // direccion
-                LocalDate.of(1980, 7, 10),          // fechaNacimiento
-                "admin@academia.com",                // usuario
-                "admin123"                           // contrasenia
+                "Director Académico",
+                "Administración",
+                "2018-05-15",
+                "A001",
+                "Admin Principal",
+                "admin@academia.com",
+                "3001112233",
+                "Dirección Academia",
+                LocalDate.of(1980, 7, 10),
+                "admin@academia.com",
+                "admin123"
         );
         listAdministradores.add(admin);
 

@@ -12,9 +12,9 @@ public class Profesor extends Persona {
     private String especialidad;
     private String fechaContratacion;
     private boolean activo;
-    private List<TipoInstrumento> theInstrumentosImpartidos; // 1 a muchos
-    private List<BloqueDisponibilidad> theDisponibilidad; // 1 a muchos
-    private List<Clase> theClasesAsignadas; // 1 a muchos
+    private List<TipoInstrumento> theInstrumentosImpartidos;
+    private List<BloqueDisponibilidad> theDisponibilidad;
+    private List<Clase> theClasesAsignadas;
 
     public Profesor(String codigo, String especialidad,String fechaContratacion,boolean activo, String  id, String nombre, String email, String telefono, String direccion,  LocalDate fechaNacimiento,String usuario,String contrasenia) {
         super(id, nombre,email,telefono,direccion, fechaNacimiento,usuario,contrasenia);

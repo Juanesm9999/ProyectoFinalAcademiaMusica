@@ -1,4 +1,4 @@
-/* package co.edu.uniquindio.poo.proyectofinalmusica.model;
+package co.edu.uniquindio.poo.proyectofinalmusica.model;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ReportesTest {
+public class ReportesTest {
 
     private SistemaAcademia sistema;
     private Estudiante estudiante1;
@@ -298,4 +298,4 @@ class ReportesTest {
         assertTrue(reporte.stream().anyMatch(linea -> linea.contains("NIVELES APROBADOS")));
         assertTrue(reporte.stream().anyMatch(linea -> linea.contains("PIANO")));
     }
-} */ //
+}

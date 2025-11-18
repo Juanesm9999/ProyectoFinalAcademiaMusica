@@ -7,7 +7,7 @@ module co.edu.uniquindio.poo.proyectofinalmusica {
     exports co.edu.uniquindio.poo.proyectofinalmusica;
 
 
-    // ViewController con V mayúscula (correcto)
+    // Controller con V mayúscula (correcto)
     exports co.edu.uniquindio.poo.proyectofinalmusica.ViewController;
     opens co.edu.uniquindio.poo.proyectofinalmusica.ViewController to javafx.fxml;
 

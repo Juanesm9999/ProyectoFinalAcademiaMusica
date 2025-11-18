@@ -319,14 +319,14 @@ public class ClaseViewController {
             return;
         }
 
-        // Verificar conflicto de aula, día y horario (excluyendo la clase actual)
+
         if (cmbAula.getValue() != null) {
             boolean hayConflicto = claseController.verificarConflictoAulaHorario(
                     cmbAula.getValue(),
                     cmbDiaSemana.getValue(),
                     txtHoraInicio.getText(),
                     txtHoraFin.getText(),
-                    selectedClase.getId() // Excluir la clase actual
+                    selectedClase.getId()
             );
 
             if (hayConflicto) {
@@ -346,7 +346,7 @@ public class ClaseViewController {
         if ("Grupal".equals(tipoClase) && selectedClase instanceof ClaseGrupal) {
             ClaseGrupal original = (ClaseGrupal) selectedClase;
             
-            // Actualizar campos básicos directamente
+
             original.setHorario(txtHorario.getText());
             original.setDiaSemana(cmbDiaSemana.getValue());
             original.setHoraInicio(txtHoraInicio.getText());
@@ -355,7 +355,7 @@ public class ClaseViewController {
             original.setNivel(spnNivel.getValue());
             original.setActiva(chkActiva.isSelected());
             
-            // Actualizar campos específicos de ClaseGrupal
+
             if (!txtCapacidadMaxima.getText().isEmpty()) {
                 int nuevaCapacidad = Integer.parseInt(txtCapacidadMaxima.getText());
                 int diferencia = nuevaCapacidad - original.getCapacidadMaxima();
@@ -365,7 +365,7 @@ public class ClaseViewController {
             }
             original.setDescripcion(txtDescripcion.getText());
             
-            // Actualizar aula
+
             if (cmbAula.getValue() != null) {
                 original.setTheAula(cmbAula.getValue());
             } else {
@@ -400,7 +400,7 @@ public class ClaseViewController {
         } else if ("Individual".equals(tipoClase) && selectedClase instanceof ClaseIndividual) {
             ClaseIndividual original = (ClaseIndividual) selectedClase;
             
-            // Actualizar campos básicos directamente
+
             original.setHorario(txtHorario.getText());
             original.setDiaSemana(cmbDiaSemana.getValue());
             original.setHoraInicio(txtHoraInicio.getText());
@@ -409,7 +409,7 @@ public class ClaseViewController {
             original.setNivel(spnNivel.getValue());
             original.setActiva(chkActiva.isSelected());
             
-            // Actualizar campos específicos de ClaseIndividual
+
             original.setTemaEspecifico(txtTemaEspecifico.getText());
             original.setObjetivos(txtObjetivos.getText());
             original.setObservaciones(txtObservaciones.getText());
@@ -421,7 +421,7 @@ public class ClaseViewController {
                 original.setTheAula(null);
             }
             
-            // Actualizar profesor si cambió
+
             Profesor profesorAnterior = original.getTheProfesor();
             if (profesorAnterior != null && (cmbProfesor.getValue() == null || !profesorAnterior.getId().equals(cmbProfesor.getValue().getId()))) {
                 profesorAnterior.getTheClasesAsignadas().remove(original);
@@ -443,7 +443,7 @@ public class ClaseViewController {
         }
 
         if (exito) {
-            // Actualizar en la lista observable y refrescar tabla
+
             tblClases.refresh();
             limpiarSeleccion();
             mostrarAlerta("Éxito", "Clase actualizada correctamente", Alert.AlertType.INFORMATION);
@@ -500,17 +500,17 @@ public class ClaseViewController {
                 chkActiva.isSelected()
         );
         
-        // Asignar aula si está seleccionada
+
         if (cmbAula.getValue() != null) {
             claseGrupal.setTheAula(cmbAula.getValue());
         }
         
-        // Asignar curso si está seleccionado
+
         if (cmbCurso.getValue() != null) {
             cmbCurso.getValue().getTheClases().add(claseGrupal);
         }
         
-        // Asignar profesor si está seleccionado
+
         if (cmbProfesor.getValue() != null) {
             claseGrupal.setTheProfesor(cmbProfesor.getValue());
             cmbProfesor.getValue().getTheClasesAsignadas().add(claseGrupal);
@@ -534,12 +534,12 @@ public class ClaseViewController {
                 chkActiva.isSelected()
         );
         
-        // Asignar aula si está seleccionada
+
         if (cmbAula.getValue() != null) {
             claseIndividual.setTheAula(cmbAula.getValue());
         }
         
-        // Asignar profesor si está seleccionado
+
         if (cmbProfesor.getValue() != null) {
             claseIndividual.setTheProfesor(cmbProfesor.getValue());
             cmbProfesor.getValue().getTheClasesAsignadas().add(claseIndividual);

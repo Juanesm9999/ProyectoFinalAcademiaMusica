@@ -1,4 +1,4 @@
-/* package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
+package co.edu.uniquindio.poo.proyectofinalmusica.model.gestion;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.model.EstadoCurso;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.Estudiante;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class InscripcionTest {
+public class InscripcionTest {
     private SistemaAcademia sistema;
     private Estudiante estudiante1;
     private Curso curso1;
@@ -158,4 +158,4 @@ class InscripcionTest {
         assertTrue(resultado);
         assertFalse(sistema.getListInscripciones().get(0).isActiva());
     }
-} */ //
+}

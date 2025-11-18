@@ -14,13 +14,13 @@ public class Curso implements IReportable {
     private String descripcion;
     private int capacidadMaxima;
     private int capacidadActual;
-    private List<Curso> thePrerrequisitos; // muchos a muchos (relación reflexiva)
+    private List<Curso> thePrerrequisitos;
     private EstadoCurso estado;
     private String fechaInicio;
     private String fechaFin;
     private int duracionSemanas;
-    private List<Clase> theClases; // 1 a muchos
-    private List<Estudiante> theEstudiantes;// 1 a muchos
+    private List<Clase> theClases;
+    private List<Estudiante> theEstudiantes;
     private List<Inscripcion> listInscripciones;
 
     public Curso(String id, String codigo, String nombre, TipoInstrumento instrumento, int nivel, String descripcion, int capacidadMaxima, int capacidadActual, EstadoCurso estado, String fechaInicio, String fechaFin, int duracionSemanas) {

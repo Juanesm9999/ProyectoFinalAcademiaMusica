@@ -1,4 +1,4 @@
-/* package co.edu.uniquindio.poo.proyectofinalmusica.model;
+package co.edu.uniquindio.poo.proyectofinalmusica.model;
 
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.ClaseGrupal;
 import co.edu.uniquindio.poo.proyectofinalmusica.model.gestion.Curso;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EvaluacionTest {
+public class EvaluacionTest {
     private SistemaAcademia sistema;
     private Estudiante estudiante1;
     private Estudiante estudiante2;
@@ -270,4 +270,4 @@ class EvaluacionTest {
 
         assertEquals("2025-06-15", evaluacion1.getFecha());
     }
-} */ //
+}

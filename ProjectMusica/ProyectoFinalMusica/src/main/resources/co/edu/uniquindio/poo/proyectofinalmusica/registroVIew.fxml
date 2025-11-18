@@ -16,7 +16,7 @@
                 <Insets top="30" right="40" bottom="30" left="40"/>
             </padding>
 
-            <!-- Título -->
+
             <VBox alignment="CENTER" spacing="5">
                 <Label text="Registro de Usuario" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #667eea;"/>
                 <Label text="Complete el formulario para crear su cuenta" style="-fx-font-size: 12; -fx-text-fill: #666;"/>
@@ -47,30 +47,30 @@
                 <Label text="Teléfono:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
                 <TextField fx:id="txtTelefono" promptText="3001234567" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
-                <!-- Dirección -->
+
                 <Label text="Dirección:" GridPane.columnIndex="0" GridPane.rowIndex="4" style="-fx-font-weight: bold;"/>
                 <TextField fx:id="txtDireccion" promptText="Calle, ciudad..." GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
-                <!-- Fecha Nacimiento -->
+
                 <Label text="Fecha Nacimiento:" GridPane.columnIndex="0" GridPane.rowIndex="5" style="-fx-font-weight: bold;"/>
                 <DatePicker fx:id="dpFechaNacimiento" promptText="dd/MM/yyyy" GridPane.columnIndex="1" GridPane.rowIndex="5" prefWidth="250"/>
 
                 <Separator prefWidth="400" GridPane.columnIndex="0" GridPane.rowIndex="6" GridPane.columnSpan="2"/>
 
-                <!-- Usuario -->
+
                 <Label text="Usuario:" GridPane.columnIndex="0" GridPane.rowIndex="7" style="-fx-font-weight: bold;"/>
                 <TextField fx:id="txtUsuario" promptText="Nombre de usuario único" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
 
-                <!-- Contraseña -->
+
                 <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="8" style="-fx-font-weight: bold;"/>
                 <PasswordField fx:id="txtContrasena" promptText="Mínimo 6 caracteres" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
 
-                <!-- Confirmar Contraseña -->
+
                 <Label text="Confirmar:" GridPane.columnIndex="0" GridPane.rowIndex="9" style="-fx-font-weight: bold;"/>
                 <PasswordField fx:id="txtConfirmarContrasena" promptText="Repita la contraseña" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
             </GridPane>
 
-            <!-- Botones -->
+
             <HBox spacing="15" alignment="CENTER">
                 <Button fx:id="btnRegistrar" text="Registrar" onAction="#onRegistrarClick"
                         style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 150; -fx-padding: 10; -fx-background-radius: 5;"/>

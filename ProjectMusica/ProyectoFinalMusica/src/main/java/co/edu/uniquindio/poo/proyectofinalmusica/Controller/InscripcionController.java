@@ -14,23 +14,17 @@ public class InscripcionController {
         this.sistemaAcademia = sistemaAcademia;
     }
 
-    /**
-     * Inscribe a un estudiante en un curso
-     */
+
     public boolean inscribirEstudiante(Estudiante estudiante, Curso curso) {
         return sistemaAcademia.inscribirEstudiante(estudiante, curso);
     }
 
-    /**
-     * Cancela una inscripción
-     */
+
     public boolean cancelarInscripcion(String inscripcionId) {
         return sistemaAcademia.cancelarInscripcion(inscripcionId);
     }
 
-    /**
-     * Busca una inscripción por ID
-     */
+
     public Inscripcion buscarInscripcion(String id) {
         for (Inscripcion insc : sistemaAcademia.getListInscripciones()) {
             if (insc.getId().equals(id)) {
@@ -40,25 +34,19 @@ public class InscripcionController {
         return null;
     }
 
-    /**
-     * Obtiene todas las inscripciones
-     */
+
     public List<Inscripcion> obtenerTodasInscripciones() {
         return sistemaAcademia.getListInscripciones();
     }
 
-    /**
-     * Obtiene las inscripciones activas
-     */
+
     public List<Inscripcion> obtenerInscripcionesActivas() {
         return sistemaAcademia.getListInscripciones().stream()
                 .filter(Inscripcion::isActiva)
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Obtiene las inscripciones de un estudiante específico
-     */
+
     public List<Inscripcion> obtenerInscripcionesPorEstudiante(String estudianteId) {
         return sistemaAcademia.getListInscripciones().stream()
                 .filter(i -> i.getTheEstudiante() != null &&
@@ -66,9 +54,7 @@ public class InscripcionController {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Obtiene las inscripciones activas de un estudiante
-     */
+
     public List<Inscripcion> obtenerInscripcionesActivasPorEstudiante(String estudianteId) {
         return sistemaAcademia.getListInscripciones().stream()
                 .filter(i -> i.getTheEstudiante() != null &&
@@ -77,9 +63,7 @@ public class InscripcionController {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Obtiene las inscripciones de un curso específico
-     */
+
     public List<Inscripcion> obtenerInscripcionesPorCurso(String cursoId) {
         return sistemaAcademia.getListInscripciones().stream()
                 .filter(i -> i.getTheCurso() != null &&
@@ -87,9 +71,7 @@ public class InscripcionController {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Obtiene las inscripciones activas de un curso
-     */
+
     public List<Inscripcion> obtenerInscripcionesActivasPorCurso(String cursoId) {
         return sistemaAcademia.getListInscripciones().stream()
                 .filter(i -> i.getTheCurso() != null &&
@@ -98,9 +80,7 @@ public class InscripcionController {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Verifica si un estudiante está inscrito en un curso
-     */
+
     public boolean verificarInscripcionExistente(String estudianteId, String cursoId) {
         return sistemaAcademia.getListInscripciones().stream()
                 .anyMatch(i -> i.getTheEstudiante() != null &&
@@ -110,9 +90,7 @@ public class InscripcionController {
                         i.isActiva());
     }
 
-    /**
-     * Aprueba una inscripción
-     */
+
     public boolean aprobarInscripcion(String inscripcionId, double calificacionFinal) {
         Inscripcion inscripcion = buscarInscripcion(inscripcionId);
         if (inscripcion != null) {
@@ -120,7 +98,7 @@ public class InscripcionController {
             inscripcion.setEstado(EstadoInscripcion.APROBADA);
             inscripcion.setCalificacionFinal(calificacionFinal);
 
-            // Crear nivel aprobado para el estudiante
+
             Estudiante estudiante = inscripcion.getTheEstudiante();
             Curso curso = inscripcion.getTheCurso();
 
@@ -139,9 +117,7 @@ public class InscripcionController {
         return false;
     }
 
-    /**
-     * Reprueba una inscripción
-     */
+
     public boolean reprobarInscripcion(String inscripcionId, double calificacionFinal) {
         Inscripcion inscripcion = buscarInscripcion(inscripcionId);
         if (inscripcion != null) {
@@ -154,9 +130,7 @@ public class InscripcionController {
         return false;
     }
 
-    /**
-     * Actualiza la calificación final de una inscripción
-     */
+
     public boolean actualizarCalificacion(String inscripcionId, double calificacion) {
         Inscripcion inscripcion = buscarInscripcion(inscripcionId);
         if (inscripcion != null) {
@@ -166,9 +140,7 @@ public class InscripcionController {
         return false;
     }
 
-    /**
-     * Cuenta las inscripciones activas de un estudiante
-     */
+
     public int contarInscripcionesActivasEstudiante(String estudianteId) {
         return (int) sistemaAcademia.getListInscripciones().stream()
                 .filter(i -> i.getTheEstudiante() != null &&
@@ -177,18 +149,14 @@ public class InscripcionController {
                 .count();
     }
 
-    /**
-     * Obtiene inscripciones por estado
-     */
+
     public List<Inscripcion> obtenerInscripcionesPorEstado(EstadoInscripcion estado) {
         return sistemaAcademia.getListInscripciones().stream()
                 .filter(i -> i.getEstado() == estado)
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Genera reporte de inscripciones de un curso
-     */
+
     public String generarReporteInscripcionesCurso(String cursoId) {
         StringBuilder reporte = new StringBuilder();
         List<Inscripcion> inscripciones = obtenerInscripcionesPorCurso(cursoId);

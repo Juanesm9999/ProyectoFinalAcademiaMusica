@@ -50,13 +50,13 @@ public class RegistroViewController {
         String usuario = txtUsuario.getText().trim();
         String contrasenia = txtContrasenia.getText().trim();
 
-        // Verificar si el usuario ya existe
+
         if (sistema.verificarUsuarioExiste(usuario)) {
             mostrarAlerta("Error", "El nombre de usuario ya está en uso", Alert.AlertType.ERROR);
             return;
         }
 
-        // Crear usuario según el tipo
+
         boolean registrado = false;
 
         try {

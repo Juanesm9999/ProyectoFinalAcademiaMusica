@@ -18,7 +18,7 @@
 
     <Separator/>
 
-    <!-- Panel de Filtros -->
+
     <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10;">
         <Label text="Seleccione el Tipo de Reporte" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
 
@@ -59,7 +59,7 @@
 
     <Separator/>
 
-    <!-- Área de Reporte -->
+
     <VBox VBox.vgrow="ALWAYS" spacing="10">
         <Label text="Reporte Generado" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
 

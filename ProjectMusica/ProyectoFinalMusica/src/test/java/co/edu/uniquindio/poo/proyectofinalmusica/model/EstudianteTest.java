@@ -1,4 +1,4 @@
-/* package co.edu.uniquindio.poo.proyectofinalmusica.model;
+ package co.edu.uniquindio.poo.proyectofinalmusica.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EstudianteTest {
+ public class EstudianteTest {
     private SistemaAcademia sistema;
     private Estudiante estudiante1;
     private Estudiante estudiante2;
@@ -108,4 +108,3 @@ class EstudianteTest {
         assertEquals(2, sistema.getListEstudiantes().size());
     }
 }
-*/ //

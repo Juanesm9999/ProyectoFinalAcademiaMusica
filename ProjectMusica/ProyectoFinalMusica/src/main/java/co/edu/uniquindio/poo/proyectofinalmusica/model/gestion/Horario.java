@@ -6,7 +6,7 @@ import co.edu.uniquindio.poo.proyectofinalmusica.model.TipoInstrumento;
 
 public class Horario {
     private String id;
-    private Clase theClase; // 1 a 1
+    private Clase theClase;
     private String diaSemana;
     private String horaInicio;
     private String horaFin;
