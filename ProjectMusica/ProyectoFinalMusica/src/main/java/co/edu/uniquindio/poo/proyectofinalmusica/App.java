@@ -260,7 +260,7 @@ public class App extends Application {
                 "3105551111",
                 "Calle 10 #15-30",
                 LocalDate.of(1985, 6, 20),
-                "carlos@academia.com",  /
+                "carlos@academia.com",  
                 "1234"
         );
         profesor1.getTheInstrumentosImpartidos().add(TipoInstrumento.GUITARRA);
