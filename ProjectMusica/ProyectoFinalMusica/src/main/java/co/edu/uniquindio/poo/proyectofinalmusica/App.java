@@ -18,32 +18,29 @@ import java.util.List;
  */
 public class App extends Application {
 
-    // Sistema principal
     public SistemaAcademia sistema;
 
-    // Stage principal
+
     private Stage primaryStage;
 
-    // Usuario actual logueado
+
     private Persona usuarioActual;
 
     @Override
     public void start(Stage stage) throws Exception {
         this.primaryStage = stage;
 
-        // Inicializar el sistema
+
         inicializarSistema();
         cargarDatosIniciales();
 
-        // Abrir vista de login
+
         openLoginView();
 
-        // Configurar stage principal
         primaryStage.setTitle("Academia de Música UQ - Sistema de Gestión");
         primaryStage.show();
     }
 
-    // ==================== INICIALIZACIÓN ====================
 
     private void inicializarSistema() {
         sistema = new SistemaAcademia("Academia de Música UQ", "NIT-123456789");
@@ -51,7 +48,6 @@ public class App extends Application {
     }
 
     private void cargarDatosIniciales() {
-        // Administrador por defecto
         Administrador admin = new Administrador(
                 "Director",
                 "Administración",
@@ -67,7 +63,6 @@ public class App extends Application {
         );
         sistema.agregarAdministrador(admin);
 
-        // Profesor de ejemplo
         Profesor prof1 = new Profesor(
                 "PROF001",
                 "Piano",
@@ -85,7 +80,6 @@ public class App extends Application {
         prof1.getTheInstrumentosImpartidos().add(TipoInstrumento.PIANO);
         sistema.agregarProfesor(prof1);
 
-        // Estudiante de ejemplo
         Estudiante est1 = new Estudiante(
                 "EST2024001",
                 LocalDate.now(),
@@ -101,13 +95,11 @@ public class App extends Application {
         );
         sistema.registrarEstudiante(est1);
 
-        // Aulas de ejemplo
         Aula aula1 = new Aula("A001", "A-101", "Aula Principal", "Piso 1", 20, true);
         Aula aula2 = new Aula("A002", "A-102", "Aula Práctica 1", "Piso 1", 10, true);
         sistema.getListAulas().add(aula1);
         sistema.getListAulas().add(aula2);
 
-        // Curso de ejemplo
         Curso curso1 = new Curso(
                 "C001",
                 "PIANO-1",
@@ -133,15 +125,14 @@ public class App extends Application {
         cargarDatosDemo();
     }
 
-    // ==================== NAVEGACIÓN ENTRE VISTAS ====================
 
-    // Login
+
     public void openLoginView() {
         loadView("/co/edu/uniquindio/poo/proyectofinalmusica/loginView.fxml",
                 controller -> ((co.edu.uniquindio.poo.proyectofinalmusica.ViewController.LoginViewController) controller).setApp(this));
     }
 
-    // Dashboards
+
     public void openAdministradorDashboard(Administrador admin) {
         loadView("/co/edu/uniquindio/poo/proyectofinalmusica/administradorDashboardView.fxml",
                 controller -> ((co.edu.uniquindio.poo.proyectofinalmusica.ViewController.AdministradorDashboardViewController) controller)
@@ -160,7 +151,7 @@ public class App extends Application {
                         .setApp(this, estudiante != null ? estudiante : (Estudiante) usuarioActual));
     }
 
-    // Gestión - Administrador
+
     public void openEstudianteView() {
         loadView("/co/edu/uniquindio/poo/proyectofinalmusica/estudianteView.fxml",
                 controller -> ((co.edu.uniquindio.poo.proyectofinalmusica.ViewController.EstudianteViewController) controller).setApp(this));
@@ -196,7 +187,7 @@ public class App extends Application {
                 controller -> ((co.edu.uniquindio.poo.proyectofinalmusica.ViewController.AdministradorViewController) controller).setApp(this));
     }
 
-    // Método auxiliar genérico para cargar vistas
+
     private void loadView(String fxmlPath, java.util.function.Consumer<Object> controllerSetup) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
@@ -216,12 +207,12 @@ public class App extends Application {
         }
     }
 
-    // Getter para sistema (usado en algunos ViewControllers)
+
     public SistemaAcademia getSistemaAcademia() {
         return sistema;
     }
 
-    // ==================== GESTIÓN DE USUARIO ACTUAL ====================
+
 
     public Persona getUsuarioActual() {
         return usuarioActual;
@@ -236,13 +227,13 @@ public class App extends Application {
         openLoginView();
     }
 
-    //                         MAIN
+
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    // Reemplaza el método cargarDatosDemo() completo en tu App.java
+
 
     private void cargarDatosDemo() {
         List<Profesor> listProfesores = sistema.getListProfesores();
@@ -255,9 +246,9 @@ public class App extends Application {
         List<EvaluacionProgreso> listEvaluaciones = sistema.getListEvaluaciones();
         List<Asistencia> listAsistencias = sistema.getListAsistencias();
 
-        // ============================================
-        // PROFESORES
-        // ============================================
+
+
+
         Profesor profesor1 = new Profesor(
                 "P001",
                 "Guitarra",
@@ -269,8 +260,8 @@ public class App extends Application {
                 "3105551111",
                 "Calle 10 #15-30",
                 LocalDate.of(1985, 6, 20),
-                "carlos@academia.com",  // usuario para login
-                "1234"                   // contraseña
+                "carlos@academia.com",  /
+                "1234"
         );
         profesor1.getTheInstrumentosImpartidos().add(TipoInstrumento.GUITARRA);
         profesor1.getTheInstrumentosImpartidos().add(TipoInstrumento.VIOLIN);
@@ -286,8 +277,8 @@ public class App extends Application {
                 "3144442222",
                 "Carrera 5 #20-45",
                 LocalDate.of(1990, 9, 12),
-                "laura@academia.com",   // usuario para login
-                "1234"                   // contraseña
+                "laura@academia.com",
+                "1234"
         );
         profesor2.getTheInstrumentosImpartidos().add(TipoInstrumento.PIANO);
         profesor2.getTheInstrumentosImpartidos().add(TipoInstrumento.SAXOFON);
@@ -295,21 +286,21 @@ public class App extends Application {
         listProfesores.add(profesor1);
         listProfesores.add(profesor2);
 
-        // ============================================
-        // ESTUDIANTES
-        // ============================================
+
+
+
         Estudiante est1 = new Estudiante(
-                "EST2024001",                    // matricula
-                LocalDate.of(2024, 1, 15),       // fechaIngreso
-                true,                            // activo
-                "E001",                          // id
-                "Ana López",                     // nombre
-                "ana@correo.com",                // email
-                "3001234567",                    // telefono
-                "Calle 5 #10-20",                // direccion
-                LocalDate.of(2000, 5, 15),       // fechaNacimiento
-                "ana@correo.com",                // usuario
-                "1234"                           // contrasenia
+                "EST2024001",
+                LocalDate.of(2024, 1, 15),
+                true,
+                "E001",
+                "Ana López",
+                "ana@correo.com",
+                "3001234567",
+                "Calle 5 #10-20",
+                LocalDate.of(2000, 5, 15),
+                "ana@correo.com",
+                "1234"
         );
 
         Estudiante est2 = new Estudiante(
@@ -332,7 +323,7 @@ public class App extends Application {
                 true,
                 "E003",
                 "Laura García",
-                "laura2@correo.com",             // Cambiado para evitar duplicado
+                "laura2@correo.com",
                 "3009876543",
                 "Avenida 30 #20-30",
                 LocalDate.of(2001, 3, 10),
@@ -359,9 +350,9 @@ public class App extends Application {
         listEstudiantes.add(est3);
         listEstudiantes.add(est4);
 
-        // ============================================
-        // AULAS
-        // ============================================
+
+
+
         Aula aula1 = new Aula("A1", "AU-101", "Aula de Piano", "Bloque A - Piso 1", 12, true);
         Aula aula2 = new Aula("A2", "AU-202", "Aula de Guitarra", "Bloque B - Piso 2", 18, true);
         Aula aula3 = new Aula("A3", "AU-303", "Sala de Canto", "Bloque C - Piso 3", 15, false);
@@ -369,9 +360,9 @@ public class App extends Application {
         listAulas.add(aula2);
         listAulas.add(aula3);
 
-        // ============================================
-        // CURSOS
-        // ============================================
+
+
+
         Curso cursoGuitarra1 = new Curso(
                 "C01",
                 "GTR-101",
@@ -380,10 +371,10 @@ public class App extends Application {
                 1,
                 "Curso de iniciación a la guitarra",
                 12,
-                4,                               // capacidadActual (4 estudiantes)
+                4,
                 EstadoCurso.ACTIVO,
-                "2024-01-15",                    // fechaInicio
-                "2024-06-30",                    // fechaFin
+                "2024-01-15",
+                "2024-06-30",
                 24
         );
 
@@ -405,27 +396,27 @@ public class App extends Application {
         listCursos.add(cursoGuitarra1);
         listCursos.add(cursoPiano1);
 
-        // ============================================
-        // CLASES
-        // ============================================
+
+
+
         ClaseGrupal claseGrupalGuitarra = new ClaseGrupal(
-                12,                                  // capacidadMaxima
-                3,                                   // capacidadActual
-                9,                                   // cuposDisponibles
-                "Clase grupal de guitarra básica",  // descripcion
-                "CL01",                              // id
-                "Lunes 14:00-16:00",                 // horario
-                "Lunes",                             // diaSemana
-                "14:00",                             // horaInicio
-                "16:00",                             // horaFin
-                TipoInstrumento.GUITARRA,            // instrumento
-                1,                                   // nivel
-                true                                 // activa
+                12,
+                3,
+                9,
+                "Clase grupal de guitarra básica",
+                "CL01",
+                "Lunes 14:00-16:00",
+                "Lunes",
+                "14:00",
+                "16:00",
+                TipoInstrumento.GUITARRA,
+                1,
+                true
         );
         claseGrupalGuitarra.setTheAula(aula2);
         claseGrupalGuitarra.setTheProfesor(profesor1);
 
-        // IMPORTANTE: Agregar estudiantes a la clase grupal
+
         claseGrupalGuitarra.getTheEstudiantesInscritos().add(est1);
         claseGrupalGuitarra.getTheEstudiantesInscritos().add(est2);
         claseGrupalGuitarra.getTheEstudiantesInscritos().add(est3);
@@ -448,17 +439,17 @@ public class App extends Application {
         claseGrupalPiano.setTheProfesor(profesor2);
 
         ClaseIndividual claseInd1 = new ClaseIndividual(
-                "Técnicas avanzadas de guitarra",   // temaEspecifico
-                "Mejorar técnica individual",        // objetivos
-                "Clase personalizada",               // observaciones
-                "CI01",                              // id
-                "Miércoles 08:00-09:00",             // horario
-                "Miércoles",                         // diaSemana
-                "08:00",                             // horaInicio
-                "09:00",                             // horaFin
-                TipoInstrumento.GUITARRA,            // instrumento
-                1,                                   // nivel
-                true                                 // activa
+                "Técnicas avanzadas de guitarra",
+                "Mejorar técnica individual",
+                "Clase personalizada",
+                "CI01",
+                "Miércoles 08:00-09:00",
+                "Miércoles",
+                "08:00",
+                "09:00",
+                TipoInstrumento.GUITARRA,
+                1,
+                true
         );
         claseInd1.setTheAula(aula2);
         claseInd1.setTheProfesor(profesor1);
@@ -468,18 +459,18 @@ public class App extends Application {
         listClases.add(claseGrupalPiano);
         listClases.add(claseInd1);
 
-        // Agregar clases a cursos
+
         cursoGuitarra1.getTheClases().add(claseGrupalGuitarra);
         cursoPiano1.getTheClases().add(claseGrupalPiano);
 
-        // Agregar clases a profesores
+
         profesor1.getTheClasesAsignadas().add(claseGrupalGuitarra);
         profesor1.getTheClasesAsignadas().add(claseInd1);
         profesor2.getTheClasesAsignadas().add(claseGrupalPiano);
 
-        // ============================================
-        // HORARIOS
-        // ============================================
+
+
+
         Horario h1 = new Horario("H01", "Lunes", "14:00", "16:00", aula2);
         h1.setClase(claseGrupalGuitarra);
         h1.setCurso(cursoGuitarra1);
@@ -504,9 +495,9 @@ public class App extends Application {
         listHorarios.add(h2);
         listHorarios.add(h3);
 
-        // ============================================
-        // INSCRIPCIONES
-        // ============================================
+
+
+
         Inscripcion ins1 = new Inscripcion("I001", "2024-01-15", EstadoInscripcion.ACTIVA, true, false, 0);
         ins1.setTheEstudiante(est1);
         ins1.setTheCurso(cursoGuitarra1);
@@ -539,9 +530,9 @@ public class App extends Application {
         cursoGuitarra1.getTheEstudiantes().add(est4);
         listInscripciones.add(ins4);
 
-        // ============================================
-        // NIVELES APROBADOS
-        // ============================================
+
+
+
         NivelAprobado nivelAprobadoEst1 = new NivelAprobado(
                 "NA001",
                 TipoInstrumento.GUITARRA,
@@ -552,9 +543,9 @@ public class App extends Application {
         );
         est1.getTheNivelesAprobados().add(nivelAprobadoEst1);
 
-        // ============================================
-        // EVALUACIONES DE PROGRESO
-        // ============================================
+
+
+
         EvaluacionProgreso ev1 = new EvaluacionProgreso(
                 "EV001",
                 4.5,
@@ -626,9 +617,9 @@ public class App extends Application {
         listEvaluaciones.add(ev4);
         listEvaluaciones.add(ev5);
 
-        // ============================================
-        // ASISTENCIAS
-        // ============================================
+
+
+
         Asistencia a1 = new Asistencia(
                 "AS001",
                 est1,
@@ -696,9 +687,9 @@ public class App extends Application {
         listAsistencias.add(a5);
         listAsistencias.add(a6);
 
-        // ============================================
-        // DISPONIBILIDAD PROFESORES
-        // ============================================
+
+
+
         BloqueDisponibilidad b1 = new BloqueDisponibilidad("BD1", "LUNES", "08:00", "10:00", true, profesor1);
         BloqueDisponibilidad b2 = new BloqueDisponibilidad("BD2", "MIERCOLES", "14:00", "16:00", true, profesor1);
         BloqueDisponibilidad b3 = new BloqueDisponibilidad("BD3", "VIERNES", "09:00", "11:00", true, profesor2);
